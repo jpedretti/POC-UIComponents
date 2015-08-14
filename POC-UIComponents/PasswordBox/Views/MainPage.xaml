@@ -17,15 +17,13 @@
                                      BorderColor="Gray"
                                      CharacterCount="10"
                                      CustonBackgroundColor="LightGray"
+                                     CustonInputScope="TelephoneNumber"
                                      ImageSource="/Assets/card.png"
                                      NotTypedColor="Green"
                                      TypedColor="Orange"
                                      TypedPassword="{Binding Password,
                                                              Mode=TwoWay,
-                                                             UpdateSourceTrigger=PropertyChanged}"
-                                     CustonInputScope="TelephoneNumber">
-
-            </local:CustonPasswordBox>
+                                                             UpdateSourceTrigger=PropertyChanged}" />
 
             <TextBox x:Name="textBlocMostraSenha"
                      Background="LightGray"

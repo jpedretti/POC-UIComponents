@@ -26,12 +26,34 @@ namespace PasswordBox
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
+
+            Window.Current.SizeChanged += Current_SizeChanged;
+
+            SetBorderWidth();
+        }
+
+        void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            SetBorderWidth();
         }
 
         private static SolidColorBrush _notTypedDefaultColor = new SolidColorBrush(Colors.Gray);
         private static SolidColorBrush _typedDefaultColor = new SolidColorBrush(Colors.Orange);
         private static SolidColorBrush _backgroundDefaultColor = new SolidColorBrush(Colors.LightGray);
         private static InputScope _inputScope = new InputScope { Names = { { new InputScopeName(InputScopeNameValue.Number) } } };
+
+        public double BorderWidth
+        {
+            get { return (double)GetValue(BorderWidthProperty); }
+            set
+            {
+                SetValue(BorderWidthProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+
+        public static readonly DependencyProperty BorderWidthProperty =
+            DependencyProperty.Register("BorderWidth", typeof(double), typeof(CustonPasswordBox), new PropertyMetadata(0));
 
         public SolidColorBrush TypedColor
         {
@@ -43,7 +65,6 @@ namespace PasswordBox
             }
         }
 
-        // Using a DependencyProperty as the backing store for FillColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TypedColorProperty =
             DependencyProperty.Register("TypedColor", typeof(SolidColorBrush), typeof(CustonPasswordBox), new PropertyMetadata(_typedDefaultColor));
 
@@ -58,7 +79,6 @@ namespace PasswordBox
             }
         }
 
-        // Using a DependencyProperty as the backing store for NotTypedColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty NotTypedColorProperty =
             DependencyProperty.Register("NotTypedColor", typeof(SolidColorBrush), typeof(CustonPasswordBox), new PropertyMetadata(_notTypedDefaultColor));
 
@@ -72,7 +92,6 @@ namespace PasswordBox
             }
         }
 
-        // Using a DependencyProperty as the backing store for BackgroudColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CustonBackgroundColorProperty =
             DependencyProperty.Register("CustonBackgroundColor", typeof(SolidColorBrush), typeof(CustonPasswordBox), new PropertyMetadata(_backgroundDefaultColor));
 
@@ -86,7 +105,6 @@ namespace PasswordBox
             }
         }
 
-        // Using a DependencyProperty as the backing store for BorderColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BorderColorProperty =
             DependencyProperty.Register("BorderColor", typeof(SolidColorBrush), typeof(CustonPasswordBox), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
 
@@ -100,7 +118,6 @@ namespace PasswordBox
             }
         }
 
-        // Using a DependencyProperty as the backing store for CharacterCount.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CharacterCountProperty =
             DependencyProperty.Register("CharacterCount", typeof(int), typeof(CustonPasswordBox), new PropertyMetadata(0));
 
@@ -114,7 +131,6 @@ namespace PasswordBox
             }
         }
 
-        // Using a DependencyProperty as the backing store for Password.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TypedPasswordProperty =
             DependencyProperty.Register("TypedPassword", typeof(string), typeof(CustonPasswordBox), new PropertyMetadata(null));
 
@@ -130,11 +146,8 @@ namespace PasswordBox
             }
         }
 
-        // Using a DependencyProperty as the backing store for ImageSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(CustonPasswordBox), null);
-
-
 
         public InputScopeNameValue CustonInputScope
         {
@@ -150,11 +163,8 @@ namespace PasswordBox
             }
         }
 
-        // Using a DependencyProperty as the backing store for CustonInputScope.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CustonInputScopeProperty =
             DependencyProperty.Register("CustonInputScope", typeof(InputScope), typeof(CustonPasswordBox), new PropertyMetadata(_inputScope));
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] String propertyName = null)
@@ -222,5 +232,20 @@ namespace PasswordBox
             FillEllipses(password);
         }
 
+        private void SetBorderWidth()
+        {
+            BorderWidth = Math.Max(Window.Current.Bounds.Height, Window.Current.Bounds.Width);
+        }
+
+
+        private void IsFucused()
+        {
+            var hasFocus = true;
+            if (hasFocus)
+                VisualStateManager.GoToState(this, "Focused", true);
+            else
+                VisualStateManager.GoToState(this, "NotFocused", true);
+
+        }
     }
 }
