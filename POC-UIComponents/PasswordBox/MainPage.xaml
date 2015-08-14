@@ -4,13 +4,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:PasswordBox"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      Background="White"
+      FontFamily="Global User Interface"
       mc:Ignorable="d">
 
     <Grid>
-        <local:PasswordBox Width="400"
-                           Height="200"
-                           ImageSource="/Assets/Logo.scale-240.png" />
+        <local:CustonPasswordBox Height="100"
+                                 BorderColor="Gray"
+                                 
+                                 CustonBackgroundColor="LightGray"
+                                 ImageSource="/Assets/card.png"
+                                 NotTypedColor="Green"
+                                 TypedColor="Orange"
+                                 CharacterCount="10"/>
 
     </Grid>
 </Page>
