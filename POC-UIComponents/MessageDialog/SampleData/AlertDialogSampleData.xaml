@@ -1,0 +1,6 @@
+﻿<Controls:AlertDialog
+	xmlns:Controls="using:MessageDialog.Controls"
+	Message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas placerat turpis id orci sagittis elementum. Sed in nisl arcu. In pellentesque vestibulum ante, sit amet pharetra tortor lacinia in. Sed."
+	Button1Text="Botão 1"
+	Button2Text="Botão 2"/>
+	
