@@ -44,5 +44,10 @@ namespace PasswordBox
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            textBlocMostraSenha.Text = custonPasswordBox.TypedPassword;
+        }
     }
 }

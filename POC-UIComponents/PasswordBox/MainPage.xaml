@@ -9,14 +9,23 @@
       mc:Ignorable="d">
 
     <Grid>
-        <local:CustonPasswordBox Height="100"
-                                 BorderColor="Gray"
-                                 
-                                 CustonBackgroundColor="LightGray"
-                                 ImageSource="/Assets/card.png"
-                                 NotTypedColor="Green"
-                                 TypedColor="Orange"
-                                 CharacterCount="10"/>
+        <StackPanel>
+            <local:CustonPasswordBox x:Name="custonPasswordBox"
+                                     Height="100"
+                                     BorderColor="Gray"
+                                     CharacterCount="10"
+                                     CustonBackgroundColor="LightGray"
+                                     ImageSource="/Assets/card.png"
+                                     NotTypedColor="Green"
+                                     TypedColor="Orange" />
 
+            <Button Background="Blue"
+                    Click="Button_Click"
+                    Content="teste" />
+
+            <TextBlock x:Name="textBlocMostraSenha"
+                       FontSize="30"
+                       Foreground="Black" />
+        </StackPanel>
     </Grid>
 </Page>
