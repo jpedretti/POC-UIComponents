@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="MessageDialogApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MessageDialogApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel Margin="10,0">
+
+            <TextBlock TextWrapping="Wrap" Text="Title" FontSize="14"/>
+            <TextBox x:Name="Title" TextWrapping="Wrap" Text="Title"/>
+
+            <TextBlock TextWrapping="Wrap" Text="Message" FontSize="14"/>
+            <TextBox x:Name="Message" TextWrapping="Wrap" Text="Message"/>
+
+            <Button x:Name="FirstButton" Content="Show dialog with 1 button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="FirstButton_Click"/>
+
+            <Button x:Name="SecondButton" Content="Show dialog with 2 buttons" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="SecondButton_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>
