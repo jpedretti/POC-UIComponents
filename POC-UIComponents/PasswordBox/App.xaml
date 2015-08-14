@@ -1,7 +1,5 @@
-﻿<Application
-    x:Class="PasswordBox.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:PasswordBox">
-
-</Application>
+﻿<prism:MvvmAppBase x:Class="PasswordBox.App"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:local="using:PasswordBox"
+                   xmlns:prism="using:Microsoft.Practices.Prism.Mvvm" />

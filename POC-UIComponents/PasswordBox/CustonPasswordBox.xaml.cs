@@ -26,18 +26,21 @@ namespace PasswordBox
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
-
-
         }
 
         private static SolidColorBrush _notTypedDefaultColor = new SolidColorBrush(Colors.Gray);
         private static SolidColorBrush _typedDefaultColor = new SolidColorBrush(Colors.Orange);
         private static SolidColorBrush _backgroundDefaultColor = new SolidColorBrush(Colors.LightGray);
+        private static InputScope _inputScope = new InputScope { Names = { { new InputScopeName(InputScopeNameValue.Number) } } };
 
         public SolidColorBrush TypedColor
         {
             get { return (SolidColorBrush)GetValue(TypedColorProperty); }
-            set { SetValue(TypedColorProperty, value); }
+            set
+            {
+                SetValue(TypedColorProperty, value);
+                RaisePropertyChanged();
+            }
         }
 
         // Using a DependencyProperty as the backing store for FillColor.  This enables animation, styling, binding, etc...
@@ -51,6 +54,7 @@ namespace PasswordBox
             {
                 SetValue(NotTypedColorProperty, value);
                 FillCreatedEllipses(value);
+                RaisePropertyChanged();
             }
         }
 
@@ -61,7 +65,11 @@ namespace PasswordBox
         public SolidColorBrush CustonBackgroundColor
         {
             get { return (SolidColorBrush)GetValue(CustonBackgroundColorProperty); }
-            set { SetValue(CustonBackgroundColorProperty, value); }
+            set
+            {
+                SetValue(CustonBackgroundColorProperty, value);
+                RaisePropertyChanged();
+            }
         }
 
         // Using a DependencyProperty as the backing store for BackgroudColor.  This enables animation, styling, binding, etc...
@@ -71,12 +79,16 @@ namespace PasswordBox
         public SolidColorBrush BorderColor
         {
             get { return (SolidColorBrush)GetValue(BorderColorProperty); }
-            set { SetValue(BorderColorProperty, value); }
+            set
+            {
+                SetValue(BorderColorProperty, value);
+                RaisePropertyChanged();
+            }
         }
 
         // Using a DependencyProperty as the backing store for BorderColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BorderColorProperty =
-            DependencyProperty.Register("BorderColor", typeof(SolidColorBrush), typeof(CustonPasswordBox), new PropertyMetadata(0));
+            DependencyProperty.Register("BorderColor", typeof(SolidColorBrush), typeof(CustonPasswordBox), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
 
         public int CharacterCount
         {
@@ -84,7 +96,7 @@ namespace PasswordBox
             set
             {
                 SetValue(CharacterCountProperty, value);
-                CharacterCountChaged(value);
+                CharacterCountChanged(value);
             }
         }
 
@@ -95,7 +107,11 @@ namespace PasswordBox
         public string TypedPassword
         {
             get { return (string)GetValue(TypedPasswordProperty); }
-            set { SetValueDp(TypedPasswordProperty, value); }
+            set
+            {
+                SetValue(TypedPasswordProperty, value);
+                RaisePropertyChanged();
+            }
         }
 
         // Using a DependencyProperty as the backing store for Password.  This enables animation, styling, binding, etc...
@@ -110,6 +126,7 @@ namespace PasswordBox
             {
                 SetValue(ImageSourceProperty, value);
                 image.Source = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -117,17 +134,37 @@ namespace PasswordBox
         public static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(CustonPasswordBox), null);
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        void SetValueDp(DependencyProperty property, object value, [System.Runtime.CompilerServices.CallerMemberName] String p = null)
+
+
+        public InputScopeNameValue CustonInputScope
         {
-            SetValue(property, value);
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(p));
+            get
+            {
+                return (GetValue(CustonInputScopeProperty) as InputScope).Names.FirstOrDefault().NameValue;
+            }
+            set
+            {
+                var newInputScope = new InputScope { Names = { { new InputScopeName(value) } } };
+                SetValue(CustonInputScopeProperty, newInputScope);
+                RaisePropertyChanged();
+            }
         }
 
-        private void passwordContainer_PasswordChanged(object sender, RoutedEventArgs e)
+        // Using a DependencyProperty as the backing store for CustonInputScope.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CustonInputScopeProperty =
+            DependencyProperty.Register("CustonInputScope", typeof(InputScope), typeof(CustonPasswordBox), new PropertyMetadata(_inputScope));
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] String propertyName = null)
         {
-            var password = (sender as Windows.UI.Xaml.Controls.PasswordBox).Password;
+            if (PropertyChanged != null)
+                PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+
+        private void FillEllipses(string password)
+        {
             var passwordLength = password.Length;
 
             var ellipses = ellipsesStackPanel.Children.OfType<Ellipse>().ToList();
@@ -143,10 +180,9 @@ namespace PasswordBox
                 count++;
             }
 
-            TypedPassword = password;
         }
 
-        private void CharacterCountChaged(int value)
+        private void CharacterCountChanged(int value)
         {
             for (int i = 0; i < value; i++)
             {
@@ -178,6 +214,12 @@ namespace PasswordBox
             {
                 item.Fill = value;
             }
+        }
+
+        private void passwordContainer_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var password = (sender as TextBox).Text;
+            FillEllipses(password);
         }
 
     }
