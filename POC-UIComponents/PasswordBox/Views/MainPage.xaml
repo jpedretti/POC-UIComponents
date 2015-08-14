@@ -12,12 +12,12 @@
 
     <Grid>
         <StackPanel>
-            <local:CustonPasswordBox x:Name="custonPasswordBox"
+            <local:CustomPasswordBox x:Name="CustomPasswordBox"
                                      Height="100"
                                      BorderColor="Gray"
                                      CharacterCount="10"
-                                     CustonBackgroundColor="LightGray"
-                                     CustonInputScope="TelephoneNumber"
+                                     CustomBackgroundColor="LightGray"
+                                     CustomInputScope="TelephoneNumber"
                                      ImageSource="/Assets/card.png"
                                      NotTypedColor="Green"
                                      TypedColor="Orange"

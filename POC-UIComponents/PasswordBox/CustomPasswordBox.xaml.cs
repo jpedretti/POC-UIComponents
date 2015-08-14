@@ -20,9 +20,9 @@ using Windows.UI.Xaml.Shapes;
 
 namespace PasswordBox
 {
-    public sealed partial class CustonPasswordBox : UserControl
+    public sealed partial class CustomPasswordBox : UserControl
     {
-        public CustonPasswordBox()
+        public CustomPasswordBox()
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
@@ -53,7 +53,7 @@ namespace PasswordBox
         }
 
         public static readonly DependencyProperty BorderWidthProperty =
-            DependencyProperty.Register("BorderWidth", typeof(double), typeof(CustonPasswordBox), new PropertyMetadata(0));
+            DependencyProperty.Register("BorderWidth", typeof(double), typeof(CustomPasswordBox), new PropertyMetadata(0));
 
         public SolidColorBrush TypedColor
         {
@@ -66,7 +66,7 @@ namespace PasswordBox
         }
 
         public static readonly DependencyProperty TypedColorProperty =
-            DependencyProperty.Register("TypedColor", typeof(SolidColorBrush), typeof(CustonPasswordBox), new PropertyMetadata(_typedDefaultColor));
+            DependencyProperty.Register("TypedColor", typeof(SolidColorBrush), typeof(CustomPasswordBox), new PropertyMetadata(_typedDefaultColor));
 
         public SolidColorBrush NotTypedColor
         {
@@ -80,20 +80,20 @@ namespace PasswordBox
         }
 
         public static readonly DependencyProperty NotTypedColorProperty =
-            DependencyProperty.Register("NotTypedColor", typeof(SolidColorBrush), typeof(CustonPasswordBox), new PropertyMetadata(_notTypedDefaultColor));
+            DependencyProperty.Register("NotTypedColor", typeof(SolidColorBrush), typeof(CustomPasswordBox), new PropertyMetadata(_notTypedDefaultColor));
 
-        public SolidColorBrush CustonBackgroundColor
+        public SolidColorBrush CustomBackgroundColor
         {
-            get { return (SolidColorBrush)GetValue(CustonBackgroundColorProperty); }
+            get { return (SolidColorBrush)GetValue(CustomBackgroundColorProperty); }
             set
             {
-                SetValue(CustonBackgroundColorProperty, value);
+                SetValue(CustomBackgroundColorProperty, value);
                 RaisePropertyChanged();
             }
         }
 
-        public static readonly DependencyProperty CustonBackgroundColorProperty =
-            DependencyProperty.Register("CustonBackgroundColor", typeof(SolidColorBrush), typeof(CustonPasswordBox), new PropertyMetadata(_backgroundDefaultColor));
+        public static readonly DependencyProperty CustomBackgroundColorProperty =
+            DependencyProperty.Register("CustomBackgroundColor", typeof(SolidColorBrush), typeof(CustomPasswordBox), new PropertyMetadata(_backgroundDefaultColor));
 
         public SolidColorBrush BorderColor
         {
@@ -106,7 +106,7 @@ namespace PasswordBox
         }
 
         public static readonly DependencyProperty BorderColorProperty =
-            DependencyProperty.Register("BorderColor", typeof(SolidColorBrush), typeof(CustonPasswordBox), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
+            DependencyProperty.Register("BorderColor", typeof(SolidColorBrush), typeof(CustomPasswordBox), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
 
         public int CharacterCount
         {
@@ -119,7 +119,7 @@ namespace PasswordBox
         }
 
         public static readonly DependencyProperty CharacterCountProperty =
-            DependencyProperty.Register("CharacterCount", typeof(int), typeof(CustonPasswordBox), new PropertyMetadata(0));
+            DependencyProperty.Register("CharacterCount", typeof(int), typeof(CustomPasswordBox), new PropertyMetadata(0));
 
         public string TypedPassword
         {
@@ -132,7 +132,7 @@ namespace PasswordBox
         }
 
         public static readonly DependencyProperty TypedPasswordProperty =
-            DependencyProperty.Register("TypedPassword", typeof(string), typeof(CustonPasswordBox), new PropertyMetadata(null));
+            DependencyProperty.Register("TypedPassword", typeof(string), typeof(CustomPasswordBox), new PropertyMetadata(null));
 
 
         public ImageSource ImageSource
@@ -147,24 +147,24 @@ namespace PasswordBox
         }
 
         public static readonly DependencyProperty ImageSourceProperty =
-            DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(CustonPasswordBox), null);
+            DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(CustomPasswordBox), null);
 
-        public InputScopeNameValue CustonInputScope
+        public InputScopeNameValue CustomInputScope
         {
             get
             {
-                return (GetValue(CustonInputScopeProperty) as InputScope).Names.FirstOrDefault().NameValue;
+                return (GetValue(CustomInputScopeProperty) as InputScope).Names.FirstOrDefault().NameValue;
             }
             set
             {
                 var newInputScope = new InputScope { Names = { { new InputScopeName(value) } } };
-                SetValue(CustonInputScopeProperty, newInputScope);
+                SetValue(CustomInputScopeProperty, newInputScope);
                 RaisePropertyChanged();
             }
         }
 
-        public static readonly DependencyProperty CustonInputScopeProperty =
-            DependencyProperty.Register("CustonInputScope", typeof(InputScope), typeof(CustonPasswordBox), new PropertyMetadata(_inputScope));
+        public static readonly DependencyProperty CustomInputScopeProperty =
+            DependencyProperty.Register("CustomInputScope", typeof(InputScope), typeof(CustomPasswordBox), new PropertyMetadata(_inputScope));
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] String propertyName = null)
