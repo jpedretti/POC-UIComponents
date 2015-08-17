@@ -21,6 +21,8 @@ namespace CustomTextBox
 {
     public sealed partial class CustomTextBox : UserControl
     {
+        private double _headerScaleFactor = 1.5;
+
         public CustomTextBox()
         {
             this.InitializeComponent();
@@ -84,7 +86,7 @@ namespace CustomTextBox
 
         public double ReducedFontSize
         {
-            get { return (double)GetValue(FontSizeProperty) / 1.5; }
+            get { return (double)GetValue(FontSizeProperty) / _headerScaleFactor; }
         }
 
         // Using a DependencyProperty as the backing store for FontSize.  This enables animation, styling, binding, etc...
@@ -92,7 +94,10 @@ namespace CustomTextBox
             DependencyProperty.Register("FontSize", typeof(double), typeof(CustomTextBox), new PropertyMetadata(9.0));
 
 
-
+        public double ReducedHeight
+        {
+            get { return (double)GetValue(HeightProperty) / _headerScaleFactor; }
+        }
 
 
 

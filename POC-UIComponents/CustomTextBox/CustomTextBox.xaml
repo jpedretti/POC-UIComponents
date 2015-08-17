@@ -15,11 +15,7 @@
     </UserControl.Resources>
 
 
-    <Grid Background="LightBlue">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="5*" />
-        </Grid.RowDefinitions>
+    <Grid Height="{Binding ReducedHeight}" Background="LightBlue">
 
         <Interactivity:Interaction.Behaviors>
             <Core:EventTriggerBehavior EventName="Loaded">
@@ -65,24 +61,10 @@
                                          Storyboard.TargetName="placeHolderTextBox"
                                          Storyboard.TargetProperty="FontSize"
                                          To="{Binding FontSize}" />
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Grid.Row)">
-                            <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <x:Int32>1</x:Int32>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="HasValue">
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Grid.Row)">
-                            <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <x:Int32>0</x:Int32>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
                         <DoubleAnimation Duration="0:0:0.8"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="placeHolderTextBox"
@@ -94,9 +76,8 @@
         </VisualStateManager.VisualStateGroups>
 
         <Border x:Name="border"
-                Grid.Row="1"
                 Margin="0"
-                VerticalAlignment="Stretch"
+                VerticalAlignment="Bottom"
                 Background="Transparent">
 
             <TextBlock x:Name="placeHolderTextBox"
@@ -107,8 +88,7 @@
                        Foreground="#FF636363"
                        Text="Celular" />
         </Border>
-        <Border Grid.Row="1"
-                Margin="0"
+        <Border Margin="0"
                 VerticalAlignment="Stretch"
                 Background="Transparent">
 
@@ -132,7 +112,6 @@
             </TextBox>
         </Border>
         <Line x:Name="bottonBorderBack"
-              Grid.Row="2"
               VerticalAlignment="Bottom"
               Stroke="Red"
               StrokeThickness="4"
@@ -140,12 +119,9 @@
               X2="{Binding Center}" />
 
         <Line x:Name="bottonBorderFront"
-              Grid.Row="2"
               VerticalAlignment="Bottom"
               Stroke="Red"
               StrokeThickness="2"
               X2="{Binding BorderWidth}" />
-
-
     </Grid>
 </UserControl>
