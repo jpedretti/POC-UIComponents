@@ -30,7 +30,7 @@
             <VisualStateGroup x:Name="FocusStateGroup">
                 <VisualState x:Name="LostFocus">
                     <Storyboard>
-                        <DoubleAnimation Duration="0:0:0.8"
+                        <DoubleAnimation Duration="0:0:0.6"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X2)"
@@ -39,7 +39,7 @@
                 </VisualState>
                 <VisualState x:Name="GotFocus">
                     <Storyboard>
-                        <DoubleAnimation Duration="0:0:0.8"
+                        <DoubleAnimation Duration="0:0:0.6"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X2)"
@@ -47,9 +47,44 @@
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
+            <VisualStateGroup x:Name="PlaceHolderStateGroup">
+                <VisualState x:Name="NotHasValue">
+                    <Storyboard>
+                        <DoubleAnimation Duration="0:0:0.8"
+                                         EnableDependentAnimation="True"
+                                         Storyboard.TargetName="placeHolderTextBox"
+                                         Storyboard.TargetProperty="FontSize"
+                                         To="20" />
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Grid.Row)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Int32>1</x:Int32>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="HasValue">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Grid.Row)">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <x:Int32>0</x:Int32>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimation Duration="0:0:0.8"
+                                         EnableDependentAnimation="True"
+                                         Storyboard.TargetName="placeHolderTextBox"
+                                         Storyboard.TargetProperty="FontSize"
+                                         To="12" />
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Border Grid.Row="1"
+        <Border x:Name="border"
+                Grid.Row="1"
                 Margin="0"
                 VerticalAlignment="Stretch"
                 Background="White">
@@ -72,7 +107,8 @@
                      VerticalAlignment="Bottom"
                      Background="Transparent"
                      FontSize="20"
-                     Style="{StaticResource CustomTextBox}">
+                     Style="{StaticResource CustomTextBox}"
+                     TextChanged="effectiveTextBox_TextChanged">
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="LostFocus">
                         <Core:GoToStateAction StateName="LostFocus" />

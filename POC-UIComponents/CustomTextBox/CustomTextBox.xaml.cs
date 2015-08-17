@@ -106,5 +106,13 @@ namespace CustomTextBox
         {
             SetBorderWidth();
         }
+
+        private void effectiveTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (effectiveTextBox.Text.Length > 0)
+                VisualStateManager.GoToState(this, "HasValue", true);
+            else
+                VisualStateManager.GoToState(this, "NotHasValue", true);
+        }
     }
 }
