@@ -14,36 +14,32 @@
 
 
     <Grid Background="LightBlue">
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="FocusStateGroup">
-                <VisualStateGroup.Transitions>
-                    <VisualTransition From="LostFocus"
-                                      GeneratedDuration="0:0:59"
-                                      To="GotFocus" />
-                    <VisualTransition From="GotFocus"
-                                      GeneratedDuration="0:0:59"
-                                      To="LostFocus" />
-                </VisualStateGroup.Transitions>
-                <VisualState x:Name="GotFocus">
-                    <Storyboard>
-                        <DoubleAnimation Duration="0:0:59"
-                                         Storyboard.TargetName="bottonBorderBack"
-                                         Storyboard.TargetProperty="Line.X2"
-                                         To="300"
-                                         d:IsOptimized="True" />
-                    </Storyboard>
-                </VisualState>
-                <VisualState x:Name="LostFocus">
-                    <Storyboard>
-                        <DoubleAnimation Duration="0:0:59"
-                                         Storyboard.TargetName="bottonBorderBack"
-                                         Storyboard.TargetProperty="Line.X2"
-                                         To="0"
-                                         d:IsOptimized="True" />
-                    </Storyboard>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+    	<VisualStateManager.VisualStateGroups>
+    		<VisualStateGroup x:Name="FocusStateGroup">
+    			<VisualStateGroup.Transitions>
+    				<VisualTransition GeneratedDuration="0" To="GotFocus">
+    					<Storyboard>
+    						<DoubleAnimationUsingKeyFrames EnableDependentAnimation="True"
+                                                           Storyboard.TargetProperty="(Line.X2)"
+                                                           Storyboard.TargetName="bottonBorderBack">
+    							<EasingDoubleKeyFrame KeyTime="0:0:1" Value="300"/>
+    						</DoubleAnimationUsingKeyFrames>
+    					</Storyboard>
+    				</VisualTransition>
+    				<VisualTransition GeneratedDuration="0" To="LostFocus">
+    					<Storyboard>
+    						<DoubleAnimationUsingKeyFrames EnableDependentAnimation="True"
+                                                           Storyboard.TargetProperty="(Line.X2)"
+                                                           Storyboard.TargetName="bottonBorderBack">
+    							<EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+    						</DoubleAnimationUsingKeyFrames>
+    					</Storyboard>
+    				</VisualTransition>
+    			</VisualStateGroup.Transitions>
+    			<VisualState x:Name="GotFocus"/>
+    			<VisualState x:Name="LostFocus"/>
+    		</VisualStateGroup>
+    	</VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
             <RowDefinition Height="5*" />
@@ -74,14 +70,9 @@
                      FontSize="20"
                      GotFocus="effectiveTextBox_GotFocus"
                      LostFocus="effectiveTextBox_LostFocus"
-                     Text="Celular">
-
-                <TextBox.Style>
-                    <StaticResource ResourceKey="CustomTextBox" />
-                </TextBox.Style>
-            </TextBox>
+                     Text="Celular" Style="{StaticResource CustomTextBox}"/>
         </Border>
-
+		
 
         <Line x:Name="bottonBorderBack"
               Grid.Row="2"
