@@ -16,6 +16,11 @@
 
 
     <Grid Background="LightBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+
         <Interactivity:Interaction.Behaviors>
             <Core:EventTriggerBehavior EventName="Loaded">
                 <Core:GoToStateAction StateName="LostFocus" />
@@ -25,28 +30,25 @@
             <VisualStateGroup x:Name="FocusStateGroup">
                 <VisualState x:Name="LostFocus">
                     <Storyboard>
-                        <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True"
-                                                       Storyboard.TargetName="bottonBorderBack"
-                                                       Storyboard.TargetProperty="(Line.X2)">
-                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
-                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimation Duration="0:0:0.8"
+                                         EnableDependentAnimation="True"
+                                         Storyboard.TargetName="bottonBorderBack"
+                                         Storyboard.TargetProperty="(Line.X2)"
+                                         To="0" />
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="GotFocus">
                     <Storyboard>
-                        <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True"
-                                                       Storyboard.TargetName="bottonBorderBack"
-                                                       Storyboard.TargetProperty="(Line.X2)">
-                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="{Binding BorderWidth}" />
-                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimation Duration="0:0:0.8"
+                                         EnableDependentAnimation="True"
+                                         Storyboard.TargetName="bottonBorderBack"
+                                         Storyboard.TargetProperty="(Line.X2)"
+                                         To="{Binding BorderWidth}" />
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="5*" />
-        </Grid.RowDefinitions>
+
         <Border Grid.Row="1"
                 Margin="0"
                 VerticalAlignment="Stretch"
