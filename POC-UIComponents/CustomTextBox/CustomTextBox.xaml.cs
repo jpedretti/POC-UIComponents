@@ -26,7 +26,6 @@ namespace CustomTextBox
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
             Window.Current.SizeChanged += Current_SizeChanged;
-            VisualStateManager.GoToState(this, "LostFocus", true);
             SetBorderWidth();
         }
 
@@ -107,20 +106,5 @@ namespace CustomTextBox
         {
             SetBorderWidth();
         }
-
-        private void effectiveTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (!VisualStateManager.GoToState(this, "GotFocus", true))
-            {
-                var a = 1;
-            }
-        }
-
-        private void effectiveTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            VisualStateManager.GoToState(this, "LostFocus", true);
-        }
-
-
     }
 }

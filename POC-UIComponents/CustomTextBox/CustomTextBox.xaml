@@ -1,6 +1,8 @@
 ﻿<UserControl x:Class="CustomTextBox.CustomTextBox"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+             xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="using:MessageDialogApp"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,36 +16,36 @@
 
 
     <Grid Background="LightBlue">
-    	<VisualStateManager.VisualStateGroups>
-    		<VisualStateGroup x:Name="FocusStateGroup">
-    			<VisualStateGroup.Transitions>
-    				<VisualTransition GeneratedDuration="0" To="GotFocus">
-    					<Storyboard>
-    						<DoubleAnimationUsingKeyFrames EnableDependentAnimation="True"
-                                                           Storyboard.TargetProperty="(Line.X2)"
-                                                           Storyboard.TargetName="bottonBorderBack">
-    							<EasingDoubleKeyFrame KeyTime="0:0:1" Value="300"/>
-    						</DoubleAnimationUsingKeyFrames>
-    					</Storyboard>
-    				</VisualTransition>
-    				<VisualTransition GeneratedDuration="0" To="LostFocus">
-    					<Storyboard>
-    						<DoubleAnimationUsingKeyFrames EnableDependentAnimation="True"
-                                                           Storyboard.TargetProperty="(Line.X2)"
-                                                           Storyboard.TargetName="bottonBorderBack">
-    							<EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
-    						</DoubleAnimationUsingKeyFrames>
-    					</Storyboard>
-    				</VisualTransition>
-    			</VisualStateGroup.Transitions>
-    			<VisualState x:Name="GotFocus"/>
-    			<VisualState x:Name="LostFocus"/>
-    		</VisualStateGroup>
-    	</VisualStateManager.VisualStateGroups>
+        <Interactivity:Interaction.Behaviors>
+            <Core:EventTriggerBehavior EventName="Loaded">
+                <Core:GoToStateAction StateName="LostFocus" />
+            </Core:EventTriggerBehavior>
+        </Interactivity:Interaction.Behaviors>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="FocusStateGroup">
+                <VisualState x:Name="LostFocus">
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True"
+                                                       Storyboard.TargetName="bottonBorderBack"
+                                                       Storyboard.TargetProperty="(Line.X2)">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="GotFocus">
+                    <Storyboard>
+                        <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True"
+                                                       Storyboard.TargetName="bottonBorderBack"
+                                                       Storyboard.TargetProperty="(Line.X2)">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="{Binding BorderWidth}" />
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
             <RowDefinition Height="5*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Border Grid.Row="1"
                 Margin="0"
@@ -68,18 +70,26 @@
                      VerticalAlignment="Bottom"
                      Background="Transparent"
                      FontSize="20"
-                     GotFocus="effectiveTextBox_GotFocus"
-                     LostFocus="effectiveTextBox_LostFocus"
-                     Text="Celular" Style="{StaticResource CustomTextBox}"/>
+                     Style="{StaticResource CustomTextBox}">
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="LostFocus">
+                        <Core:GoToStateAction StateName="LostFocus" />
+                    </Core:EventTriggerBehavior>
+                    <Core:EventTriggerBehavior EventName="GotFocus">
+                        <Core:GoToStateAction StateName="GotFocus" />
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </TextBox>
         </Border>
-		
-
         <Line x:Name="bottonBorderBack"
               Grid.Row="2"
+              VerticalAlignment="Bottom"
               Stroke="Red"
-              StrokeThickness="10" />
+              StrokeThickness="4" />
+
         <Line x:Name="bottonBorderFront"
               Grid.Row="2"
+              VerticalAlignment="Bottom"
               Stroke="Red"
               StrokeThickness="2"
               X2="{Binding BorderWidth}" />
