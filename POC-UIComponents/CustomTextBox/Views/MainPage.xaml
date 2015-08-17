@@ -9,13 +9,15 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="59*"/>
-            <ColumnDefinition Width="233*"/>
-            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="59*" />
+            <ColumnDefinition Width="233*" />
+            <ColumnDefinition Width="107*" />
         </Grid.ColumnDefinitions>
-        <local:CustomTextBox Height="60"
-                             Grid.Column="1"
+        <local:CustomTextBox Grid.Column="1"
+                             Height="60"
+                             Margin="0,290"
                              BorderColor="Black"
-                             PlaceHolderText="Celular" Margin="0,290" />
+                             FontSize="20"
+                             PlaceHolderText="Celular" />
     </Grid>
 </Page>
