@@ -8,8 +8,14 @@
       mc:Ignorable="d">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="59*"/>
+            <ColumnDefinition Width="233*"/>
+            <ColumnDefinition Width="107*"/>
+        </Grid.ColumnDefinitions>
         <local:CustomTextBox Height="60"
+                             Grid.Column="1"
                              BorderColor="Black"
-                             PlaceHolderText="Celular" />
+                             PlaceHolderText="Celular" Margin="0,290" />
     </Grid>
 </Page>

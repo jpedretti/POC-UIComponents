@@ -35,6 +35,7 @@ namespace CustomTextBox
             set
             {
                 SetValue(BorderWidthProperty, value);
+                Center = value / 2.0;
                 RaisePropertyChanged();
             }
         }
@@ -56,6 +57,22 @@ namespace CustomTextBox
             DependencyProperty.Register("BorderColor", typeof(SolidColorBrush), typeof(CustomTextBox), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+
+
+        public double Center
+        {
+            get { return (double)GetValue(CenterProperty); }
+            set
+            {
+                SetValue(CenterProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for Center.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CenterProperty =
+            DependencyProperty.Register("Center", typeof(double), typeof(CustomTextBox), new PropertyMetadata(0));
 
 
 
@@ -99,7 +116,7 @@ namespace CustomTextBox
 
         private void SetBorderWidth()
         {
-            BorderWidth = Math.Max(Window.Current.Bounds.Height, Window.Current.Bounds.Width);
+            BorderWidth = Window.Current.Bounds.Width;
         }
 
         void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)

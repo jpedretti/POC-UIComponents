@@ -34,7 +34,12 @@
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X2)"
-                                         To="0" />
+                                         To="{Binding Center}" />
+                        <DoubleAnimation Duration="0:0:0.8"
+                                         EnableDependentAnimation="True"
+                                         Storyboard.TargetName="bottonBorderBack"
+                                         Storyboard.TargetProperty="(Line.X1)"
+                                         To="{Binding Center}" />
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="GotFocus">
@@ -44,6 +49,11 @@
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X2)"
                                          To="{Binding BorderWidth}" />
+                        <DoubleAnimation Duration="0:0:0.8"
+                                         EnableDependentAnimation="True"
+                                         Storyboard.TargetName="bottonBorderBack"
+                                         Storyboard.TargetProperty="(Line.X1)"
+                                         To="0" />
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
@@ -123,6 +133,8 @@
               Grid.Row="2"
               VerticalAlignment="Bottom"
               Stroke="Red"
+              X1="{Binding Center}"
+              X2="{Binding Center}"
               StrokeThickness="4" />
 
         <Line x:Name="bottonBorderFront"
