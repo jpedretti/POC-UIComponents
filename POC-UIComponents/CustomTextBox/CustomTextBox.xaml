@@ -65,7 +65,7 @@
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="placeHolderTextBox"
                                          Storyboard.TargetProperty="FontSize"
-                                         To="20" />
+                                         To="{Binding FontSize}" />
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(Grid.Row)">
                             <DiscreteObjectKeyFrame KeyTime="0:0:0.8">
                                 <DiscreteObjectKeyFrame.Value>
@@ -88,7 +88,7 @@
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="placeHolderTextBox"
                                          Storyboard.TargetProperty="FontSize"
-                                         To="12" />
+                                         To="{Binding ReducedFontSize}" />
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
@@ -98,12 +98,13 @@
                 Grid.Row="1"
                 Margin="0"
                 VerticalAlignment="Stretch"
-                Background="White">
+                Background="Transparent">
 
             <TextBlock x:Name="placeHolderTextBox"
+                       Width="{Binding BorderWidth}"
                        Margin="0"
                        VerticalAlignment="Bottom"
-                       FontSize="20"
+                       FontSize="{Binding FontSize}"
                        Foreground="#FF636363"
                        Text="Celular" />
         </Border>
@@ -113,11 +114,12 @@
                 Background="Transparent">
 
             <TextBox x:Name="effectiveTextBox"
+                     Width="{Binding BorderWidth}"
                      Margin="0,0,0,-6.5"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Bottom"
                      Background="Transparent"
-                     FontSize="20"
+                     FontSize="{Binding FontSize}"
                      Style="{StaticResource CustomTextBox}"
                      TextChanged="effectiveTextBox_TextChanged">
                 <Interactivity:Interaction.Behaviors>
@@ -134,9 +136,9 @@
               Grid.Row="2"
               VerticalAlignment="Bottom"
               Stroke="Red"
+              StrokeThickness="4"
               X1="{Binding Center}"
-              X2="{Binding Center}"
-              StrokeThickness="4" />
+              X2="{Binding Center}" />
 
         <Line x:Name="bottonBorderFront"
               Grid.Row="2"

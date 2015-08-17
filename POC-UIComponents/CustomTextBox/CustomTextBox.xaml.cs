@@ -82,9 +82,14 @@ namespace CustomTextBox
             set { SetValue(FontSizeProperty, value); }
         }
 
+        public double ReducedFontSize
+        {
+            get { return (double)GetValue(FontSizeProperty) / 1.5; }
+        }
+
         // Using a DependencyProperty as the backing store for FontSize.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.Register("FontSize", typeof(double), typeof(CustomTextBox), new PropertyMetadata(9));
+            DependencyProperty.Register("FontSize", typeof(double), typeof(CustomTextBox), new PropertyMetadata(9.0));
 
 
 
