@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="CustomTextBox.CustomTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:MessageDialogApp"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Name="userControl"
+             d:DesignHeight="60"
+             d:DesignWidth="400"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary Source="CustomTextBoxStyleResourceDictionary.xaml" />
+    </UserControl.Resources>
+
+
+    <Grid Background="LightBlue">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="FocusStateGroup">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition From="LostFocus"
+                                      GeneratedDuration="0:0:59"
+                                      To="GotFocus" />
+                    <VisualTransition From="GotFocus"
+                                      GeneratedDuration="0:0:59"
+                                      To="LostFocus" />
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="GotFocus">
+                    <Storyboard>
+                        <DoubleAnimation Duration="0:0:59"
+                                         Storyboard.TargetName="bottonBorderBack"
+                                         Storyboard.TargetProperty="Line.X2"
+                                         To="300"
+                                         d:IsOptimized="True" />
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="LostFocus">
+                    <Storyboard>
+                        <DoubleAnimation Duration="0:0:59"
+                                         Storyboard.TargetName="bottonBorderBack"
+                                         Storyboard.TargetProperty="Line.X2"
+                                         To="0"
+                                         d:IsOptimized="True" />
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="1"
+                Margin="0"
+                VerticalAlignment="Stretch"
+                Background="White">
+
+            <TextBlock x:Name="placeHolderTextBox"
+                       Margin="0"
+                       VerticalAlignment="Bottom"
+                       FontSize="20"
+                       Foreground="#FF636363"
+                       Text="Celular" />
+        </Border>
+        <Border Grid.Row="1"
+                Margin="0"
+                VerticalAlignment="Stretch"
+                Background="Transparent">
+
+            <TextBox x:Name="effectiveTextBox"
+                     Margin="0,0,0,-6.5"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Bottom"
+                     Background="Transparent"
+                     FontSize="20"
+                     GotFocus="effectiveTextBox_GotFocus"
+                     LostFocus="effectiveTextBox_LostFocus"
+                     Text="Celular">
+
+                <TextBox.Style>
+                    <StaticResource ResourceKey="CustomTextBox" />
+                </TextBox.Style>
+            </TextBox>
+        </Border>
+
+
+        <Line x:Name="bottonBorderBack"
+              Grid.Row="2"
+              Stroke="Red"
+              StrokeThickness="10" />
+        <Line x:Name="bottonBorderFront"
+              Grid.Row="2"
+              Stroke="Red"
+              StrokeThickness="2"
+              X2="{Binding BorderWidth}" />
+
+
+    </Grid>
+</UserControl>
