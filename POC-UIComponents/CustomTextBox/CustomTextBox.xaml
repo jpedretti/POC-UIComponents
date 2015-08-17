@@ -15,7 +15,8 @@
     </UserControl.Resources>
 
 
-    <Grid Background="LightBlue">
+    <Grid Background="LightBlue"
+          Loaded="Grid_Loaded">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
             <RowDefinition Height="5*" />
@@ -35,7 +36,7 @@
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X2)"
                                          To="{Binding Center}" />
-                        <DoubleAnimation Duration="0:0:0.8"
+                        <DoubleAnimation Duration="0:0:0.6"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X1)"
@@ -49,7 +50,7 @@
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X2)"
                                          To="{Binding BorderWidth}" />
-                        <DoubleAnimation Duration="0:0:0.8"
+                        <DoubleAnimation Duration="0:0:0.6"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X1)"
