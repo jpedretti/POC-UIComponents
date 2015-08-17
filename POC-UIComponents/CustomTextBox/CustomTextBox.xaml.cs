@@ -28,7 +28,6 @@ namespace CustomTextBox
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
             Window.Current.SizeChanged += Current_SizeChanged;
-            SetBorderWidth();
         }
 
         public double BorderWidth
@@ -37,7 +36,8 @@ namespace CustomTextBox
             set
             {
                 SetValue(BorderWidthProperty, value);
-                Center = value / 2.0;
+
+                Center = (value / 2.0);
                 RaisePropertyChanged();
             }
         }
@@ -140,6 +140,12 @@ namespace CustomTextBox
                 VisualStateManager.GoToState(this, "HasValue", true);
             else
                 VisualStateManager.GoToState(this, "NotHasValue", true);
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            BorderWidth = grid.ActualWidth;
         }
     }
 }

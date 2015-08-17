@@ -15,7 +15,7 @@
     </UserControl.Resources>
 
 
-    <Grid Height="{Binding ReducedHeight}" Background="LightBlue">
+    <Grid Background="LightBlue" Loaded="Grid_Loaded">
 
         <Interactivity:Interaction.Behaviors>
             <Core:EventTriggerBehavior EventName="Loaded">
@@ -31,7 +31,7 @@
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X2)"
                                          To="{Binding Center}" />
-                        <DoubleAnimation Duration="0:0:0.8"
+                        <DoubleAnimation Duration="0:0:0.6"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X1)"
@@ -45,7 +45,7 @@
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X2)"
                                          To="{Binding BorderWidth}" />
-                        <DoubleAnimation Duration="0:0:0.8"
+                        <DoubleAnimation Duration="0:0:0.6"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X1)"
@@ -61,6 +61,11 @@
                                          Storyboard.TargetName="placeHolderTextBox"
                                          Storyboard.TargetProperty="FontSize"
                                          To="{Binding FontSize}" />
+                        <DoubleAnimation Duration="0:0:0.8"
+                                         Storyboard.TargetName="border"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                                         To="0"
+                                         d:IsOptimized="True" />
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="HasValue">
@@ -70,6 +75,11 @@
                                          Storyboard.TargetName="placeHolderTextBox"
                                          Storyboard.TargetProperty="FontSize"
                                          To="{Binding ReducedFontSize}" />
+                        <DoubleAnimation Duration="0:0:0.8"
+                                         Storyboard.TargetName="border"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                                         To="-75"
+                                         d:IsOptimized="True" />
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
@@ -78,7 +88,11 @@
         <Border x:Name="border"
                 Margin="0"
                 VerticalAlignment="Bottom"
-                Background="Transparent">
+                Background="Transparent"
+                RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <CompositeTransform />
+            </Border.RenderTransform>
 
             <TextBlock x:Name="placeHolderTextBox"
                        Width="{Binding BorderWidth}"
