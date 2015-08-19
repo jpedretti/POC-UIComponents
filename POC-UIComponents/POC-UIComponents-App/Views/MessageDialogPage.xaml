@@ -1,0 +1,39 @@
+﻿<Page x:Class="POC_UIComponents_App.Views.MessageDialogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:POC_UIComponents_App.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:prism="using:Microsoft.Practices.Prism.Mvvm"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel Margin="10,0">
+
+            <TextBox x:Name="Title"
+                     Header="Title"
+                     Text="{Binding Title, Mode=TwoWay}"
+                     TextWrapping="Wrap" />
+
+            <TextBox x:Name="Message"
+                     Header="Message"
+                     Text="{Binding Message, Mode=TwoWay}"
+                     TextWrapping="Wrap" />
+
+            <Button x:Name="FirstButton"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding Button1Command}"
+                    Content="Show dialog with 1 button" />
+
+            <Button x:Name="SecondButton"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding Button2Command}"
+                    Content="Show dialog with 2 buttons" />
+
+        </StackPanel>
+    </Grid>
+</Page>

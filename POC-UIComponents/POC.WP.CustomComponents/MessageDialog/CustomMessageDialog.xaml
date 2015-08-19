@@ -1,0 +1,72 @@
+﻿<ContentDialog x:Class="POC.WP.CustomComponents.CustomMessageDialog"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:local="using:WP.CustomComponents"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               DataContext="{Binding RelativeSource={RelativeSource Self}}"
+               mc:Ignorable="d">
+
+    <ContentDialog.Background>
+        <SolidColorBrush Color="White" />
+    </ContentDialog.Background>
+
+    <ContentDialog.Resources>
+        <Style x:Key="DialogButton" TargetType="Button">
+            <Setter Property="BorderThickness" Value="3" />
+            <!-- <Setter Property="BorderBrush" Value="#f47920"/> -->
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="#f47920" />
+            <Setter Property="HorizontalAlignment" Value="left" />
+            <Setter Property="Margin" Value="0,0,10,0" />
+            <Setter Property="FontFamily" Value="Arial" />
+        </Style>
+    </ContentDialog.Resources>
+
+    <ContentDialog.TitleTemplate>
+        <DataTemplate>
+            <TextBlock Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       FontFamily="Arial"
+                       Foreground="#f47920"
+                       Style="{StaticResource MessageDialogTitleStyle}"
+                       Text="{Binding}" />
+        </DataTemplate>
+    </ContentDialog.TitleTemplate>
+
+    <ContentDialog.Content>
+        <StackPanel>
+            <TextBlock x:Name="body"
+                       Margin="0,0,0,20"
+                       FontFamily="Arial"
+                       Foreground="#8C8C8C"
+                       Style="{StaticResource MessageDialogContentStyle}"
+                       Text="{Binding Message}"
+                       TextWrapping="Wrap" />
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Button1"
+                        Grid.Column="0"
+                        Command="{Binding Button1Clicked}"
+                        Content="{Binding Button1Text}"
+                        Style="{StaticResource DialogButton}"
+                        Visibility="{Binding Button1Enabled,
+                                             Mode=OneWay}">
+                    <Button.BorderBrush>
+                        <SolidColorBrush>
+                            <Color>#f47920</Color>
+                        </SolidColorBrush>
+                    </Button.BorderBrush>
+                </Button>
+
+                <Button x:Name="Button2"
+                        Grid.Column="1"
+                        Command="{Binding Button2Clicked}"
+                        Content="{Binding Button2Text}"
+                        Style="{StaticResource DialogButton}"
+                        Visibility="{Binding Button2Enabled,
+                                             Mode=OneWay}" />
+            </StackPanel>
+        </StackPanel>
+    </ContentDialog.Content>
+
+</ContentDialog>

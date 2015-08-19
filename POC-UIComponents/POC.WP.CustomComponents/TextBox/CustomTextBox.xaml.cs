@@ -1,0 +1,151 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+
+// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
+
+namespace POC.WP.CustomComponents
+{
+    public sealed partial class CustomTextBox : UserControl
+    {
+        private double _headerScaleFactor = 1.5;
+
+        public CustomTextBox()
+        {
+            this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
+            Window.Current.SizeChanged += Current_SizeChanged;
+        }
+
+        public double BorderWidth
+        {
+            get { return (double)GetValue(BorderWidthProperty); }
+            set
+            {
+                SetValue(BorderWidthProperty, value);
+
+                Center = (value / 2.0);
+                RaisePropertyChanged();
+            }
+        }
+
+        public static readonly DependencyProperty BorderWidthProperty =
+            DependencyProperty.Register("BorderWidth", typeof(double), typeof(CustomTextBox), new PropertyMetadata(0));
+
+        public SolidColorBrush BorderColor
+        {
+            get { return (SolidColorBrush)GetValue(BorderColorProperty); }
+            set
+            {
+                SetValue(BorderColorProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+
+        public static readonly DependencyProperty BorderColorProperty =
+            DependencyProperty.Register("BorderColor", typeof(SolidColorBrush), typeof(CustomTextBox), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+
+        public double Center
+        {
+            get { return (double)GetValue(CenterProperty); }
+            set
+            {
+                SetValue(CenterProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for Center.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CenterProperty =
+            DependencyProperty.Register("Center", typeof(double), typeof(CustomTextBox), new PropertyMetadata(0));
+
+
+
+        public double FontSize
+        {
+            get { return (double)GetValue(FontSizeProperty); }
+            set { SetValue(FontSizeProperty, value); }
+        }
+
+        public double ReducedFontSize
+        {
+            get { return (double)GetValue(FontSizeProperty) / _headerScaleFactor; }
+        }
+
+        // Using a DependencyProperty as the backing store for FontSize.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FontSizeProperty =
+            DependencyProperty.Register("FontSize", typeof(double), typeof(CustomTextBox), new PropertyMetadata(9.0));
+
+
+        public double ReducedHeight
+        {
+            get { return (double)GetValue(HeightProperty) / _headerScaleFactor; }
+        }
+
+
+
+        public string PlaceHolderText
+        {
+            get { return (string)GetValue(PlaceHolderTextProperty); }
+            set
+            {
+                SetValue(PlaceHolderTextProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for PlaceHolderText.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PlaceHolderTextProperty =
+            DependencyProperty.Register("PlaceHolderText", typeof(string), typeof(CustomTextBox), new PropertyMetadata(""));
+
+
+
+
+        private void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] String propertyName = null)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+
+        private void SetBorderWidth()
+        {
+            BorderWidth = Window.Current.Bounds.Width;
+        }
+
+        void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            SetBorderWidth();
+        }
+
+        private void effectiveTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (effectiveTextBox.Text.Length > 0)
+                VisualStateManager.GoToState(this, "HasValue", true);
+            else
+                VisualStateManager.GoToState(this, "NotHasValue", true);
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            BorderWidth = grid.ActualWidth;
+        }
+    }
+}
