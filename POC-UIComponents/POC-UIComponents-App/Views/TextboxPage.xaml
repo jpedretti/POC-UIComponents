@@ -11,8 +11,14 @@
 
     <Grid>
         <controls:CustomTextBox Height="100"
-                                BorderColor="Black"
+                                Background="CadetBlue"
+                                BorderAnimationTime="0:0:0.8"
+                                BorderColor="Green"
                                 FontSize="30"
-                                PlaceHolderText="Celular" />
+                                Foreground="DarkRed"
+                                PlaceHolderAnimationTime="0:0:0.3"
+                                PlaceHolderForeground="Blue"
+                                PlaceHolderText="Celular"
+                                SelectedBorderThickness="6" />
     </Grid>
 </Page>

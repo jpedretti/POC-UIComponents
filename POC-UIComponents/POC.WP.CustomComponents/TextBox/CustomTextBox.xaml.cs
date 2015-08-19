@@ -26,24 +26,21 @@ namespace POC.WP.CustomComponents
         public CustomTextBox()
         {
             this.InitializeComponent();
-            (this.Content as FrameworkElement).DataContext = this;
-            Window.Current.SizeChanged += Current_SizeChanged;
+            this.SizeChanged += CustomTextBox_SizeChanged;
+            this.Tapped += CustomTextBox_Tapped;
         }
 
-        public double BorderWidth
+
+
+        public double Center
         {
-            get { return (double)GetValue(BorderWidthProperty); }
-            set
-            {
-                SetValue(BorderWidthProperty, value);
-
-                Center = (value / 2.0);
-                RaisePropertyChanged();
-            }
+            get { return (double)GetValue(CenterProperty); }
+            private set { SetValue(CenterProperty, value); }
         }
 
-        public static readonly DependencyProperty BorderWidthProperty =
-            DependencyProperty.Register("BorderWidth", typeof(double), typeof(CustomTextBox), new PropertyMetadata(0));
+        // Using a DependencyProperty as the backing store for Center.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CenterProperty =
+            DependencyProperty.Register("Center", typeof(double), typeof(CustomTextBox), new PropertyMetadata(0));
 
         public SolidColorBrush BorderColor
         {
@@ -60,44 +57,16 @@ namespace POC.WP.CustomComponents
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-
-
-        public double Center
-        {
-            get { return (double)GetValue(CenterProperty); }
-            set
-            {
-                SetValue(CenterProperty, value);
-                RaisePropertyChanged();
-            }
-        }
-
-        // Using a DependencyProperty as the backing store for Center.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CenterProperty =
-            DependencyProperty.Register("Center", typeof(double), typeof(CustomTextBox), new PropertyMetadata(0));
-
-
-
-        public double FontSize
-        {
-            get { return (double)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
-        }
-
         public double ReducedFontSize
         {
             get { return (double)GetValue(FontSizeProperty) / _headerScaleFactor; }
         }
 
-        // Using a DependencyProperty as the backing store for FontSize.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.Register("FontSize", typeof(double), typeof(CustomTextBox), new PropertyMetadata(9.0));
-
-
         public double ReducedHeight
         {
             get { return (double)GetValue(HeightProperty) / _headerScaleFactor; }
         }
+
 
 
 
@@ -115,23 +84,85 @@ namespace POC.WP.CustomComponents
         public static readonly DependencyProperty PlaceHolderTextProperty =
             DependencyProperty.Register("PlaceHolderText", typeof(string), typeof(CustomTextBox), new PropertyMetadata(""));
 
-
-
-
         private void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] String propertyName = null)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetBorderWidth()
+
+
+        public Duration PlaceHolderAnimationTime
         {
-            BorderWidth = Window.Current.Bounds.Width;
+            get { return (Duration)GetValue(PlaceHolderAnimationTimeProperty); }
+            set
+            {
+                SetValue(PlaceHolderAnimationTimeProperty, value);
+                RaisePropertyChanged();
+            }
         }
 
-        void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        // Using a DependencyProperty as the backing store for AnimationTime.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PlaceHolderAnimationTimeProperty =
+            DependencyProperty.Register("PlaceHolderAnimationTime", typeof(Duration), typeof(CustomTextBox), new PropertyMetadata(new Duration(TimeSpan.FromSeconds(0.5))));
+
+
+
+
+        public Duration BorderAnimationTime
         {
-            SetBorderWidth();
+            get { return (Duration)GetValue(BorderAnimationTimeProperty); }
+            set { SetValue(BorderAnimationTimeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BorderAnimationTime.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BorderAnimationTimeProperty =
+            DependencyProperty.Register("BorderAnimationTime", typeof(Duration), typeof(CustomTextBox), new PropertyMetadata(new Duration(TimeSpan.FromSeconds(0.7))));
+
+
+
+
+        public double SelectedBorderThickness
+        {
+            get { return (double)GetValue(SelectedBorderThicknessProperty); }
+            set
+            {
+                SetValue(SelectedBorderThicknessProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedBorderThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedBorderThicknessProperty =
+            DependencyProperty.Register("SelectedBorderThickness", typeof(double), typeof(CustomTextBox), new PropertyMetadata(3));
+
+
+
+
+        public SolidColorBrush PlaceHolderForeground
+        {
+            get { return (SolidColorBrush)GetValue(PlaceHolderForegroundProperty); }
+            set
+            {
+                SetValue(PlaceHolderForegroundProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for PlaceHolderForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PlaceHolderForegroundProperty =
+            DependencyProperty.Register("PlaceHolderForeground", typeof(SolidColorBrush), typeof(CustomTextBox), new PropertyMetadata(new SolidColorBrush(Colors.Gray)));
+
+
+
+
+
+        private void SetBorderWidth(double width)
+        {
+            effectiveTextBox.Width = width;
+            placeHolderTextBox.Width = width;
+            bottonBorderFront.X2 = width;
+            Center = width / 2.0;
         }
 
         private void effectiveTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -142,10 +173,15 @@ namespace POC.WP.CustomComponents
                 VisualStateManager.GoToState(this, "NotHasValue", true);
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        void CustomTextBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var grid = sender as Grid;
-            BorderWidth = grid.ActualWidth;
+            SetBorderWidth(e.NewSize.Width);
+        }
+
+        private void CustomTextBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (effectiveTextBox.FocusState == Windows.UI.Xaml.FocusState.Unfocused)
+                effectiveTextBox.Focus(FocusState.Programmatic);
         }
     }
 }
