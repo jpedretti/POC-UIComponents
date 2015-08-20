@@ -101,7 +101,7 @@
                 Margin="0"
                 VerticalAlignment="Bottom"
                 Background="Transparent"
-                RenderTransformOrigin="0.5,0.5">
+                RenderTransformOrigin="0,0">
             <Border.RenderTransform>
                 <CompositeTransform />
             </Border.RenderTransform>
@@ -133,6 +133,8 @@
                                           ElementName=userControl}"
                      InputScope="{Binding InputScope}"
                      Style="{StaticResource CustomTextBox}"
+                     Text="{Binding Text,
+                                    ElementName=userControl}"
                      TextChanged="effectiveTextBox_TextChanged">
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="LostFocus">
