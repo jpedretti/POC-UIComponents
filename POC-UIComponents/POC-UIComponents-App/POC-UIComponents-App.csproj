@@ -91,6 +91,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\ColorExtentions.cs" />
     <Compile Include="ViewModels\NavigationSearchBarViewModel.cs" />
     <Compile Include="ViewModels\PasswordBoxPageViewModel.cs" />
     <Compile Include="ViewModels\MessageDialogViewModel.cs" />
