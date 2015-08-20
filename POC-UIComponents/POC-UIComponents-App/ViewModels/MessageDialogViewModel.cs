@@ -9,6 +9,7 @@ using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using POC.WP.CustomComponents;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Text;
+using System.Diagnostics;
 
 namespace POC_UIComponents_App.ViewModels
 {
@@ -80,7 +81,13 @@ namespace POC_UIComponents_App.ViewModels
                 Message = this.Message,
                 Button1Text = "Click Me Arial",
                 FontFamily = new FontFamily("Arial"),
-                FontWeight = FontWeights.Black
+                FontWeight = FontWeights.Black,
+                Button1Command = new DelegateCommand<string>
+                (
+                    (s) => { Debug.WriteLine(s); },
+                    (s) => { return true; }
+                ),
+                Button1Params = "HELLO WORLD"
             };
 
             await dialog.ShowAsync();

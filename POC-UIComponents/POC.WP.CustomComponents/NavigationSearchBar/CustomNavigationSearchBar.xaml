@@ -81,7 +81,7 @@
                  Visibility="Collapsed" 
                  Text="{Binding SearchTerm, Mode=TwoWay}" 
                  Background="{Binding Background}" 
-                 BorderBrush="{Binding Background}" />
+                 BorderBrush="{Binding Background}"/>
 
         <!-- Search button -->
         <Rectangle Grid.Column="2" Fill="Black" 

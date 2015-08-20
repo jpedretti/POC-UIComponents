@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -24,6 +25,7 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
 
             //registra os eventos default de click nos botões
             this.searchButton.Click += searchButton_Click_WhenSearchTextBoxCollapsed;
+            this.backButton.Click += backButton_Click;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -129,7 +131,7 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
 
         // Using a DependencyProperty as the backing store for SearchIconSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SearchIconSourceProperty =
-            DependencyProperty.Register("SearchIconSource", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(String.Empty));
+            DependencyProperty.Register("SearchIconSource", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(null));
 
 
         /// <summary>
@@ -143,9 +145,30 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
 
         // Using a DependencyProperty as the backing store for BackIconSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BackIconSourceProperty =
-            DependencyProperty.Register("BackIconSource", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(String.Empty));
+            DependencyProperty.Register("BackIconSource", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Command a ser executado quando o botão de voltar for clicado
+        /// </summary>
+        public ICommand BackButtonCommand
+        {
+            get { return (ICommand)GetValue(BackButtonCommandProperty); }
+            set { SetValue(BackButtonCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BackButtonCommand.  This enables animation, styling, binding, etc...
+        private static readonly DependencyProperty BackButtonCommandProperty =
+            DependencyProperty.Register("BackButtonCommand", typeof(ICommand), typeof(CustomNavigationSearchBar), new PropertyMetadata(null));
 
         #endregion
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.BackButtonCommand != null && this.BackButtonCommand.CanExecute(null))
+            {
+                BackButtonCommand.Execute(null);
+            }
+        }
 
         private async void searchButton_Click_WhenSearchTextBoxCollapsed(object sender, RoutedEventArgs e)
         {
