@@ -72,8 +72,9 @@
                 Background="Red"
                 BorderBrush="Red"
                 Command="{Binding BackButtonCommand}"
+                CommandParameter="{x:Null}"
                 Foreground="Red"
-                Visibility="{Binding SearchButtonVisibility}">
+                Visibility="{Binding BackButtonVisibility}">
             <Image HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Source="{Binding BackIconSource}" />
