@@ -17,7 +17,7 @@
             x:Name="redNavigationBar"
             Height="50" Background="Red"
             Text="Com dos dois botoes..."
-            BackButtonCommand="{Binding MyCommand}"
+            BackButtonCommand="{Binding MyCommand, RelativeSource={RelativeSource TemplatedParent}}"
             BackButtonVisibility="Visible"
             SearchButtonVisibility="Visible" />
 
@@ -35,6 +35,7 @@
         <NavigationSearchBar:CustomNavigationSearchBar
             Height="100" Background="Blue"
             Text="Apenas back button..."
+            BackButtonCommand="{Binding MyCommand, RelativeSource={RelativeSource TemplatedParent}}"
             BackButtonVisibility="Visible"
             SearchButtonVisibility="Collapsed" Margin="0,20,0,0"/>
 

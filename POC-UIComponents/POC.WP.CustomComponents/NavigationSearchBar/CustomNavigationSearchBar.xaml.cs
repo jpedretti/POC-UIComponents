@@ -25,7 +25,7 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
 
             //registra os eventos default de click nos botões
             this.searchButton.Click += searchButton_Click_WhenSearchTextBoxCollapsed;
-            this.backButton.Click += backButton_Click;
+            //this.backButton.Click += backButton_Click;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -164,7 +164,7 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.BackButtonCommand != null && this.BackButtonCommand.CanExecute(null))
+            if (BackButtonCommand != null && BackButtonCommand.CanExecute(null))
             {
                 BackButtonCommand.Execute(null);
             }

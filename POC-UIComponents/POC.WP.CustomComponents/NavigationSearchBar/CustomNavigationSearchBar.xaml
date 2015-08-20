@@ -65,7 +65,9 @@
                 Foreground="Red" 
                 Background="Red"
                 MinWidth="10" MinHeight="10"
-                Visibility="{Binding SearchButtonVisibility}"
+                Command="{Binding BackButtonCommand}"
+                CommandParameter="{x:Null}"
+                Visibility="{Binding BackButtonVisibility}"
                 MaxWidth="{Binding ActualHeight, ElementName=userControl}">
             <Image HorizontalAlignment="Center" VerticalAlignment="Center"
                    Source="{Binding BackIconSource}" />
