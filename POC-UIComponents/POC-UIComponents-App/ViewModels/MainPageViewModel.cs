@@ -66,6 +66,24 @@ namespace POC_UIComponents_App.ViewModels
             }
         }
 
+
+        private DelegateCommand _goToNavigationSearchBar;
+        public DelegateCommand GoToNavigationSearchBar
+        {
+            get
+            {
+                if (_goToNavigationSearchBar == null)
+                {
+                    _goToNavigationSearchBar = new DelegateCommand
+                        (
+                            () => { GoToNavigationSearchBarAction(); },
+                            () => { return true; }
+                        );
+                }
+                return _goToNavigationSearchBar;
+            }
+        }
+
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
@@ -85,6 +103,11 @@ namespace POC_UIComponents_App.ViewModels
         private void GoToMessageDialogAction()
         {
             _navigationService.Navigate("MessageDialog", null);
+        }
+
+        private void GoToNavigationSearchBarAction()
+        {
+            _navigationService.Navigate("NavigationSearchBar", null);
         }
     }
 }

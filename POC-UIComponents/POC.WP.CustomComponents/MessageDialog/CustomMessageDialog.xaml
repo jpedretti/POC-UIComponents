@@ -4,6 +4,7 @@
                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                xmlns:local="using:WP.CustomComponents"
                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               x:Name="customMessageDialog"
                DataContext="{Binding RelativeSource={RelativeSource Self}}"
                mc:Ignorable="d">
 
@@ -19,7 +20,6 @@
             <Setter Property="Foreground" Value="#f47920" />
             <Setter Property="HorizontalAlignment" Value="left" />
             <Setter Property="Margin" Value="0,0,10,0" />
-            <Setter Property="FontFamily" Value="Arial" />
         </Style>
     </ContentDialog.Resources>
 
@@ -27,7 +27,8 @@
         <DataTemplate>
             <TextBlock Grid.Row="0"
                        Grid.ColumnSpan="2"
-                       FontFamily="Arial"
+                       FontFamily="{Binding FontFamily,
+                                    ElementName=customMessageDialog}"
                        Foreground="#f47920"
                        Style="{StaticResource MessageDialogTitleStyle}"
                        Text="{Binding}" />
@@ -38,7 +39,8 @@
         <StackPanel>
             <TextBlock x:Name="body"
                        Margin="0,0,0,20"
-                       FontFamily="Arial"
+                       FontFamily="{Binding FontFamily,
+                                    ElementName=customMessageDialog}"
                        Foreground="#8C8C8C"
                        Style="{StaticResource MessageDialogContentStyle}"
                        Text="{Binding Message}"
@@ -46,6 +48,8 @@
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="Button1"
                         Grid.Column="0"
+                        FontFamily="{Binding FontFamily,
+                                     ElementName=customMessageDialog}"
                         Command="{Binding Button1Clicked}"
                         Content="{Binding Button1Text}"
                         Style="{StaticResource DialogButton}"
@@ -61,6 +65,8 @@
                 <Button x:Name="Button2"
                         Grid.Column="1"
                         Command="{Binding Button2Clicked}"
+                        FontFamily="{Binding FontFamily,
+                                     ElementName=customMessageDialog}"
                         Content="{Binding Button2Text}"
                         Style="{StaticResource DialogButton}"
                         Visibility="{Binding Button2Enabled,

@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{871021
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavigationSearchBar", "NavigationSearchBar\NavigationSearchBar.csproj", "{7380A45A-F655-423B-A17F-382E3A7E95F1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POC-UIComponents-App", "POC-UIComponents-App\POC-UIComponents-App.csproj", "{BCD47649-60D4-492D-96BE-1F7296F609A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POC.WP.CustomComponents", "POC.WP.CustomComponents\POC.WP.CustomComponents.csproj", "{9062F599-0411-4CB9-8AC8-A8C338E94D71}"
@@ -26,24 +24,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Debug|ARM.ActiveCfg = Debug|ARM
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Debug|ARM.Build.0 = Debug|ARM
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Debug|ARM.Deploy.0 = Debug|ARM
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Debug|x86.ActiveCfg = Debug|x86
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Debug|x86.Build.0 = Debug|x86
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Debug|x86.Deploy.0 = Debug|x86
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Release|ARM.ActiveCfg = Release|ARM
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Release|ARM.Build.0 = Release|ARM
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Release|ARM.Deploy.0 = Release|ARM
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Release|x86.ActiveCfg = Release|x86
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Release|x86.Build.0 = Release|x86
-		{7380A45A-F655-423B-A17F-382E3A7E95F1}.Release|x86.Deploy.0 = Release|x86
 		{BCD47649-60D4-492D-96BE-1F7296F609A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BCD47649-60D4-492D-96BE-1F7296F609A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCD47649-60D4-492D-96BE-1F7296F609A1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

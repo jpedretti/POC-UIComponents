@@ -21,6 +21,7 @@ namespace POC.WP.CustomComponents
 {
     public sealed partial class CustomMessageDialog : ContentDialog
     {
+        #region Dependency Properties
         public string Message
         {
             get { return (string)GetValue(MessageProperty); }
@@ -106,9 +107,12 @@ namespace POC.WP.CustomComponents
         private static readonly DependencyProperty Button2EnabledProperty =
             DependencyProperty.Register("Button2Enabled", typeof(Visibility), typeof(CustomMessageDialog), new PropertyMetadata(Visibility.Collapsed));
 
+        #endregion
+
         public CustomMessageDialog()
         {
             this.InitializeComponent();
+            FontFamily = new FontFamily("Arial");
         }
 
 
