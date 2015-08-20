@@ -22,26 +22,21 @@ namespace POC.WP.CustomComponents
 {
     public sealed partial class CustomPasswordBox : UserControl
     {
-        public CustomPasswordBox()
-        {
-            this.InitializeComponent();
-            (this.Content as FrameworkElement).DataContext = this;
-
-            Window.Current.SizeChanged += Current_SizeChanged;
-
-            SetBorderWidth();
-        }
-
-        void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
-        {
-            SetBorderWidth();
-        }
-
         private static SolidColorBrush _notTypedDefaultColor = new SolidColorBrush(Colors.Gray);
         private static SolidColorBrush _typedDefaultColor = new SolidColorBrush(Colors.Orange);
         private static SolidColorBrush _backgroundDefaultColor = new SolidColorBrush(Colors.LightGray);
         private static InputScope _inputScope = new InputScope { Names = { { new InputScopeName(InputScopeNameValue.Number) } } };
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public CustomPasswordBox()
+        {
+            this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
+            this.SizeChanged += CustomPasswordBox_SizeChanged;
+        }
+
+        #region Dependency Properties
         public double BorderWidth
         {
             get { return (double)GetValue(BorderWidthProperty); }
@@ -51,7 +46,6 @@ namespace POC.WP.CustomComponents
                 RaisePropertyChanged();
             }
         }
-
         public static readonly DependencyProperty BorderWidthProperty =
             DependencyProperty.Register("BorderWidth", typeof(double), typeof(CustomPasswordBox), new PropertyMetadata(0.0));
 
@@ -64,7 +58,6 @@ namespace POC.WP.CustomComponents
                 RaisePropertyChanged();
             }
         }
-
         public static readonly DependencyProperty TypedColorProperty =
             DependencyProperty.Register("TypedColor", typeof(SolidColorBrush), typeof(CustomPasswordBox), new PropertyMetadata(_typedDefaultColor));
 
@@ -78,7 +71,6 @@ namespace POC.WP.CustomComponents
                 RaisePropertyChanged();
             }
         }
-
         public static readonly DependencyProperty NotTypedColorProperty =
             DependencyProperty.Register("NotTypedColor", typeof(SolidColorBrush), typeof(CustomPasswordBox), new PropertyMetadata(_notTypedDefaultColor));
 
@@ -91,7 +83,6 @@ namespace POC.WP.CustomComponents
                 RaisePropertyChanged();
             }
         }
-
         public static readonly DependencyProperty CustomBackgroundColorProperty =
             DependencyProperty.Register("CustomBackgroundColor", typeof(SolidColorBrush), typeof(CustomPasswordBox), new PropertyMetadata(_backgroundDefaultColor));
 
@@ -104,7 +95,6 @@ namespace POC.WP.CustomComponents
                 RaisePropertyChanged();
             }
         }
-
         public static readonly DependencyProperty BorderColorProperty =
             DependencyProperty.Register("BorderColor", typeof(SolidColorBrush), typeof(CustomPasswordBox), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
 
@@ -117,7 +107,6 @@ namespace POC.WP.CustomComponents
                 CharacterCountChanged(value);
             }
         }
-
         public static readonly DependencyProperty CharacterCountProperty =
             DependencyProperty.Register("CharacterCount", typeof(int), typeof(CustomPasswordBox), new PropertyMetadata(4));
 
@@ -130,10 +119,8 @@ namespace POC.WP.CustomComponents
                 RaisePropertyChanged();
             }
         }
-
         public static readonly DependencyProperty TypedPasswordProperty =
             DependencyProperty.Register("TypedPassword", typeof(string), typeof(CustomPasswordBox), new PropertyMetadata(""));
-
 
         public ImageSource ImageSource
         {
@@ -145,10 +132,8 @@ namespace POC.WP.CustomComponents
                 RaisePropertyChanged();
             }
         }
-
         public static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(CustomPasswordBox), null);
-
 
         public InputScopeNameValue CustomInputScope
         {
@@ -163,11 +148,11 @@ namespace POC.WP.CustomComponents
                 RaisePropertyChanged();
             }
         }
-
         public static readonly DependencyProperty CustomInputScopeProperty =
             DependencyProperty.Register("CustomInputScope", typeof(InputScope), typeof(CustomPasswordBox), new PropertyMetadata(_inputScope));
+        #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region Private Methods
         private void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] String propertyName = null)
         {
             if (PropertyChanged != null)
@@ -233,20 +218,15 @@ namespace POC.WP.CustomComponents
             FillEllipses(password);
         }
 
-        private void SetBorderWidth()
+        private void SetBorderWidth(double width)
         {
-            BorderWidth = Math.Max(Window.Current.Bounds.Height, Window.Current.Bounds.Width);
+            BorderWidth = width;
         }
 
-
-        private void IsFucused()
+        private void CustomPasswordBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var hasFocus = true;
-            if (hasFocus)
-                VisualStateManager.GoToState(this, "Focused", true);
-            else
-                VisualStateManager.GoToState(this, "NotFocused", true);
-
+            SetBorderWidth(e.NewSize.Width);
         }
+        #endregion
     }
 }

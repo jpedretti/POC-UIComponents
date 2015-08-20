@@ -15,7 +15,7 @@
     </UserControl.Resources>
 
 
-    <Grid Background="LightBlue">
+    <Grid Background="{Binding Background, ElementName=userControl}">
 
         <Interactivity:Interaction.Behaviors>
             <Core:EventTriggerBehavior EventName="Loaded">
@@ -26,27 +26,32 @@
             <VisualStateGroup x:Name="FocusStateGroup">
                 <VisualState x:Name="LostFocus">
                     <Storyboard>
-                        <DoubleAnimation Duration="{Binding BorderAnimationTime}"
+                        <DoubleAnimation Duration="{Binding BorderAnimationTime,
+                                                            ElementName=userControl}"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X2)"
                                          To="{Binding Center}" />
-                        <DoubleAnimation Duration="{Binding BorderAnimationTime}"
+                        <DoubleAnimation Duration="{Binding BorderAnimationTime,
+                                                            ElementName=userControl}"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X1)"
-                                         To="{Binding Center}" />
+                                         To="{Binding Center,
+                                                      ElementName=userControl}" />
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="GotFocus">
                     <Storyboard>
-                        <DoubleAnimation Duration="{Binding BorderAnimationTime}"
+                        <DoubleAnimation Duration="{Binding BorderAnimationTime,
+                                                            ElementName=userControl}"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X2)"
                                          To="{Binding ElementName=bottonBorderFront,
                                                       Path=X2}" />
-                        <DoubleAnimation Duration="{Binding BorderAnimationTime}"
+                        <DoubleAnimation Duration="{Binding BorderAnimationTime,
+                                                            ElementName=userControl}"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="bottonBorderBack"
                                          Storyboard.TargetProperty="(Line.X1)"
@@ -57,12 +62,15 @@
             <VisualStateGroup x:Name="PlaceHolderStateGroup">
                 <VisualState x:Name="NotHasValue">
                     <Storyboard>
-                        <DoubleAnimation Duration="{Binding PlaceHolderAnimationTime}"
+                        <DoubleAnimation Duration="{Binding PlaceHolderAnimationTime,
+                                                            ElementName=userControl}"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="placeHolderTextBox"
                                          Storyboard.TargetProperty="FontSize"
-                                         To="{Binding FontSize}" />
-                        <DoubleAnimation Duration="{Binding PlaceHolderAnimationTime}"
+                                         To="{Binding FontSize,
+                                                      ElementName=userControl}" />
+                        <DoubleAnimation Duration="{Binding PlaceHolderAnimationTime,
+                                                            ElementName=userControl}"
                                          Storyboard.TargetName="border"
                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
                                          To="0"
@@ -71,15 +79,18 @@
                 </VisualState>
                 <VisualState x:Name="HasValue">
                     <Storyboard>
-                        <DoubleAnimation Duration="{Binding PlaceHolderAnimationTime}"
+                        <DoubleAnimation Duration="{Binding PlaceHolderAnimationTime,
+                                                            ElementName=userControl}"
                                          EnableDependentAnimation="True"
                                          Storyboard.TargetName="placeHolderTextBox"
                                          Storyboard.TargetProperty="FontSize"
                                          To="{Binding ReducedFontSize}" />
-                        <DoubleAnimation Duration="{Binding PlaceHolderAnimationTime}"
+                        <DoubleAnimation Duration="{Binding PlaceHolderAnimationTime,
+                                                            ElementName=userControl}"
                                          Storyboard.TargetName="border"
                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
-                                         To="-75"
+                                         To="{Binding HeaderHeight,
+                                                      ElementName=userControl}"
                                          d:IsOptimized="True" />
                     </Storyboard>
                 </VisualState>
@@ -98,27 +109,29 @@
             <TextBlock x:Name="placeHolderTextBox"
                        Margin="0"
                        VerticalAlignment="Bottom"
-                       FontFamily="{Binding FontFamily,
-                                            ElementName=userControl}"
                        FontSize="{Binding FontSize,
                                           ElementName=userControl}"
-                       Foreground="{Binding PlaceHolderForeground}"
-                       Text="Celular" />
+                       Foreground="{Binding PlaceHolderForeground,
+                                            ElementName=userControl}"
+                       Text="{Binding PlaceHolderText,
+                                      ElementName=userControl}" />
         </Border>
         <Border Margin="0"
                 VerticalAlignment="Stretch"
                 Background="Transparent">
 
             <TextBox x:Name="effectiveTextBox"
+                     Margin="{Binding TextMargin,
+                                      ElementName=userControl}"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Bottom"
                      Background="Transparent"
-                     FontFamily="{Binding FontFamily,
-                                          ElementName=userControl}"
+                     FontFamily="Global User Interface"
                      FontSize="{Binding FontSize,
                                         ElementName=userControl}"
                      Foreground="{Binding Foreground,
                                           ElementName=userControl}"
+                     InputScope="{Binding InputScope}"
                      Style="{StaticResource CustomTextBox}"
                      TextChanged="effectiveTextBox_TextChanged">
                 <Interactivity:Interaction.Behaviors>
@@ -133,14 +146,18 @@
         </Border>
         <Line x:Name="bottonBorderBack"
               VerticalAlignment="Bottom"
-              Stroke="{Binding BorderColor}"
+              Stroke="{Binding BorderColor,
+                               ElementName=userControl}"
               StrokeThickness="{Binding SelectedBorderThickness}"
-              X1="{Binding Center}"
-              X2="{Binding Center}" />
+              X1="{Binding Center,
+                           ElementName=userControl}"
+              X2="{Binding Center,
+                           ElementName=userControl}" />
 
         <Line x:Name="bottonBorderFront"
               VerticalAlignment="Bottom"
-              Stroke="{Binding BorderColor}"
+              Stroke="{Binding BorderColor,
+                               ElementName=userControl}"
               StrokeThickness="2" />
     </Grid>
 </UserControl>

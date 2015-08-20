@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.Prism.Mvvm.Interfaces;
 using POC.WP.CustomComponents;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Text;
 
 namespace POC_UIComponents_App.ViewModels
 {
@@ -76,7 +78,9 @@ namespace POC_UIComponents_App.ViewModels
             {
                 Title = this.Title,
                 Message = this.Message,
-                Button1Text = "Click Me"
+                Button1Text = "Click Me Arial",
+                FontFamily = new FontFamily("Arial"),
+                FontWeight = FontWeights.Black
             };
 
             await dialog.ShowAsync();
@@ -89,7 +93,8 @@ namespace POC_UIComponents_App.ViewModels
                 Title = this.Title,
                 Message = this.Message,
                 Button1Text = "Click Me",
-                Button2Text = "Or Me!"
+                Button2Text = "Or Me!",
+                FontFamily = new FontFamily("Arial")
             };
 
             await dialog.ShowAsync();
