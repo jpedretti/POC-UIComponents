@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage.Pickers.Provider;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,15 +23,69 @@ namespace POC.WP.CustomComponents
     public sealed partial class CustomMessageDialog : ContentDialog
     {
         #region Dependency Properties
+
         public string Message
         {
             get { return (string)GetValue(MessageProperty); }
             set { SetValue(MessageProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Message.  This enables animation, styling, binding, etc...
         private static readonly DependencyProperty MessageProperty =
             DependencyProperty.Register("Message", typeof(string), typeof(CustomMessageDialog), new PropertyMetadata(null));
+
+
+
+        public SolidColorBrush MessageForeground
+        {
+            get { return (SolidColorBrush)GetValue(MessageForegroundProperty); }
+            set { SetValue(MessageForegroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty MessageForegroundProperty =
+            DependencyProperty.Register("MessageForeground", typeof(SolidColorBrush), typeof(CustomMessageDialog), new PropertyMetadata(
+                new SolidColorBrush(Color.FromArgb(255, 140, 140, 140))
+            ));
+
+        public SolidColorBrush TitleForeground
+        {
+            get { return (SolidColorBrush)GetValue(TitleForegroundProperty); }
+            set { SetValue(TitleForegroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty TitleForegroundProperty =
+            DependencyProperty.Register("TitleForeground", typeof(SolidColorBrush), typeof(CustomMessageDialog), new PropertyMetadata(
+                new SolidColorBrush(Color.FromArgb(255, 244, 121, 32))
+            ));
+
+
+
+        public SolidColorBrush ButtonForeground
+        {
+            get { return (SolidColorBrush)GetValue(ButtonForegroundProperty); }
+            set { SetValue(ButtonForegroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ButtonForeground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ButtonForegroundProperty =
+            DependencyProperty.Register("ButtonForeground", typeof(SolidColorBrush), typeof(CustomMessageDialog), new PropertyMetadata(
+                new SolidColorBrush(Color.FromArgb(255, 244, 121, 32))
+            ));
+
+
+
+        public SolidColorBrush ButtonBorderBrush
+        {
+            get { return (SolidColorBrush)GetValue(ButtonBorderBrushProperty); }
+            set { SetValue(ButtonBorderBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ButtonBorderBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ButtonBorderBrushProperty =
+            DependencyProperty.Register("ButtonBorderBrush", typeof(SolidColorBrush), typeof(CustomMessageDialog), new PropertyMetadata(
+                new SolidColorBrush(Color.FromArgb(255, 244, 121, 32))
+        ));
+
+
 
         public string Button1Text
         {
@@ -38,7 +93,6 @@ namespace POC.WP.CustomComponents
             set { SetButton1Text(value); }
         }
 
-        // Using a DependencyProperty as the backing store for Button1Text.  This enables animation, styling, binding, etc...
         private static readonly DependencyProperty Button1TextProperty =
             DependencyProperty.Register("Button1Text", typeof(string), typeof(CustomMessageDialog), new PropertyMetadata(null));
 
@@ -48,7 +102,6 @@ namespace POC.WP.CustomComponents
             set { SetButton2Text(value); }
         }
 
-        // Using a DependencyProperty as the backing store for Button2Text.  This enables animation, styling, binding, etc...
         private static readonly DependencyProperty Button2TextProperty =
             DependencyProperty.Register("Button2Text", typeof(string), typeof(CustomMessageDialog), new PropertyMetadata(null));
 
@@ -58,7 +111,6 @@ namespace POC.WP.CustomComponents
             set { SetValue(Button1CommandProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Button1Command.  This enables animation, styling, binding, etc...
         private static readonly DependencyProperty Button1CommandProperty =
             DependencyProperty.Register("Button1Command", typeof(ICommand), typeof(CustomMessageDialog), new PropertyMetadata(null));
 
@@ -68,9 +120,20 @@ namespace POC.WP.CustomComponents
             set { SetValue(Button2CommandProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Button2Command.  This enables animation, styling, binding, etc...
         private static readonly DependencyProperty Button2CommandProperty =
             DependencyProperty.Register("Button2Command", typeof(ICommand), typeof(CustomMessageDialog), new PropertyMetadata(null));
+
+        private static readonly DependencyProperty Button1EnabledProperty =
+            DependencyProperty.Register("Button1Enabled", typeof(Visibility), typeof(CustomMessageDialog), new PropertyMetadata(Visibility.Collapsed));
+
+        private Visibility Button2Enabled
+        {
+            get { return (Visibility)GetValue(Button2EnabledProperty); }
+            set { SetValue(Button2EnabledProperty, value); }
+        }
+
+        private static readonly DependencyProperty Button2EnabledProperty =
+            DependencyProperty.Register("Button2Enabled", typeof(Visibility), typeof(CustomMessageDialog), new PropertyMetadata(Visibility.Collapsed));
 
         private object _button1Params;
 
@@ -93,19 +156,6 @@ namespace POC.WP.CustomComponents
             get { return (Visibility)GetValue(Button1EnabledProperty); }
             set { SetValue(Button1EnabledProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for Button1Enabled.  This enables animation, styling, binding, etc...
-        private static readonly DependencyProperty Button1EnabledProperty =
-            DependencyProperty.Register("Button1Enabled", typeof(Visibility), typeof(CustomMessageDialog), new PropertyMetadata(Visibility.Collapsed));
-
-        private Visibility Button2Enabled
-        {
-            get { return (Visibility)GetValue(Button2EnabledProperty); }
-            set { SetValue(Button2EnabledProperty, value); }
-        }
-
-        private static readonly DependencyProperty Button2EnabledProperty =
-            DependencyProperty.Register("Button2Enabled", typeof(Visibility), typeof(CustomMessageDialog), new PropertyMetadata(Visibility.Collapsed));
 
         #endregion
 

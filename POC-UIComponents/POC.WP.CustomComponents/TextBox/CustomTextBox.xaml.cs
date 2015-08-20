@@ -107,7 +107,7 @@ namespace POC.WP.CustomComponents
         public double SelectedBorderThickness
         {
             get { return (double)GetValue(SelectedBorderThicknessProperty); }
-            set
+            private set
             {
                 SetValue(SelectedBorderThicknessProperty, value);
                 RaisePropertyChanged();
@@ -127,6 +127,14 @@ namespace POC.WP.CustomComponents
         }
         public static readonly DependencyProperty PlaceHolderTextProperty =
             DependencyProperty.Register("PlaceHolderText", typeof(string), typeof(CustomTextBox), new PropertyMetadata(""));
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register("Text", typeof(string), typeof(CustomTextBox), new PropertyMetadata(""));
 
         public Duration PlaceHolderAnimationTime
         {
@@ -185,10 +193,7 @@ namespace POC.WP.CustomComponents
         #region Private Methods
         private void SetBorderWidth(double width)
         {
-            effectiveTextBox.Width = width;
-            placeHolderTextBox.Width = width;
-            bottonBorderFront.X2 = width;
-            Center = width / 2.0;
+
         }
 
         private void effectiveTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -201,14 +206,17 @@ namespace POC.WP.CustomComponents
 
         private void CustomTextBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            SetBorderWidth(e.NewSize.Width);
-            var componentSizeWithoutBottonBorder = (e.NewSize.Height - SelectedBorderThickness);
-            var textBottonMarginValue = SelectedBorderThickness;
-            TextMargin = new Thickness(0, 0, 0, textBottonMarginValue);
+            bottonBorderFront.X2 = e.NewSize.Width;
+            Center = e.NewSize.Width / 2.0;
 
-            FontSize = (componentSizeWithoutBottonBorder - textBottonMarginValue) * 2 / 3;
-            ReducedFontSize = FontSize / 2;
-            HeaderHeight = -(FontSize + textBottonMarginValue);
+            SelectedBorderThickness = e.NewSize.Height / 20;
+            var componentSizeWithoutBottonBorder = (e.NewSize.Height - SelectedBorderThickness);
+            TextMargin = new Thickness(0, 0, 0, SelectedBorderThickness);
+
+            ReducedFontSize = componentSizeWithoutBottonBorder * 1.5 / 7.0;
+            FontSize = componentSizeWithoutBottonBorder * 4.5 / 7.0;
+
+            HeaderHeight = -(e.NewSize.Height - ReducedFontSize);
         }
 
         private void CustomTextBox_Tapped(object sender, TappedRoutedEventArgs e)
