@@ -22,7 +22,7 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
         public CustomNavigationSearchBar()
         {
             this.InitializeComponent();
-
+            (this.Content as FrameworkElement).DataContext = this;
             //registra os eventos default de click nos botões
             this.searchButton.Click += searchButton_Click_WhenSearchTextBoxCollapsed;
             this.backButton.Click += backButton_Click;
@@ -153,7 +153,11 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
         public ICommand BackButtonCommand
         {
             get { return (ICommand)GetValue(BackButtonCommandProperty); }
-            set { SetValue(BackButtonCommandProperty, value); }
+            set
+            {
+                SetValue(BackButtonCommandProperty, value);
+                RaisePropertyChanged();
+            }
         }
 
         // Using a DependencyProperty as the backing store for BackButtonCommand.  This enables animation, styling, binding, etc...
@@ -236,6 +240,6 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
                 searchTextBoxVisibilityDispatcherTime.Start();
             }
         }
-        
+
     }
 }

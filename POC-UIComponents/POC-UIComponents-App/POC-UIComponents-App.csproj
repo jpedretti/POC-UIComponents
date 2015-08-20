@@ -95,7 +95,7 @@
     <Compile Include="ViewModels\NavigationSearchBarViewModel.cs" />
     <Compile Include="ViewModels\PasswordBoxPageViewModel.cs" />
     <Compile Include="ViewModels\MessageDialogViewModel.cs" />
-    <Compile Include="ViewModels\TextboxViewModel.cs" />
+    <Compile Include="ViewModels\TextboxPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

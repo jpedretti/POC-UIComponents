@@ -26,6 +26,7 @@ namespace POC.WP.CustomComponents
         public CustomTextBox()
         {
             this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
             this.SizeChanged += CustomTextBox_SizeChanged;
             this.Tapped += CustomTextBox_Tapped;
             this.FontFamily = new FontFamily("Arial");

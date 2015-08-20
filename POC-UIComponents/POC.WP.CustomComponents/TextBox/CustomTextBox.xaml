@@ -6,7 +6,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Name="userControl"
-             DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
              d:DesignHeight="60"
              d:DesignWidth="400"
              mc:Ignorable="d">
@@ -134,6 +133,8 @@
                      InputScope="{Binding InputScope}"
                      Style="{StaticResource CustomTextBox}"
                      Text="{Binding Text,
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged,
                                     ElementName=userControl}"
                      TextChanged="effectiveTextBox_TextChanged">
                 <Interactivity:Interaction.Behaviors>

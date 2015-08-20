@@ -9,7 +9,7 @@ using Microsoft.Practices.Prism.Mvvm.Interfaces;
 
 namespace POC_UIComponents_App.ViewModels
 {
-    class PasswordBoxPageViewModel : ViewModel
+    public class PasswordBoxPageViewModel : ViewModel
     {
         private INavigationService _navigationService;
 

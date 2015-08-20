@@ -10,13 +10,27 @@ using System.Diagnostics;
 
 namespace POC_UIComponents_App.ViewModels
 {
-    class NavigationSearchBarPageViewModel : ViewModel
+    public class NavigationSearchBarPageViewModel : ViewModel
     {
         private INavigationService _navigationService;
 
         public NavigationSearchBarPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+        }
+
+        private string _text = string.Empty;
+
+        public string MyText
+        {
+            get
+            {
+                return _text;
+            }
+            set
+            {
+                SetProperty(ref _text, value);
+            }
         }
 
         private DelegateCommand _myCommand;

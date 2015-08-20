@@ -9,13 +9,27 @@ using Microsoft.Practices.Prism.Mvvm.Interfaces;
 
 namespace POC_UIComponents_App.ViewModels
 {
-    class TextboxViewModel : ViewModel
+    class TextboxPageViewModel : ViewModel
     {
         private INavigationService _navigationService;
 
-        public TextboxViewModel(INavigationService navigationService)
+        public TextboxPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+        }
+
+        private string _myText = string.Empty;
+
+        public string Nome
+        {
+            get
+            {
+                return _myText;
+            }
+            set
+            {
+                SetProperty(ref _myText, value);
+            }
         }
     }
 }

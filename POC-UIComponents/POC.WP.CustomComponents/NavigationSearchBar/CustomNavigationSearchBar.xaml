@@ -1,106 +1,132 @@
-﻿<UserControl x:Name="userControl"
-    x:Class="POC.WP.CustomComponents.NavigationSearchBar.CustomNavigationSearchBar"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:POC.WP.CustomComponents.NavigationSearchBar"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
-    mc:Ignorable="d"
-    d:DesignHeight="50"
-    d:DesignWidth="400">
+﻿<UserControl x:Class="POC.WP.CustomComponents.NavigationSearchBar.CustomNavigationSearchBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Name="userControl"
+             d:DesignHeight="50"
+             d:DesignWidth="400"
+             mc:Ignorable="d">
 
     <Grid x:Name="mainNavigationGrid" Background="{Binding Background}">
-    	<VisualStateManager.VisualStateGroups>
-    		<VisualStateGroup x:Name="SearchStateGroup">
-    			<VisualStateGroup.Transitions>
-    				<VisualTransition GeneratedDuration="0:0:0.250"/>
-    			</VisualStateGroup.Transitions>
-    			<VisualState x:Name="SearchHidden">
-    				<Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="searchTextBox">
-    						<DiscreteObjectKeyFrame KeyTime="0">
-    							<DiscreteObjectKeyFrame.Value>
-    								<Visibility>Collapsed</Visibility>
-    							</DiscreteObjectKeyFrame.Value>
-    						</DiscreteObjectKeyFrame>
-    					</ObjectAnimationUsingKeyFrames>
-    				</Storyboard>
-    			</VisualState>
-    			<VisualState x:Name="SearchActivated">
-    				<Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="headerTextBlock">
-    						<DiscreteObjectKeyFrame KeyTime="0">
-    							<DiscreteObjectKeyFrame.Value>
-    								<Visibility>Collapsed</Visibility>
-    							</DiscreteObjectKeyFrame.Value>
-    						</DiscreteObjectKeyFrame>
-    					</ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="searchTextBox">
-                        	<DiscreteObjectKeyFrame KeyTime="0">
-                        		<DiscreteObjectKeyFrame.Value>
-                        			<Visibility>Visible</Visibility>
-                        		</DiscreteObjectKeyFrame.Value>
-                        	</DiscreteObjectKeyFrame>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="SearchStateGroup">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0:0:0.250" />
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="SearchHidden">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="searchTextBox" Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
-    				</Storyboard>
-    			</VisualState>
-    		</VisualStateGroup>
-    	</VisualStateManager.VisualStateGroups>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="SearchActivated">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="headerTextBlock" Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="searchTextBox" Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <!-- Back button -->
-        <Rectangle Grid.Column="0" Fill="Black"
-                   Visibility="{Binding BackButtonVisibility}" 
-                   MinWidth="{Binding ActualHeight, ElementName=userControl}"
-                   MaxWidth="{Binding ActualHeight, ElementName=userControl}" />
-        
-        <Button x:Name="backButton" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"
-                BorderBrush="Red"
-                Foreground="Red" 
+        <!--  Back button  -->
+        <Rectangle Grid.Column="0"
+                   MinWidth="{Binding ActualHeight,
+                                      ElementName=userControl}"
+                   MaxWidth="{Binding ActualHeight,
+                                      ElementName=userControl}"
+                   Fill="Black"
+                   Visibility="{Binding BackButtonVisibility}" />
+
+        <Button x:Name="backButton"
+                Grid.Column="0"
+                MinWidth="10"
+                MinHeight="10"
+                MaxWidth="{Binding ActualHeight,
+                                   ElementName=userControl}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 Background="Red"
-                MinWidth="10" MinHeight="10"
-                Visibility="{Binding SearchButtonVisibility}"
-                MaxWidth="{Binding ActualHeight, ElementName=userControl}">
-            <Image HorizontalAlignment="Center" VerticalAlignment="Center"
+                BorderBrush="Red"
+                Command="{Binding BackButtonCommand}"
+                Foreground="Red"
+                Visibility="{Binding SearchButtonVisibility}">
+            <Image HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
                    Source="{Binding BackIconSource}" />
         </Button>
 
-        <!-- Center room -->
-        <TextBlock x:Name="headerTextBlock" Grid.Column="1" VerticalAlignment="Center" Margin="10,0" 
-                   FontSize="{Binding FontSize}" 
-                   FontWeight="{Binding FontWeight}" 
-                   Text="{Binding Text}"/>
+        <!--  Center room  -->
+        <TextBlock x:Name="headerTextBlock"
+                   Grid.Column="1"
+                   Margin="10,0"
+                   VerticalAlignment="Center"
+                   FontSize="{Binding FontSize}"
+                   FontWeight="{Binding FontWeight}"
+                   Text="{Binding Text}" />
 
-        <TextBox x:Name="searchTextBox" Grid.Column="1" VerticalAlignment="Center" Margin="10,0,0,0"
-                 Visibility="Collapsed" 
-                 Text="{Binding SearchTerm, Mode=TwoWay}" 
-                 Background="{Binding Background}" 
-                 BorderBrush="{Binding Background}"/>
+        <TextBox x:Name="searchTextBox"
+                 Grid.Column="1"
+                 Margin="10,0,0,0"
+                 VerticalAlignment="Center"
+                 Background="{Binding Background}"
+                 BorderBrush="{Binding Background}"
+                 Text="{Binding SearchTerm,
+                                ElementName=userControl,
+                                Mode=TwoWay,
+                                UpdateSourceTrigger=PropertyChanged}"
+                 Visibility="Collapsed" />
 
-        <!-- Search button -->
-        <Rectangle Grid.Column="2" Fill="Black" 
-                   Visibility="{Binding SearchButtonVisibility}"
-                   MinWidth="{Binding ActualHeight, ElementName=userControl}"
-                   MaxWidth="{Binding ActualHeight, ElementName=userControl}" />
-        
-        <Button x:Name="searchButton" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"
-                BorderBrush="Red"
-                Foreground="Red" 
+        <!--  Search button  -->
+        <Rectangle Grid.Column="2"
+                   MinWidth="{Binding ActualHeight,
+                                      ElementName=userControl}"
+                   MaxWidth="{Binding ActualHeight,
+                                      ElementName=userControl}"
+                   Fill="Black"
+                   Visibility="{Binding SearchButtonVisibility}" />
+
+        <Button x:Name="searchButton"
+                Grid.Column="2"
+                MinWidth="10"
+                MinHeight="10"
+                MaxWidth="{Binding ActualHeight,
+                                   ElementName=userControl}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 Background="Red"
-                MinWidth="10" MinHeight="10"
-                Visibility="{Binding SearchButtonVisibility}"
-                MaxWidth="{Binding ActualHeight, ElementName=userControl}">
-            <Image HorizontalAlignment="Center" VerticalAlignment="Center"
+                BorderBrush="Red"
+                Foreground="Red"
+                Visibility="{Binding SearchButtonVisibility}">
+            <Image HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
                    Source="{Binding SearchIconSource}" />
         </Button>
-        
+
 
     </Grid>
-    
+
 </UserControl>
