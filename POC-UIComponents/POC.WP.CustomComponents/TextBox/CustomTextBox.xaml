@@ -98,6 +98,8 @@
             <TextBlock x:Name="placeHolderTextBox"
                        Margin="0"
                        VerticalAlignment="Bottom"
+                       FontFamily="{Binding FontFamily,
+                                            ElementName=userControl}"
                        FontSize="{Binding FontSize,
                                           ElementName=userControl}"
                        Foreground="{Binding PlaceHolderForeground}"
@@ -111,6 +113,8 @@
                      HorizontalAlignment="Left"
                      VerticalAlignment="Bottom"
                      Background="Transparent"
+                     FontFamily="{Binding FontFamily,
+                                          ElementName=userControl}"
                      FontSize="{Binding FontSize,
                                         ElementName=userControl}"
                      Foreground="{Binding Foreground,
