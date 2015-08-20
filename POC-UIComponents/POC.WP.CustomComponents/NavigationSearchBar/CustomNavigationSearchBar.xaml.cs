@@ -14,8 +14,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace POC.WP.CustomComponents.NavigationSearchBar
 {
     public sealed partial class CustomNavigationSearchBar : UserControl
@@ -23,6 +21,9 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
         public CustomNavigationSearchBar()
         {
             this.InitializeComponent();
+
+            //registra os eventos default de click nos botões
+            this.searchButton.Click += searchButton_Click_WhenSearchTextBoxCollapsed;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -33,6 +34,20 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region XAML and State Controls
+
+        private DispatcherTimer searchTextBoxVisibilityDispatcherTime = null;
+        public bool HasSearchValue
+        {
+            get
+            {
+                return (this.SearchButtonVisibility == Visibility.Visible
+                       && !string.IsNullOrWhiteSpace(this.SearchTerm));
+            }
+        }
+
+        #endregion
+
         #region XAML Properties
 
         /// <summary>
@@ -42,7 +57,7 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
         {
             get { return (Visibility)GetValue(BackButtonVisibilityProperty); }
             set
-            { 
+            {
                 SetValue(BackButtonVisibilityProperty, value);
                 RaisePropertyChanged();
             }
@@ -106,32 +121,98 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
         /// <summary>
         /// Caminho para o ícone a ser usado no botão de busca
         /// </summary>
-        public String SearchIconPath
+        public String SearchIconSource
         {
-            get { return (String)GetValue(SearchIconPathProperty); }
-            set { SetValue(SearchIconPathProperty, value); }
+            get { return (String)GetValue(SearchIconSourceProperty); }
+            set { SetValue(SearchIconSourceProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for SearchIconPath.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SearchIconPathProperty =
-            DependencyProperty.Register("SearchIconPath", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(String.Empty));
+        // Using a DependencyProperty as the backing store for SearchIconSource.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SearchIconSourceProperty =
+            DependencyProperty.Register("SearchIconSource", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(String.Empty));
 
 
         /// <summary>
         /// Caminho para o ícone a ser usado no botãode voltar
         /// </summary>
-        public String BackIconPath
+        public String BackIconSource
         {
-            get { return (String)GetValue(BackIconPathProperty); }
-            set { SetValue(BackIconPathProperty, value); }
+            get { return (String)GetValue(BackIconSourceProperty); }
+            set { SetValue(BackIconSourceProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for BackIconPath.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty BackIconPathProperty =
-            DependencyProperty.Register("BackIconPath", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(String.Empty));
-
-        
+        // Using a DependencyProperty as the backing store for BackIconSource.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BackIconSourceProperty =
+            DependencyProperty.Register("BackIconSource", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(String.Empty));
 
         #endregion
+
+        private async void searchButton_Click_WhenSearchTextBoxCollapsed(object sender, RoutedEventArgs e)
+        {
+            if (HasSearchValue)
+            {
+                //se houver valor pesquisado, dá foco no campo
+                searchTextBox.Focus(FocusState.Programmatic);
+                return;
+            }
+
+            //faz a caixa de texto aparecer
+            VisualStateManager.GoToState(this, "SearchActivated", true);
+
+            //dá foco no controle
+            await System.Threading.Tasks.Task.Delay(750);
+            searchTextBox.Focus(FocusState.Programmatic);
+
+            //altera os eventos
+            searchButton.Click -= searchButton_Click_WhenSearchTextBoxCollapsed;
+            searchButton.Click += searchButton_Click_WhenSearchTextBoxVisible;
+
+            searchTextBox.LostFocus += searchTextBox_LostFocus_WhenVisible;
+        }
+
+        private void searchButton_Click_WhenSearchTextBoxVisible(object sender, RoutedEventArgs e)
+        {
+            if (HasSearchValue)
+            {
+                //se houver valor pesquisado, dá foco no campo
+                searchTextBox.Focus(FocusState.Programmatic);
+            }
+            else
+            {
+                if (searchTextBoxVisibilityDispatcherTime != null && searchTextBoxVisibilityDispatcherTime.IsEnabled)
+                {
+                    searchTextBoxVisibilityDispatcherTime.Stop();
+                }
+
+                //altera os eventos
+                searchButton.Click += searchButton_Click_WhenSearchTextBoxCollapsed;
+                searchButton.Click -= searchButton_Click_WhenSearchTextBoxVisible;
+
+                searchTextBox.LostFocus -= searchTextBox_LostFocus_WhenVisible;
+            }
+        }
+
+        private void searchTextBox_LostFocus_WhenVisible(object sender, RoutedEventArgs e)
+        {
+            if (HasSearchValue)
+            {
+                //se houver valor pesquisado apenas deixa o lost focus ocorrer
+                return;
+            }
+            else
+            {
+                //se não havia valor pesquisado, faz a caixa de busca sumir
+                VisualStateManager.GoToState(this, "SearchHidden", true);
+
+                searchTextBoxVisibilityDispatcherTime = new DispatcherTimer();
+                searchTextBoxVisibilityDispatcherTime.Tick += (sdt, edt) =>
+                {
+                    searchButton_Click_WhenSearchTextBoxVisible(null, null);
+                };
+                searchTextBoxVisibilityDispatcherTime.Interval = TimeSpan.FromMilliseconds(1000);
+                searchTextBoxVisibilityDispatcherTime.Start();
+            }
+        }
+        
     }
 }
