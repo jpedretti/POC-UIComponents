@@ -21,27 +21,17 @@ namespace POC.WP.CustomComponents
 {
     public sealed partial class CustomTextBox : UserControl
     {
-        private double _headerScaleFactor = 1.5;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public CustomTextBox()
         {
             this.InitializeComponent();
             this.SizeChanged += CustomTextBox_SizeChanged;
             this.Tapped += CustomTextBox_Tapped;
+            this.FontFamily = new FontFamily("Arial");
         }
 
-
-
-        public double Center
-        {
-            get { return (double)GetValue(CenterProperty); }
-            private set { SetValue(CenterProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Center.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CenterProperty =
-            DependencyProperty.Register("Center", typeof(double), typeof(CustomTextBox), new PropertyMetadata(0));
-
+        #region Dependency Properties
         public SolidColorBrush BorderColor
         {
             get { return (SolidColorBrush)GetValue(BorderColorProperty); }
@@ -51,93 +41,8 @@ namespace POC.WP.CustomComponents
                 RaisePropertyChanged();
             }
         }
-
         public static readonly DependencyProperty BorderColorProperty =
             DependencyProperty.Register("BorderColor", typeof(SolidColorBrush), typeof(CustomTextBox), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public double ReducedFontSize
-        {
-            get { return (double)GetValue(FontSizeProperty) / _headerScaleFactor; }
-        }
-
-        public double ReducedHeight
-        {
-            get { return (double)GetValue(HeightProperty) / _headerScaleFactor; }
-        }
-
-
-
-
-        public string PlaceHolderText
-        {
-            get { return (string)GetValue(PlaceHolderTextProperty); }
-            set
-            {
-                SetValue(PlaceHolderTextProperty, value);
-                RaisePropertyChanged();
-            }
-        }
-
-        // Using a DependencyProperty as the backing store for PlaceHolderText.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PlaceHolderTextProperty =
-            DependencyProperty.Register("PlaceHolderText", typeof(string), typeof(CustomTextBox), new PropertyMetadata(""));
-
-        private void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] String propertyName = null)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-        }
-
-
-
-        public Duration PlaceHolderAnimationTime
-        {
-            get { return (Duration)GetValue(PlaceHolderAnimationTimeProperty); }
-            set
-            {
-                SetValue(PlaceHolderAnimationTimeProperty, value);
-                RaisePropertyChanged();
-            }
-        }
-
-        // Using a DependencyProperty as the backing store for AnimationTime.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PlaceHolderAnimationTimeProperty =
-            DependencyProperty.Register("PlaceHolderAnimationTime", typeof(Duration), typeof(CustomTextBox), new PropertyMetadata(new Duration(TimeSpan.FromSeconds(0.5))));
-
-
-
-
-        public Duration BorderAnimationTime
-        {
-            get { return (Duration)GetValue(BorderAnimationTimeProperty); }
-            set { SetValue(BorderAnimationTimeProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for BorderAnimationTime.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty BorderAnimationTimeProperty =
-            DependencyProperty.Register("BorderAnimationTime", typeof(Duration), typeof(CustomTextBox), new PropertyMetadata(new Duration(TimeSpan.FromSeconds(0.7))));
-
-
-
-
-        public double SelectedBorderThickness
-        {
-            get { return (double)GetValue(SelectedBorderThicknessProperty); }
-            set
-            {
-                SetValue(SelectedBorderThicknessProperty, value);
-                RaisePropertyChanged();
-            }
-        }
-
-        // Using a DependencyProperty as the backing store for SelectedBorderThickness.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedBorderThicknessProperty =
-            DependencyProperty.Register("SelectedBorderThickness", typeof(double), typeof(CustomTextBox), new PropertyMetadata(3));
-
-
-
 
         public SolidColorBrush PlaceHolderForeground
         {
@@ -148,15 +53,136 @@ namespace POC.WP.CustomComponents
                 RaisePropertyChanged();
             }
         }
-
-        // Using a DependencyProperty as the backing store for PlaceHolderForeground.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PlaceHolderForegroundProperty =
-            DependencyProperty.Register("PlaceHolderForeground", typeof(SolidColorBrush), typeof(CustomTextBox), new PropertyMetadata(new SolidColorBrush(Colors.Gray)));
+            DependencyProperty.Register("PlaceHolderForeground", typeof(SolidColorBrush), typeof(CustomTextBox), new PropertyMetadata(new SolidColorBrush(Colors.LightGray)));
 
+        public double ReducedFontSize
+        {
+            get { return (double)GetValue(ReducedFontSizeProperty); }
+            private set
+            {
+                SetValue(ReducedFontSizeProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+        public static readonly DependencyProperty ReducedFontSizeProperty =
+            DependencyProperty.Register("ReducedFontSize", typeof(double), typeof(CustomTextBox), new PropertyMetadata(0));
 
+        new public double FontSize
+        {
+            get { return (double)GetValue(FontSizeProperty); }
+            private set
+            {
+                SetValue(FontSizeProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+        new public static readonly DependencyProperty FontSizeProperty =
+            DependencyProperty.Register("FontSize", typeof(double), typeof(CustomTextBox), new PropertyMetadata(0));
 
+        public double HeaderHeight
+        {
+            get { return (double)GetValue(HeaderHeightProperty); }
+            private set
+            {
+                SetValue(HeaderHeightProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+        public static readonly DependencyProperty HeaderHeightProperty =
+            DependencyProperty.Register("HeaderHeight", typeof(double), typeof(CustomTextBox), new PropertyMetadata(0));
 
+        public double Center
+        {
+            get { return (double)GetValue(CenterProperty); }
+            private set
+            {
+                SetValue(CenterProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+        public static readonly DependencyProperty CenterProperty =
+            DependencyProperty.Register("Center", typeof(double), typeof(CustomTextBox), new PropertyMetadata(0));
 
+        public double SelectedBorderThickness
+        {
+            get { return (double)GetValue(SelectedBorderThicknessProperty); }
+            set
+            {
+                SetValue(SelectedBorderThicknessProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+        public static readonly DependencyProperty SelectedBorderThicknessProperty =
+            DependencyProperty.Register("SelectedBorderThickness", typeof(double), typeof(CustomTextBox), new PropertyMetadata(3));
+
+        public string PlaceHolderText
+        {
+            get { return (string)GetValue(PlaceHolderTextProperty); }
+            set
+            {
+                SetValue(PlaceHolderTextProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+        public static readonly DependencyProperty PlaceHolderTextProperty =
+            DependencyProperty.Register("PlaceHolderText", typeof(string), typeof(CustomTextBox), new PropertyMetadata(""));
+
+        public Duration PlaceHolderAnimationTime
+        {
+            get { return (Duration)GetValue(PlaceHolderAnimationTimeProperty); }
+            set
+            {
+                SetValue(PlaceHolderAnimationTimeProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+        public static readonly DependencyProperty PlaceHolderAnimationTimeProperty =
+            DependencyProperty.Register("PlaceHolderAnimationTime", typeof(Duration), typeof(CustomTextBox), new PropertyMetadata(new Duration(TimeSpan.FromSeconds(0.3))));
+
+        public Duration BorderAnimationTime
+        {
+            get { return (Duration)GetValue(BorderAnimationTimeProperty); }
+            set
+            {
+                SetValue(BorderAnimationTimeProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+        public static readonly DependencyProperty BorderAnimationTimeProperty =
+            DependencyProperty.Register("BorderAnimationTime", typeof(Duration), typeof(CustomTextBox), new PropertyMetadata(new Duration(TimeSpan.FromSeconds(0.7))));
+
+        public Thickness TextMargin
+        {
+            get { return (Thickness)GetValue(TextMarginProperty); }
+            private set
+            {
+                SetValue(TextMarginProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+        public static readonly DependencyProperty TextMarginProperty =
+            DependencyProperty.Register("TextMargin", typeof(Thickness), typeof(CustomTextBox), new PropertyMetadata(0));
+
+        public InputScopeNameValue InputScope
+        {
+            get
+            {
+                return (GetValue(InputScopeProperty) as InputScope).Names.FirstOrDefault().NameValue;
+            }
+            set
+            {
+                var newInputScope = new InputScope { Names = { { new InputScopeName(value) } } };
+                SetValue(InputScopeProperty, newInputScope);
+                RaisePropertyChanged();
+            }
+        }
+        public static readonly DependencyProperty InputScopeProperty =
+            DependencyProperty.Register("InputScope", typeof(InputScope), typeof(CustomTextBox),
+            new PropertyMetadata(new InputScope { Names = { { new InputScopeName(InputScopeNameValue.AlphanumericFullWidth) } } }));
+        #endregion
+
+        #region Private Methods
         private void SetBorderWidth(double width)
         {
             effectiveTextBox.Width = width;
@@ -173,9 +199,16 @@ namespace POC.WP.CustomComponents
                 VisualStateManager.GoToState(this, "NotHasValue", true);
         }
 
-        void CustomTextBox_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void CustomTextBox_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             SetBorderWidth(e.NewSize.Width);
+            var componentSizeWithoutBottonBorder = (e.NewSize.Height - SelectedBorderThickness);
+            var textBottonMarginValue = SelectedBorderThickness;
+            TextMargin = new Thickness(0, 0, 0, textBottonMarginValue);
+
+            FontSize = (componentSizeWithoutBottonBorder - textBottonMarginValue) * 2 / 3;
+            ReducedFontSize = FontSize / 2;
+            HeaderHeight = -(FontSize + textBottonMarginValue);
         }
 
         private void CustomTextBox_Tapped(object sender, TappedRoutedEventArgs e)
@@ -183,5 +216,13 @@ namespace POC.WP.CustomComponents
             if (effectiveTextBox.FocusState == Windows.UI.Xaml.FocusState.Unfocused)
                 effectiveTextBox.Focus(FocusState.Programmatic);
         }
+
+        private void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] String propertyName = null)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
     }
 }
