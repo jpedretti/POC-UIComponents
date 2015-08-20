@@ -85,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="NavigationSearchBar\CustomNavigationSearchBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PasswordBox\CustomPasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,6 +108,9 @@
     <Compile Include="MessageDialog\CustomMessageDialog.xaml.cs">
       <DependentUpon>CustomMessageDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NavigationSearchBar\CustomNavigationSearchBar.xaml.cs">
+      <DependentUpon>CustomNavigationSearchBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PasswordBox\CustomPasswordBox.xaml.cs">
       <DependentUpon>CustomPasswordBox.xaml</DependentUpon>
     </Compile>
@@ -120,6 +127,7 @@
   <ItemGroup>
     <DesignData Include="SampleData\CustomTextBoxSampleData.xaml" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
