@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="POC_UIComponents_App.Views.AddressBookPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:POC_UIComponents_App.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:prism="using:Microsoft.Practices.Prism.Mvvm"
+      Background="White"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      mc:Ignorable="d">
+    <Page.Resources>
+        <CollectionViewSource x:Key="AddressGroups"
+                              IsSourceGrouped="True" Source="{Binding AddressGroups}"/>
+    </Page.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TitlePanel -->
+        <StackPanel Grid.Row="0" Margin="24,17,0,28">
+            <TextBlock Text="Contatos" 
+                       Margin="0,12,0,0" 
+                       Style="{ThemeResource HeaderTextBlockStyle}" 
+                       FontSize="52" 
+                       Foreground="Orange"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" x:Name="ContentRoot">
+            <SemanticZoom>
+                <SemanticZoom.ZoomedInView>
+                    <ListView IsHoldingEnabled="True"
+                          ItemsSource="{Binding Source={StaticResource AddressGroups}}"
+                          ItemTemplate="{StaticResource AddrBookItemTemplate}"
+                          ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                        <ListView.GroupStyle>
+                            <GroupStyle HidesIfEmpty="True" 
+                                        HeaderTemplate="{StaticResource AddrBookGroupHeaderTemplate}"/>
+                        </ListView.GroupStyle>
+                    </ListView>
+                </SemanticZoom.ZoomedInView>
+                <SemanticZoom.ZoomedOutView>
+                    <GridView Background="White" 
+                          ItemsSource="{Binding Source={StaticResource AddressGroups}, Path=CollectionGroups}"
+                          ItemTemplate="{StaticResource AddrBookJumpTemplate}">
+                    </GridView>
+                </SemanticZoom.ZoomedOutView>
+            </SemanticZoom>
+        </Grid>
+    </Grid>
+</Page>

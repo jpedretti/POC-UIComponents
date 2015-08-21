@@ -30,13 +30,27 @@
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToMessageDialog}"
                 Content="CustomMessageDialog" />
-
+        
         <Button x:Name="buttonCustomNavigationSearchBar"
                 Grid.Row="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToNavigationSearchBar}"
                 Content="CustomNavigationSearchBar" />
+        
+        <Button x:Name="buttonCustomExpanderView"
+                Grid.Row="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding GoToExpanderView}"
+                Content="CustomExpanderView" />
+
+        <Button x:Name="buttonCustomAddressBook"
+                Grid.Row="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding GoToAddressBook}"
+                Content="CustomAddressBook" />
 
         <Button x:Name="buttonCustomButton"
                 HorizontalAlignment="Stretch"
