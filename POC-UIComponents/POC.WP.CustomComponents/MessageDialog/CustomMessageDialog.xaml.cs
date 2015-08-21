@@ -32,9 +32,7 @@ namespace POC.WP.CustomComponents
 
         private static readonly DependencyProperty MessageProperty =
             DependencyProperty.Register("Message", typeof(string), typeof(CustomMessageDialog), new PropertyMetadata(null));
-
-
-
+        
         public SolidColorBrush MessageForeground
         {
             get { return (SolidColorBrush)GetValue(MessageForegroundProperty); }
@@ -162,6 +160,7 @@ namespace POC.WP.CustomComponents
         public CustomMessageDialog()
         {
             this.InitializeComponent();
+            (this.Content as FrameworkElement).DataContext = this;
             FontFamily = new FontFamily("Arial");
         }
 
