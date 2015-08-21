@@ -84,6 +84,23 @@ namespace POC_UIComponents_App.ViewModels
             }
         }
 
+        private DelegateCommand _goToExpanderView;
+        public DelegateCommand GoToExpanderView
+        {
+            get
+            {
+                if (_goToExpanderView == null)
+                {
+                    _goToExpanderView = new DelegateCommand
+                        (
+                            () => { GoToExpanderViewAction(); },
+                            () => { return true; }
+                        );
+                }
+                return _goToExpanderView;
+            }
+        }
+
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
@@ -108,6 +125,12 @@ namespace POC_UIComponents_App.ViewModels
         private void GoToNavigationSearchBarAction()
         {
             _navigationService.Navigate("NavigationSearchBar", null);
+        }
+
+
+        private void GoToExpanderViewAction()
+        {
+            _navigationService.Navigate("ExpanderView", null);
         }
     }
 }

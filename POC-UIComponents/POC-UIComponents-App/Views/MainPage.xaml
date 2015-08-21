@@ -37,6 +37,13 @@
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToNavigationSearchBar}"
                 Content="CustomNavigationSearchBar" />
+
+        <Button x:Name="buttonCustomExpanderView"
+                Grid.Row="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding GoToExpanderView}"
+                Content="CustomExpanderView" />
         
     </StackPanel>
 </Page>
