@@ -6,7 +6,8 @@
     <prism:MvvmAppBase.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Controls/ExpanderView/CustomExpanderViewResourceDictionary.xaml" />
+                <ResourceDictionary Source="Styles/ExpanderView/CustomExpanderViewResourceDictionary.xaml" />
+                <ResourceDictionary Source="Styles/AddressBook/CustomAddressBookResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </prism:MvvmAppBase.Resources>
