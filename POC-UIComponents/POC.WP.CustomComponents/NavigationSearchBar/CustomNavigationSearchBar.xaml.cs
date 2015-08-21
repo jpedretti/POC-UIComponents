@@ -3,29 +3,25 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Input;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace POC.WP.CustomComponents.NavigationSearchBar
 {
+    /// <summary>
+    /// Barra de navegação com botão de voltar configurável e barra de busca.
+    /// </summary>
     public sealed partial class CustomNavigationSearchBar : UserControl
     {
         public CustomNavigationSearchBar()
         {
             this.InitializeComponent();
             (this.Content as FrameworkElement).DataContext = this;
+
             //registra os eventos default de click nos botões
             this.searchButton.Click += searchButton_Click_WhenSearchTextBoxCollapsed;
-            //this.backButton.Click += backButton_Click;
+            this.backButton.Click += backButton_Click;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -64,8 +60,6 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
                 RaisePropertyChanged();
             }
         }
-
-        // Using a DependencyProperty as the backing store for BackButtonVisibility.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BackButtonVisibilityProperty =
             DependencyProperty.Register("BackButtonVisibility", typeof(Visibility), typeof(CustomNavigationSearchBar), new PropertyMetadata(Visibility.Collapsed));
 
@@ -82,8 +76,6 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
                 RaisePropertyChanged();
             }
         }
-
-        // Using a DependencyProperty as the backing store for SearchButtonVisibility.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SearchButtonVisibilityProperty =
             DependencyProperty.Register("SearchButtonVisibility", typeof(Visibility), typeof(CustomNavigationSearchBar), new PropertyMetadata(Visibility.Collapsed));
 
@@ -96,8 +88,6 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
             get { return (String)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for Text.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register("Text", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(String.Empty));
 
@@ -114,8 +104,6 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
                 RaisePropertyChanged("SearchTerm");
             }
         }
-
-        // Using a DependencyProperty as the backing store for SearchTerm.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SearchTermProperty =
             DependencyProperty.Register("SearchTerm", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(String.Empty));
 
@@ -128,8 +116,6 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
             get { return (String)GetValue(SearchIconSourceProperty); }
             set { SetValue(SearchIconSourceProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for SearchIconSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SearchIconSourceProperty =
             DependencyProperty.Register("SearchIconSource", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(null));
 
@@ -142,8 +128,6 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
             get { return (String)GetValue(BackIconSourceProperty); }
             set { SetValue(BackIconSourceProperty, value); }
         }
-
-        // Using a DependencyProperty as the backing store for BackIconSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BackIconSourceProperty =
             DependencyProperty.Register("BackIconSource", typeof(String), typeof(CustomNavigationSearchBar), new PropertyMetadata(null));
 
@@ -159,8 +143,6 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
                 RaisePropertyChanged();
             }
         }
-
-        // Using a DependencyProperty as the backing store for BackButtonCommand.  This enables animation, styling, binding, etc...
         private static readonly DependencyProperty BackButtonCommandProperty =
             DependencyProperty.Register("BackButtonCommand", typeof(ICommand), typeof(CustomNavigationSearchBar), new PropertyMetadata(null));
 
@@ -194,7 +176,7 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
             searchButton.Click -= searchButton_Click_WhenSearchTextBoxCollapsed;
             searchButton.Click += searchButton_Click_WhenSearchTextBoxVisible;
 
-            searchTextBox.LostFocus += searchTextBox_LostFocus_WhenVisible;
+            searchTextBox.LostFocus += searchTextBox_LostFocus;
         }
 
         private void searchButton_Click_WhenSearchTextBoxVisible(object sender, RoutedEventArgs e)
@@ -206,6 +188,7 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
             }
             else
             {
+                //caso contrário reseta os eventos associados aos controles envolvidos
                 if (searchTextBoxVisibilityDispatcherTime != null && searchTextBoxVisibilityDispatcherTime.IsEnabled)
                 {
                     searchTextBoxVisibilityDispatcherTime.Stop();
@@ -215,11 +198,11 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
                 searchButton.Click += searchButton_Click_WhenSearchTextBoxCollapsed;
                 searchButton.Click -= searchButton_Click_WhenSearchTextBoxVisible;
 
-                searchTextBox.LostFocus -= searchTextBox_LostFocus_WhenVisible;
+                searchTextBox.LostFocus -= searchTextBox_LostFocus;
             }
         }
 
-        private void searchTextBox_LostFocus_WhenVisible(object sender, RoutedEventArgs e)
+        private void searchTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             if (HasSearchValue)
             {
@@ -228,9 +211,10 @@ namespace POC.WP.CustomComponents.NavigationSearchBar
             }
             else
             {
-                //se não havia valor pesquisado, faz a caixa de busca sumir
+                //se não há valor pesquisado, faz a caixa de busca sumir
                 VisualStateManager.GoToState(this, "SearchHidden", true);
 
+                //configura um dispatcher para resetar os eventos associados aos controles de busca
                 searchTextBoxVisibilityDispatcherTime = new DispatcherTimer();
                 searchTextBoxVisibilityDispatcherTime.Tick += (sdt, edt) =>
                 {

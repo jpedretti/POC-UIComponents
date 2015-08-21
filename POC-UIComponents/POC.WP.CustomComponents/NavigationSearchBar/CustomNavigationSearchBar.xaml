@@ -8,7 +8,7 @@
              d:DesignWidth="400"
              mc:Ignorable="d">
 
-    <Grid x:Name="mainNavigationGrid" Background="{Binding Background}">
+    <Grid x:Name="mainNavigationGrid" Background="{Binding Background, ElementName=userControl}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="SearchStateGroup">
                 <VisualStateGroup.Transitions>
@@ -71,8 +71,6 @@
                 VerticalAlignment="Center"
                 Background="Red"
                 BorderBrush="Red"
-                Command="{Binding BackButtonCommand}"
-                CommandParameter="{x:Null}"
                 Foreground="Red"
                 Visibility="{Binding BackButtonVisibility}">
             <Image HorizontalAlignment="Center"
@@ -126,7 +124,6 @@
                    VerticalAlignment="Center"
                    Source="{Binding SearchIconSource}" />
         </Button>
-
 
     </Grid>
 
