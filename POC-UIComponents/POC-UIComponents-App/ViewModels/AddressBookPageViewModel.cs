@@ -56,18 +56,18 @@ namespace POC_UIComponents_App.ViewModels
             source.Add(new AddressBookEntryModel("Yolanda Honey Bunny", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", ""));
             source.Add(new AddressBookEntryModel("Jules Winnfield", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", ""));
             source.Add(new AddressBookEntryModel("Marvin", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", "", true));
-            source.Add(new AddressBookEntryModel("Brett", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", ""));
+            source.Add(new AddressBookEntryModel("Brett", null, null, "99999-0011", ""));
             source.Add(new AddressBookEntryModel("Roger", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", "", true));
             source.Add(new AddressBookEntryModel("Butch Coolidge", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", ""));
             source.Add(new AddressBookEntryModel("Marsellus Wallace", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", "/Assets/contact_photo.jpg", true));
-            source.Add(new AddressBookEntryModel("Paul English Bob", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", "/Assets/contact_photo.jpg"));
+            source.Add(new AddressBookEntryModel("Paul English Bob", null, null, "99999-0011", "/Assets/contact_photo.jpg"));
             source.Add(new AddressBookEntryModel("Trudi", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", "/Assets/contact_photo.jpg", true));
             source.Add(new AddressBookEntryModel("Jody", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", "/Assets/contact_photo.jpg", true));
             source.Add(new AddressBookEntryModel("Lance", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", "/Assets/contact_photo.jpg", true));
             source.Add(new AddressBookEntryModel("Mia Wallace", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", "/Assets/contact_photo.jpg"));
             source.Add(new AddressBookEntryModel("Bob Bogle", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", "/Assets/contact_photo.jpg"));
             source.Add(new AddressBookEntryModel("Quentin", "Citi", "Ag. 1234 | CC. 1231231", "99999-0011", null, true));
-            source.Add(new AddressBookEntryModel("Jeferson", "Zed", "Ag. 1234 | CC. 1231231", "99999-0011", "/Assets/contact_photo.jpg", true));
+            source.Add(new AddressBookEntryModel("Jeferson", null, null, "99999-0011", "/Assets/contact_photo.jpg", true));
 
             AddressGroups = AlphaKeyGroup<AddressBookEntryModel>.CreateGroups(source, CultureInfo.CurrentUICulture, s => s.FullName, true);
         }
