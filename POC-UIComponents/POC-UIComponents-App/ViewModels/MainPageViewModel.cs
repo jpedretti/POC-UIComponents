@@ -84,6 +84,23 @@ namespace POC_UIComponents_App.ViewModels
             }
         }
 
+        DelegateCommand _goToCustomButton = null;
+        public DelegateCommand GoToCustomButton
+        {
+            get
+            {
+                if (_goToCustomButton != null)
+                    return _goToCustomButton;
+                _goToCustomButton = new DelegateCommand
+                (
+                    () => { _navigationService.Navigate("RoundBorderButton", null); },
+                    () => { return true; }
+                );
+                this.PropertyChanged += (s, e) => _goToCustomButton.RaiseCanExecuteChanged();
+                return _goToCustomButton;
+            }
+        }
+
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;

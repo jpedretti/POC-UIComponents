@@ -171,7 +171,7 @@ namespace POC.WP.CustomComponents
             }
         }
         public static readonly DependencyProperty TextMarginProperty =
-            DependencyProperty.Register("TextMargin", typeof(Thickness), typeof(CustomTextBox), new PropertyMetadata(0));
+            DependencyProperty.Register("TextMargin", typeof(Thickness), typeof(CustomTextBox), new PropertyMetadata(new Thickness(0)));
 
         public InputScopeNameValue InputScope
         {
@@ -192,10 +192,6 @@ namespace POC.WP.CustomComponents
         #endregion
 
         #region Private Methods
-        private void SetBorderWidth(double width)
-        {
-
-        }
 
         private void effectiveTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {

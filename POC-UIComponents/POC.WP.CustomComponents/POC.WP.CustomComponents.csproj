@@ -81,6 +81,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Page Include="CustomButton\RoundBorderButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MessageDialog\CustomMessageDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="CustomButton\RoundBorderButton.xaml.cs">
+      <DependentUpon>RoundBorderButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MessageDialog\CustomMessageDialog.xaml.cs">
       <DependentUpon>CustomMessageDialog.xaml</DependentUpon>
     </Compile>

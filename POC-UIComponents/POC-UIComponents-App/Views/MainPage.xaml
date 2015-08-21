@@ -30,13 +30,19 @@
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToMessageDialog}"
                 Content="CustomMessageDialog" />
-        
+
         <Button x:Name="buttonCustomNavigationSearchBar"
                 Grid.Row="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToNavigationSearchBar}"
                 Content="CustomNavigationSearchBar" />
-        
+
+        <Button x:Name="buttonCustomButton"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding GoToCustomButton}"
+                Content="CustomButton" />
+
     </StackPanel>
 </Page>
