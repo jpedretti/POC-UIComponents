@@ -96,7 +96,6 @@
     <Compile Include="ViewModels\AddressBookPageViewModel.cs" />
     <Compile Include="ViewModels\NavigationSearchBarViewModel.cs" />
     <Compile Include="ViewModels\ExpanderViewPageViewModel.cs" />
-    <Compile Include="ViewModels\ObservableCollection.cs" />
     <Compile Include="ViewModels\PasswordBoxPageViewModel.cs" />
     <Compile Include="ViewModels\MessageDialogViewModel.cs" />
     <Compile Include="ViewModels\TextboxPageViewModel.cs" />

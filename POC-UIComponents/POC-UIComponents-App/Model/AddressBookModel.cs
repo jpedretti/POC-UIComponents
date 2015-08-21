@@ -120,6 +120,12 @@ namespace POC_UIComponents_App.Model
 
             string result = initials.Replace(fullname, "$1");
 
+            if (!string.IsNullOrEmpty(result))
+                if (result.Length > 1)
+                    result = result.First().ToString() + result.Last().ToString();
+                else
+                    result = result.First().ToString();
+
             return result;
         }
     }
