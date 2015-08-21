@@ -92,12 +92,18 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ColorExtentions.cs" />
+    <Compile Include="Model\AddressBookModel.cs" />
+    <Compile Include="ViewModels\AddressBookPageViewModel.cs" />
     <Compile Include="ViewModels\NavigationSearchBarViewModel.cs" />
     <Compile Include="ViewModels\ExpanderViewPageViewModel.cs" />
+    <Compile Include="ViewModels\ObservableCollection.cs" />
     <Compile Include="ViewModels\PasswordBoxPageViewModel.cs" />
     <Compile Include="ViewModels\MessageDialogViewModel.cs" />
     <Compile Include="ViewModels\TextboxPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="Views\AddressBookViewPage.xaml.cs">
+      <DependentUpon>AddressBookViewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExpanderViewPage.xaml.cs">
       <DependentUpon>ExpanderViewPage.xaml</DependentUpon>
     </Compile>
@@ -127,6 +133,7 @@
     <Content Include="Assets\arrow_down.png" />
     <Content Include="Assets\arrow_up.png" />
     <Content Include="Assets\card.png" />
+    <Content Include="Assets\contact_photo.jpg" />
     <Content Include="Assets\icon_sms.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
@@ -140,10 +147,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\ExpanderView\CustomExpanderViewResourceDictionary.xaml">
+    <Page Include="Styles\AddressBook\CustomAddressBookResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Styles\ExpanderView\CustomExpanderViewResourceDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\AddressBookViewPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ExpanderViewPage.xaml">
       <SubType>Designer</SubType>

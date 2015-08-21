@@ -101,6 +101,23 @@ namespace POC_UIComponents_App.ViewModels
             }
         }
 
+        private DelegateCommand _goToAddressBook;
+        public DelegateCommand GoToAddressBook
+        {
+            get
+            {
+                if (_goToAddressBook == null)
+                {
+                    _goToAddressBook = new DelegateCommand
+                        (
+                            () => { GoToAddressBookAction(); },
+                            () => { return true; }
+                        );
+                }
+                return _goToAddressBook;
+            }
+        }
+
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
@@ -126,11 +143,16 @@ namespace POC_UIComponents_App.ViewModels
         {
             _navigationService.Navigate("NavigationSearchBar", null);
         }
-
-
+        
         private void GoToExpanderViewAction()
         {
             _navigationService.Navigate("ExpanderView", null);
         }
+
+        private void GoToAddressBookAction()
+        {
+            _navigationService.Navigate("AddressBook", null);
+        }
+
     }
 }

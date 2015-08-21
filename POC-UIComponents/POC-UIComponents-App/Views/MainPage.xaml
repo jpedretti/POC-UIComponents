@@ -44,6 +44,13 @@
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToExpanderView}"
                 Content="CustomExpanderView" />
-        
+
+        <Button x:Name="buttonCustomAddressBook"
+                Grid.Row="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Command="{Binding GoToAddressBook}"
+                Content="CustomAddressBook" />
+
     </StackPanel>
 </Page>
