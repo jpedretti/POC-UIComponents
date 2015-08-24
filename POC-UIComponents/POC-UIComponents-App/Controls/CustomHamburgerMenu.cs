@@ -26,21 +26,6 @@ namespace POC_UIComponents_App.Controls
         {
             this.DefaultStyleKey = typeof(CustomHamburgerMenu);
             this.SizeChanged += CustomHamburgerMenu_SizeChanged;
-            this.ManipulationStarted += CustomHamburgerMenu_ManipulationStarted;
-            this.ManipulationCompleted += CustomHamburgerMenu_ManipulationCompleted;
-        }
-
-        void CustomHamburgerMenu_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            if (e.Position.X - _initialX <= Window.Current.Bounds.Width * 0.2)
-            {
-                IsLeftPaneOpen = false;
-            }
-        }
-
-        void CustomHamburgerMenu_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            _initialX = e.Position.X;
         }
 
         void CustomHamburgerMenu_SizeChanged(object sender, SizeChangedEventArgs e)
