@@ -31,5 +31,19 @@ namespace POC_UIComponents_App.ViewModels
                 SetProperty(ref _password, value);
             }
         }
+
+        private string _password2 = default(string);
+
+        public string Password2
+        {
+            get
+            {
+                return _password2;
+            }
+            set
+            {
+                SetProperty(ref _password2, value);
+            }
+        }
     }
 }

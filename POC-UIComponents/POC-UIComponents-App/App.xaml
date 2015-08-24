@@ -3,14 +3,15 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:local="using:POC_UIComponents_App"
                    xmlns:prism="using:Microsoft.Practices.Prism.Mvvm">
-
     <prism:MvvmAppBase.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/ExpanderView/CustomExpanderViewResourceDictionary.xaml" />
+                <ResourceDictionary Source="Styles/AddressBook/CustomAddressBookResourceDictionary.xaml" />
                 <ResourceDictionary Source="Styles/HamburgerToggleButton.xaml" />
                 <ResourceDictionary Source="Styles/HamburgerMenuDefaultStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </prism:MvvmAppBase.Resources>
-
 </prism:MvvmAppBase>
+        

@@ -1,0 +1,81 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:POC_UIComponents_App.Styles.AddressBook">
+    
+    
+    <CollectionViewSource x:Key="AddressGroups" IsSourceGrouped="True"/>
+
+    <JumpListItemBackgroundConverter x:Key="BackgroundConverter"
+                                     Enabled="Orange"
+                                     Disabled="LightGray" />
+    <JumpListItemForegroundConverter x:Key="ForegroundConverter"/>
+
+
+    <DataTemplate x:Key="AddrBookJumpTemplate">
+        <Border Padding="5">
+            <Border Background="{Binding Converter={StaticResource BackgroundConverter}}" 
+                    Width="82" 
+                    Height="82" 
+                    HorizontalAlignment="Left">
+    
+                <TextBlock Text="{Binding Group.Key}" 
+                           Foreground="{Binding Converter={StaticResource ForegroundConverter}}" 
+                           FontSize="48" 
+                           Padding="6" 
+                           HorizontalAlignment="Left" 
+                           VerticalAlignment="Center"/>
+            </Border>
+        </Border>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="AddrBookItemTemplate">
+        <StackPanel Orientation="Horizontal">
+            <Grid Background="Gray" Width="64" Height="64" Margin="5,5,5,5">
+                <Grid>
+                    <TextBlock Text="{Binding Initials}" 
+                                   FontSize="24" 
+                                   Foreground="White" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center" />
+                </Grid>
+                
+                <Image Source="{Binding PhotoPath}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"/>
+                
+                <TextBlock Text="●" 
+                           Foreground="Orange" 
+                           FontSize="32" 
+                           Margin="40, 25, 0, 0" 
+                           Visibility="{Binding Flag}"/>
+            </Grid>
+            <StackPanel VerticalAlignment="Top" Margin="0,0,0,0">
+
+                <TextBlock FontSize="22" Foreground="Gray" FontWeight="Bold" Text="{Binding FullName}" />
+                <TextBlock FontSize="10" Foreground="DarkGray" Text="{Binding BankName}" />
+                <TextBlock FontSize="10" Foreground="DarkGray" Text="{Binding Account}" />
+                <TextBlock FontSize="10" Foreground="DarkGray" Text="{Binding Phone}" />
+
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="AddrBookGroupHeaderTemplate">
+        <Border Background="Transparent" Padding="5">
+            <Border Background="Orange" 
+                        BorderBrush="Orange" 
+                        BorderThickness="2" 
+                        Width="62" 
+                        Height="62" 
+                        Margin="0,0,18,0" 
+                        HorizontalAlignment="Left">
+                <TextBlock Text="{Binding Key}" 
+                               Foreground="White" 
+                               FontSize="48" 
+                               Padding="6" 
+                               FontFamily="{StaticResource PhoneFontFamilySemiLight}" 
+                               HorizontalAlignment="Left" 
+                               VerticalAlignment="Center"/>
+            </Border>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>
