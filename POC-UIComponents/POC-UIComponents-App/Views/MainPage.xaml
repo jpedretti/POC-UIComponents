@@ -16,59 +16,61 @@
             <hamburguerViews:MenuView/>
         </controls:CustomHamburgerMenu.LeftPane>
     
-    <StackPanel>
-            <Border Grid.ColumnSpan="2" Height="67.5">
-                <ToggleButton IsChecked="{Binding IsLeftPaneOpen, ElementName=hamburger, Mode=TwoWay}" Style="{StaticResource HamburgerToggleButton}" />
-            </Border>
+        <StackPanel>
+                <Border Grid.ColumnSpan="2" Height="67.5">
+                    <ToggleButton IsChecked="{Binding IsLeftPaneOpen, ElementName=hamburger, Mode=TwoWay}"
+                                  Style="{StaticResource HamburgerToggleButton}"
+                                  x:Name="hamburgerMenuToggle"/>
+                </Border>
 
-        <Button x:Name="buttonCustomTextbox"
-                Grid.Row="0"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Command="{Binding GoToTextBox}"
-                Content="CustomTextBox" />
+            <Button x:Name="buttonCustomTextbox"
+                    Grid.Row="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding GoToTextBox}"
+                    Content="CustomTextBox" />
 
-        <Button x:Name="buttonCustomPasswordBox"
-                Grid.Row="1"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Command="{Binding GoToPasswordbox}"
-                Content="CustomPasswordBox" />
+            <Button x:Name="buttonCustomPasswordBox"
+                    Grid.Row="1"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding GoToPasswordbox}"
+                    Content="CustomPasswordBox" />
 
-        <Button x:Name="buttonCustomMessageDialog"
-                Grid.Row="2"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Command="{Binding GoToMessageDialog}"
-                Content="CustomMessageDialog" />
+            <Button x:Name="buttonCustomMessageDialog"
+                    Grid.Row="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding GoToMessageDialog}"
+                    Content="CustomMessageDialog" />
         
-        <Button x:Name="buttonCustomNavigationSearchBar"
-                Grid.Row="2"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Command="{Binding GoToNavigationSearchBar}"
-                Content="CustomNavigationSearchBar" />
+            <Button x:Name="buttonCustomNavigationSearchBar"
+                    Grid.Row="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding GoToNavigationSearchBar}"
+                    Content="CustomNavigationSearchBar" />
         
-        <Button x:Name="buttonCustomExpanderView"
-                Grid.Row="2"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Command="{Binding GoToExpanderView}"
-                Content="CustomExpanderView" />
+            <Button x:Name="buttonCustomExpanderView"
+                    Grid.Row="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding GoToExpanderView}"
+                    Content="CustomExpanderView" />
 
-        <Button x:Name="buttonCustomAddressBook"
-                Grid.Row="2"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Command="{Binding GoToAddressBook}"
-                Content="CustomAddressBook" />
+            <Button x:Name="buttonCustomAddressBook"
+                    Grid.Row="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding GoToAddressBook}"
+                    Content="CustomAddressBook" />
 
-        <Button x:Name="buttonCustomButton"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Command="{Binding GoToCustomButton}"
-                Content="CustomButton" />
+            <Button x:Name="buttonCustomButton"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding GoToCustomButton}"
+                    Content="CustomButton" />
 
-    </StackPanel>
+        </StackPanel>
     </controls:CustomHamburgerMenu>
 </Page>
