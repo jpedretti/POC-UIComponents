@@ -1,5 +1,6 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
@@ -66,9 +67,15 @@ namespace POC.WP.CustomComponents
                     // Change to appropriate view state when the the IsLeftPaneOpen is toggled
                     var value = (bool)args.NewValue;
                     if (value)
+                    {
                         VisualStateManager.GoToState(ctrl, "OpenLeftPane", true);
+                        ctrl.ManipulationMode = ManipulationModes.TranslateX;
+                    }
                     else
+                    {
                         VisualStateManager.GoToState(ctrl, "CloseLeftPane", true);
+                        ctrl.ManipulationMode = default(ManipulationModes);
+                    }
                 }
             }
         }
