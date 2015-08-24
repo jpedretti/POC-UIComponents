@@ -81,6 +81,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Page Include="CustomButton\TokpagButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ExpanderView\CustomExpanderViewResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="CustomButton\TokpagButton.xaml.cs">
+      <DependentUpon>TokpagButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExpanderView\CustomExpanderView.cs" />
     <Compile Include="CustomButton\RoundBorderButton.xaml.cs">
       <DependentUpon>RoundBorderButton.xaml</DependentUpon>
@@ -145,7 +152,14 @@
   <ItemGroup>
     <DesignData Include="SampleData\CustomTextBoxSampleData.xaml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\arrows_black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\arrows_white.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

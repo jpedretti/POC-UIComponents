@@ -9,14 +9,24 @@
       prism:ViewModelLocator.AutoWireViewModel="True"
       mc:Ignorable="d">
 
-    <Grid>
+    <StackPanel>
         <CustomButton:RoundBorderButton Width="300"
                                         Height="80"
-                                        Background="LightGray"
+                                        Margin="30"
+                                        Background="Orange"
                                         BorderRadius="20"
                                         ButtonContent="Pressione"
                                         Command="{Binding Execute}"
                                         PressedBackgroundColor="Aqua"
                                         PressedForegroundColor="Black" />
-    </Grid>
+
+        <CustomButton:TokpagButton Command="{Binding Execute2}"
+                                   Foreground="Blue"
+                                   Radius="100" />
+
+        <CustomButton:TokpagButton Command="{Binding Execute3}"
+                                   Foreground="Blue"
+                                   Radius="100" 
+                                   DisabledBackgroundColor="Pink"/>
+    </StackPanel>
 </Page>

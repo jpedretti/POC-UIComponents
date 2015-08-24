@@ -1,12 +1,12 @@
-﻿<UserControl x:Class="POC.WP.CustomComponents.CustomButton.RoundBorderButton"
+﻿<UserControl x:Class="POC.WP.CustomComponents.CustomButton.TokpagButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="using:POC.WP.CustomComponents.CustomButton"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Name="userControl"
-             d:DesignHeight="70"
-             d:DesignWidth="400"
+             d:DesignHeight="100"
+             d:DesignWidth="100"
              mc:Ignorable="d">
     <UserControl.Resources>
         <Thickness x:Key="PhoneBorderThickness">2.5</Thickness>
@@ -18,12 +18,25 @@
         <x:Double x:Key="PhoneButtonMinWidth">0</x:Double>
         <Thickness x:Key="PhoneTouchTargetOverhang">0,0</Thickness>
         <SolidColorBrush x:Key="ButtonDisabledBackgroundThemeBrush" Color="Transparent" />
-        <Style x:Key="RoundBorderButtonStyle" TargetType="Button">
+        <Style x:Key="TokpagButtonStyle" TargetType="Button">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Path Margin="10"
+                              Data="{Binding Path=Content,
+                                             RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                              Fill="{Binding Path=Foreground,
+                                             RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                              RenderTransformOrigin="0.5,0.5"
+                              Stretch="Uniform" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="{ThemeResource PhoneForegroundBrush}" />
-            <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}" />
             <Setter Property="BorderThickness" Value="{ThemeResource PhoneBorderThickness}" />
-            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}" />
             <Setter Property="FontWeight" Value="{ThemeResource PhoneButtonFontWeight}" />
             <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}" />
             <Setter Property="Padding" Value="{ThemeResource PhoneButtonContentPadding}" />
@@ -59,23 +72,13 @@
                                     <VisualState x:Name="Pressed">
                                         <Storyboard>
                                             <PointerDownThemeAnimation Storyboard.TargetName="Grid" />
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding PressedForegroundColor}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding PressedBackgroundColor}" />
-                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background" />
                                         </Storyboard>
                                     </VisualState>
                                     <VisualState x:Name="Disabled">
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding DisabledForegroundColor}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding DisabledBorderBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding DisabledBackgroundColor}" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
@@ -83,6 +86,10 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <Border x:Name="Border"
+                                    Width="{Binding Path=Width,
+                                                    RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                    Height="{Binding Path=Height,
+                                                     RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     Margin="{ThemeResource PhoneTouchTargetOverhang}"
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
@@ -106,9 +113,11 @@
 
     <Button HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="{Binding Background, ElementName=userControl}"
+            Background="Orange"
             BorderThickness="0"
             Command="{Binding Command}"
-            Content="{Binding ButtonContent}"
-            Style="{StaticResource RoundBorderButtonStyle}" />
+            Content="F1M181.003,-1898.78L207.077,-1902.33 207.089,-1877.18 181.027,-1877.03 181.003,-1898.78z M207.065,-1874.28L207.085,-1849.1 181.023,-1852.69 181.022,-1874.45 207.065,-1874.28z M210.226,-1902.79L244.798,-1907.84 244.798,-1877.5 210.226,-1877.22 210.226,-1902.79z M244.807,-1874.04L244.798,-1843.84 210.226,-1848.72 210.177,-1874.1 244.807,-1874.04z"
+            Foreground="{Binding Foreground,
+                                 ElementName=userControl}"
+            Style="{StaticResource TokpagButtonStyle}" />
 </UserControl>
