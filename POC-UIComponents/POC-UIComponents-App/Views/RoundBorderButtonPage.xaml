@@ -25,8 +25,8 @@
                                    Radius="100" />
 
         <CustomButton:TokpagButton Command="{Binding Execute3}"
+                                   DisabledBackgroundColor="Pink"
                                    Foreground="Blue"
-                                   Radius="100" 
-                                   DisabledBackgroundColor="Pink"/>
+                                   Radius="100" />
     </StackPanel>
 </Page>
