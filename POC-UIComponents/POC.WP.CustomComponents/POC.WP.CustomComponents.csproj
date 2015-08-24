@@ -130,6 +130,7 @@
     <Compile Include="CustomButton\RoundBorderButton.xaml.cs">
       <DependentUpon>RoundBorderButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HamburgerMenu\HamburgerMenu.cs" />
     <Compile Include="MessageDialog\CustomMessageDialog.xaml.cs">
       <DependentUpon>CustomMessageDialog.xaml</DependentUpon>
     </Compile>

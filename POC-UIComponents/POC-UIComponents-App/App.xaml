@@ -8,6 +8,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/ExpanderView/CustomExpanderViewResourceDictionary.xaml" />
                 <ResourceDictionary Source="Styles/AddressBook/CustomAddressBookResourceDictionary.xaml" />
+                <ResourceDictionary Source="Styles/HamburgerToggleButton.xaml" />
+                <ResourceDictionary Source="Styles/HamburgerMenuDefaultStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </prism:MvvmAppBase.Resources>

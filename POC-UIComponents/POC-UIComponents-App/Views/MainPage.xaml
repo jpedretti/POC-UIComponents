@@ -3,13 +3,24 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:POC_UIComponents_App"
+      xmlns:controls="using:POC_UIComponents_App.Controls"
+      xmlns:hamburguerViews="using:POC_UIComponents_App.Views.HamburguerViews"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:prism="using:Microsoft.Practices.Prism.Mvvm"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       prism:ViewModelLocator.AutoWireViewModel="True"
       mc:Ignorable="d">
 
+    <controls:CustomHamburgerMenu x:Name="hamburger" LeftPaneWidthScreenRatio="0.85">
+        <controls:CustomHamburgerMenu.LeftPane>
+            <hamburguerViews:MenuView/>
+        </controls:CustomHamburgerMenu.LeftPane>
+    
     <StackPanel>
+            <Border Grid.ColumnSpan="2" Height="67.5">
+                <ToggleButton IsChecked="{Binding IsLeftPaneOpen, ElementName=hamburger, Mode=TwoWay}" Style="{StaticResource HamburgerToggleButton}" />
+            </Border>
+
         <Button x:Name="buttonCustomTextbox"
                 Grid.Row="0"
                 HorizontalAlignment="Stretch"
@@ -59,4 +70,5 @@
                 Content="CustomButton" />
 
     </StackPanel>
+    </controls:CustomHamburgerMenu>
 </Page>
