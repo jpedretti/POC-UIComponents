@@ -33,8 +33,6 @@ namespace POC.WP.CustomComponents.CustomButton
 
         #region Dependency Properties
 
-
-
         public double Radius
         {
             get { return (double)GetValue(HeightProperty); }
@@ -43,6 +41,7 @@ namespace POC.WP.CustomComponents.CustomButton
                 Width = value;
                 Height = value;
                 BorderRadius = new CornerRadius(value);
+                ImageSize = value * 0.50;
                 RaisePropertyChanged();
             }
         }
@@ -92,7 +91,6 @@ namespace POC.WP.CustomComponents.CustomButton
         public static readonly DependencyProperty DisabledBackgroundColorProperty =
             DependencyProperty.Register("DisabledBackgroundColor", typeof(SolidColorBrush), typeof(TokpagButton), new PropertyMetadata(new SolidColorBrush(Colors.LightGray)));
 
-
         public CornerRadius BorderRadius
         {
             get { return (CornerRadius)GetValue(BorderRadiusProperty); }
@@ -104,6 +102,20 @@ namespace POC.WP.CustomComponents.CustomButton
         }
         public static readonly DependencyProperty BorderRadiusProperty =
             DependencyProperty.Register("BorderRadius", typeof(CornerRadius), typeof(TokpagButton), new PropertyMetadata(new CornerRadius(0)));
+
+        public double ImageSize
+        {
+            get { return (double)GetValue(ImageSizeProperty); }
+            private set
+            {
+                SetValue(ImageSizeProperty, value);
+                RaisePropertyChanged();
+            }
+        }
+        public static readonly DependencyProperty ImageSizeProperty =
+            DependencyProperty.Register("ImageSize", typeof(double), typeof(TokpagButton), new PropertyMetadata(0.0));
+
+
         #endregion
 
         #region Private Methods

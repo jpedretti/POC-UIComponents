@@ -23,10 +23,10 @@
         <CustomButton:TokpagButton Command="{Binding Execute2}"
                                    Foreground="Blue"
                                    Radius="100" />
-
-        <CustomButton:TokpagButton Command="{Binding Execute3}"
+        <CustomButton:TokpagButton Margin="100,0"
+                                   Command="{Binding Execute3}"
                                    DisabledBackgroundColor="Pink"
                                    Foreground="Blue"
-                                   Radius="100" />
+                                   Radius="200" />
     </StackPanel>
 </Page>

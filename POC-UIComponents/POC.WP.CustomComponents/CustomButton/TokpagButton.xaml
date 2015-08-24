@@ -22,7 +22,11 @@
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <Path Margin="10"
+
+                        <Path Width="{Binding ImageSize,
+                                              ElementName=userControl}"
+                              Height="{Binding ImageSize,
+                                               ElementName=userControl}"
                               Data="{Binding Path=Content,
                                              RelativeSource={RelativeSource Mode=TemplatedParent}}"
                               Fill="{Binding Path=Foreground,
@@ -120,4 +124,7 @@
             Foreground="{Binding Foreground,
                                  ElementName=userControl}"
             Style="{StaticResource TokpagButtonStyle}" />
+
+
+
 </UserControl>
