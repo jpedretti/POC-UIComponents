@@ -45,7 +45,7 @@
             </Grid>
             <Image Grid.Column="1"
                     VerticalAlignment="Top"
-                    Margin="10"
+                    Margin="10,10,20,0"
                     Source="/Assets/gear.png"/>
         </Grid>
         <StackPanel Grid.Row="1" Background="Orange">

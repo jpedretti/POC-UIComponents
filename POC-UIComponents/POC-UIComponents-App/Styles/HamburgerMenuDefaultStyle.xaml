@@ -4,7 +4,7 @@
     xmlns:local="using:POC_UIComponents_App.Styles"
     xmlns:controls="using:POC_UIComponents_App.Controls">
 
-    <!-- Default style for hamburger menu -->
+    <!-- Default style for hamburger menu --><!--
     <Style TargetType="controls:CustomHamburgerMenu">
         <Setter Property="Template">
             <Setter.Value>
@@ -62,18 +62,18 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <!-- Main body container -->
+                        --><!-- Main body container --><!--
                         <ContentPresenter Grid.Column="0"
                                           Grid.ColumnSpan="2"
                                           Content="{TemplateBinding Content}" />
-                        <!-- Element to obscure main body when left pane is open -->
+                        --><!-- Element to obscure main body when left pane is open --><!--
                         <Rectangle Grid.Column="0"
                                    Grid.ColumnSpan="2"
                                    x:Name="mainPaneRectangle"
                                    Visibility="Collapsed"
                                    Opacity="0"
                                    Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
-                        <!-- Left pane container -->
+                        --><!-- Left pane container --><!--
                         <ContentPresenter Grid.Column="0"
                                           x:Name="leftPanePresenter"
                                           Content="{TemplateBinding LeftPane}"
@@ -82,7 +82,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
 
 </ResourceDictionary>

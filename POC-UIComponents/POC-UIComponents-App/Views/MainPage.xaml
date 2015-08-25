@@ -3,72 +3,118 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:POC_UIComponents_App"
-      xmlns:controls="using:POC_UIComponents_App.Controls"
-      xmlns:hamburguerViews="using:POC_UIComponents_App.Views.HamburguerViews"
+      xmlns:controls="using:POC.WP.CustomComponents.HamburgerMenu"
+      xmlns:cs="using:POC.WP.CustomComponents.ProfilePhoto"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:prism="using:Microsoft.Practices.Prism.Mvvm"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       prism:ViewModelLocator.AutoWireViewModel="True"
       mc:Ignorable="d">
 
-    <controls:CustomHamburgerMenu x:Name="hamburger" LeftPaneWidthScreenRatio="0.85">
-        <controls:CustomHamburgerMenu.LeftPane>
-            <hamburguerViews:MenuView/>
-        </controls:CustomHamburgerMenu.LeftPane>
-    
-    <StackPanel>
-            <Border Grid.ColumnSpan="2" Height="67.5">
-                <ToggleButton IsChecked="{Binding IsLeftPaneOpen, ElementName=hamburger, Mode=TwoWay}" Style="{StaticResource HamburgerToggleButton}" />
-            </Border>
-
-        <Button x:Name="buttonCustomTextbox"
+    <Grid>
+        <StackPanel Margin="0,50,0,0">
+            <Button x:Name="buttonCustomTextbox"
                 Grid.Row="0"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToTextBox}"
                 Content="CustomTextBox" />
 
-        <Button x:Name="buttonCustomPasswordBox"
+            <Button x:Name="buttonCustomPasswordBox"
                 Grid.Row="1"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToPasswordbox}"
                 Content="CustomPasswordBox" />
 
-        <Button x:Name="buttonCustomMessageDialog"
+            <Button x:Name="buttonCustomMessageDialog"
                 Grid.Row="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToMessageDialog}"
                 Content="CustomMessageDialog" />
-        
-        <Button x:Name="buttonCustomNavigationSearchBar"
+
+            <Button x:Name="buttonCustomNavigationSearchBar"
                 Grid.Row="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToNavigationSearchBar}"
                 Content="CustomNavigationSearchBar" />
-        
-        <Button x:Name="buttonCustomExpanderView"
+
+            <Button x:Name="buttonCustomExpanderView"
                 Grid.Row="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToExpanderView}"
                 Content="CustomExpanderView" />
 
-        <Button x:Name="buttonCustomAddressBook"
+            <Button x:Name="buttonCustomAddressBook"
                 Grid.Row="2"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToAddressBook}"
                 Content="CustomAddressBook" />
 
-        <Button x:Name="buttonCustomButton"
+            <Button x:Name="buttonCustomButton"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Command="{Binding GoToCustomButton}"
                 Content="CustomButton" />
 
-    </StackPanel>
-    </controls:CustomHamburgerMenu>
+        </StackPanel>
+        <Border Height="40" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top">
+            <controls:HamburgerMenuButtonControl x:Name="hbMenu" 
+                                                 MenuView="{Binding ElementName=gridMenu}"
+                                                 MenuOverlay="{Binding ElementName=gridOverlay}"
+                                                 MenuViewWidth="350"
+                                                 AnimateMenu="True"/>
+        </Border>
+        <Grid x:Name="gridOverlay" Background="Gray" Opacity="0" />
+        <Grid x:Name="gridMenu" Margin="-350,0,0,0" HorizontalAlignment="Left" Height="auto" Width="350">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="Orange" >
+                <StackPanel Orientation="Horizontal" Margin="10, 30, 10, 10">
+                    <cs:ProfilePhotoControl SourcePhoto="/Assets/usuario.jpg" Width="80" Height="80" />
+                    <StackPanel VerticalAlignment="Center" Margin="10" Grid.Column="2">
+                        <TextBlock x:Name="txtUserName" Text="Fulano de Tal" FontSize="18" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="txtPhone" Text="(11) 9 XXXX 8888" FontSize="14"/>
+                        <TextBlock x:Name="txtAccountInfo" Text="agência 1234  conta XXX45-6" FontSize="14"/>
+                    </StackPanel>
+                    <Grid>
+                        <Image VerticalAlignment="Top" 
+                           HorizontalAlignment="Center"
+                           Width="40"
+                           Margin="10"
+                           Source="/Assets/gear.png" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1" Background="White">
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="btnAction1" 
+                        Content="Action 1" 
+                        Foreground="Black" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"/>
+                    <Button x:Name="btnAction2" 
+                        Content="Action 2" 
+                        Foreground="Black" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"/>
+                    <Button x:Name="btnAction3" 
+                        Content="Action 3" 
+                        Foreground="Black" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
 </Page>

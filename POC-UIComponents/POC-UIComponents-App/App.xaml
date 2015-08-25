@@ -6,8 +6,7 @@
     <prism:MvvmAppBase.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/HamburgerToggleButton.xaml" />
-                <ResourceDictionary Source="Styles/HamburgerMenuDefaultStyle.xaml" />
+                <ResourceDictionary Source="Styles/AddressBook/CustomAddressBookResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </prism:MvvmAppBase.Resources>

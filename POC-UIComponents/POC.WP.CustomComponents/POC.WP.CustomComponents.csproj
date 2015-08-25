@@ -85,16 +85,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ExpanderView\CustomExpanderViewResourceDictionary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
     <Page Include="CustomButton\RoundBorderButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExpanderView\ExpanderViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HamburgerMenu\HamburgerMenuButtonControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,6 +108,10 @@
     <Page Include="PasswordBox\CustomPasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProfilePhoto\ProfilePhotoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TextBox\CustomTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -130,14 +133,15 @@
     <Compile Include="CustomButton\TokpagButton.xaml.cs">
       <DependentUpon>TokpagButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ExpanderView\CustomExpanderView.cs" />
     <Compile Include="CustomButton\RoundBorderButton.xaml.cs">
       <DependentUpon>RoundBorderButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExpanderView\ExpanderViewControl.xaml.cs">
       <DependentUpon>ExpanderViewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HamburgerMenu\HamburgerMenu.cs" />
+    <Compile Include="HamburgerMenu\HamburgerMenuButtonControl.xaml.cs">
+      <DependentUpon>HamburgerMenuButtonControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MessageDialog\CustomMessageDialog.xaml.cs">
       <DependentUpon>CustomMessageDialog.xaml</DependentUpon>
     </Compile>
@@ -146,6 +150,9 @@
     </Compile>
     <Compile Include="PasswordBox\CustomPasswordBox.xaml.cs">
       <DependentUpon>CustomPasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProfilePhoto\ProfilePhotoControl.xaml.cs">
+      <DependentUpon>ProfilePhotoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextBox\CustomTextBox.xaml.cs">
