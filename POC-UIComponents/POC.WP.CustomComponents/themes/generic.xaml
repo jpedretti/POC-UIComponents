@@ -2,9 +2,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:POC.WP.CustomComponents.themes">
-
-
     
     <Style TargetType="Rectangle" />
-    
+    <!--<ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Styles/ExpanderView/CustomExpanderViewResourceDictionary.xaml" />
+        <ResourceDictionary Source="Styles/AddressBook/CustomAddressBookResourceDictionary.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/POC.WP.CustomComponents;component/ExpanderView/CustomExpanderViewResourceDictionary.xaml" />
+        <ResourceDictionary Source="ExpanderView/CustomExpanderViewResourceDictionary.xaml" />
+    </ResourceDictionary.MergedDictionaries>-->
+
 </ResourceDictionary>

@@ -1,5 +1,6 @@
 ﻿<Page
     x:Class="POC_UIComponents_App.Views.ExpanderViewPage"
+    x:Name="expanderViewPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,41 +16,79 @@
     <Grid>
         <StackPanel Orientation="Vertical">
             <TextBlock FontSize="22" FontWeight="ExtraLight">ExpanderView Test</TextBlock>
+            <cs:ExpanderViewControl x:Name="csExpander" 
+                                    Title="Receber por SMS" 
+                                    IconSource="/Assets/icon_sms.png"
+                                    IsOpenOnStart="False"
+                                    ContentPanel="{Binding ElementName=gridTeste}" 
+                                    ContentPanelHeight="300" 
+                                    AnimateContentPanel="True"
+                                    Background="White"
+                                    LineForeground="LightGray"
+                                    LineThickness ="3" 
+                                    FontWeight="SemiBold"
+                                    Foreground="Gray"/>
 
-            <cs:CustomExpanderView x:Name="theExpander" 
-                             Title="Receber por SMS" 
-                             IconSource="/Assets/icon_sms.png"
-                             Height="auto">
-                <cs:CustomExpanderView.ViewContents>
+            <Grid x:Name="gridTeste" Background="White">
+                <ScrollViewer>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Digite a senha recebida abaixo:" Foreground="Black" FontSize="22" Margin="20, 20, 20, 20" />
+                        <TextBlock Text="Digite a senha recebida abaixo:" 
+                                   Foreground="Black" 
+                                   FontSize="22" 
+                                   Margin="20, 20, 20, 20" />
                         <pcs:CustomPasswordBox Margin="0, 20, 0, 20"
-                            Height="100"
-                                    CustomInputScope="AlphanumericFullWidth"
-                                    BorderColor="Red"
-                                    CharacterCount="6"
-                                    ImageSource="/Assets/card.png"/>
-                    </StackPanel>
-                </cs:CustomExpanderView.ViewContents>
-            </cs:CustomExpanderView>
+                                               Height="100"
+                                               CustomInputScope="AlphanumericFullWidth"
+                                               BorderColor="Red"
+                                               CharacterCount="6"
+                                               ImageSource="/Assets/card.png" />
+                        
+                        <TextBlock Foreground="Gray" 
+                                   FontSize="14" 
+                                   FontFamily="Arial" 
+                                   Margin="10,10,10,10" 
+                                   TextWrapping="WrapWholeWords">
+                            Mu ssum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. 
+                            Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. 
+                            Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis 
+                            quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num 
+                            significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, 
+                            mais bolis eu num gostis.
+                            
+                            Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. 
+                            Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, 
+                            aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar
+                            pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. 
+                            Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus 
+                            velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris 
+                            lectus, non scelerisque augue. Aenean justo massa.
 
-            <cs:CustomExpanderView x:Name="theExpander2" 
-                             Title="Receber por Token" 
-                             IconSource="/Assets/card.png"
-                             Height="auto">
-                <cs:CustomExpanderView.ViewContents>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Digite a senha recebida abaixo:" Foreground="Black" FontSize="22" Margin="20, 20, 20, 20" />
-                        <pcs:CustomPasswordBox Margin="0, 20, 0, 20"
-                            Height="100"
-                                    CustomInputScope="AlphanumericFullWidth"
-                                    BorderColor="Red"
-                                    CharacterCount="6"
-                                    ImageSource="/Assets/card.png"/>
+                            Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. 
+                            Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. 
+                            Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis 
+                            quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num 
+                            significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, 
+                            mais bolis eu num gostis.
+                            
+                            Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. 
+                            Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, 
+                            aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar
+                            pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. 
+                            Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus 
+                            velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris 
+                            lectus, non scelerisque augue. Aenean justo massa.
+                        </TextBlock>
+
                     </StackPanel>
-                </cs:CustomExpanderView.ViewContents>
-            </cs:CustomExpanderView>
-            
+                </ScrollViewer>
+            </Grid>
+            <Grid Height="50" Background="#ff2500" />
+            <Grid Height="50" Background="#e52100" />
+            <Grid Height="50" Background="#cc1d00" />
+            <Grid Height="50" Background="#b21900" />
+            <Grid Height="50" Background="#991600" />
+            <Grid Height="50" Background="#7f1200" />
+            <Grid Height="50" Background="#660e00" />
 
         </StackPanel>
     </Grid>

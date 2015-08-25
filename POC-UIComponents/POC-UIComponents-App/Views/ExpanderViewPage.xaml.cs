@@ -27,7 +27,5 @@ namespace POC_UIComponents_App.Views
         {
             this.InitializeComponent();
         }
-
-
     }
 }
