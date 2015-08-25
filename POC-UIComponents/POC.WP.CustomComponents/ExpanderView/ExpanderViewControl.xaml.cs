@@ -23,6 +23,8 @@ namespace POC.WP.CustomComponents.ExpanderView
     {
 
         #region Properties
+        private bool _hasContentPanelLoaded = false;
+
         public static readonly DependencyProperty ContentPanelProperty =
             DependencyProperty.Register("ContentPanel", typeof(Grid), typeof(ExpanderViewControl), new PropertyMetadata(null));
 
@@ -107,22 +109,32 @@ namespace POC.WP.CustomComponents.ExpanderView
 
         #endregion
 
+        #region Constructors
         public ExpanderViewControl()
         {
             this.InitializeComponent();
             this.btnOpenImage.Tapped += btnOpenImage_Tapped;
-            //this.Loaded += ExpanderViewControl_Loaded;
             this.LayoutUpdated += ExpanderViewControl_LayoutUpdated;
         }
+        #endregion
+
+        #region Handlers
 
         void ExpanderViewControl_LayoutUpdated(object sender, object e)
         {
             Setup();
         }
 
-        private bool _hasContentPanelLoaded = false;
+        void btnOpenImage_Tapped(object sender, RoutedEventArgs e)
+        {
+            ChangePanelState();
+        }
 
-        public async void Setup()
+        
+        #endregion
+
+        #region Methods
+        private async Task Setup()
         {
             if (!_hasContentPanelLoaded && ContentPanel != null)
             {
@@ -137,13 +149,7 @@ namespace POC.WP.CustomComponents.ExpanderView
             }
         }
 
-        #region Handlers
-        void btnOpenImage_Tapped(object sender, RoutedEventArgs e)
-        {
-            ChangePanelState();
-        }
-
-        public async void ChangePanelState()
+        public async Task ChangePanelState()
         {
             if (!IsPanelOpen)
             {
@@ -196,7 +202,6 @@ namespace POC.WP.CustomComponents.ExpanderView
             btnOpenImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/arrow_up.png", UriKind.Absolute));
         }
         #endregion
-
 
     }
 }
