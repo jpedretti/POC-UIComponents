@@ -12,7 +12,7 @@
 
     <Grid>
         <StackPanel Orientation="Vertical">
-            <Grid Background="White" Height="60" VerticalAlignment="Top" Margin="0,0,0,0">
+            <Grid Background="{Binding Background, ElementName=expanderView}" Height="60" VerticalAlignment="Top" Margin="0,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="5*" />
@@ -25,13 +25,19 @@
                 </Grid>
                 <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,10,10,10">
                     <!--Titulo padrão do componente. nunca opcional-->
-                    <TextBlock x:Name="txtTitle"  Text="{Binding Title, ElementName=expanderView}" Foreground="Gray" FontFamily="Arial" FontWeight="SemiBold" FontSize="20" />
+                    <TextBlock x:Name="txtTitle"  
+                               Text="{Binding Title, ElementName=expanderView}" 
+                               Foreground="{Binding Foreground, ElementName=expanderView}" 
+                               FontFamily="Arial" 
+                               FontWeight="{Binding FontWeight, ElementName=expanderView}" 
+                               FontSize="20" />
                 </Grid>
                 <Grid Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,10,10" >
                     <!--Botao de abertura do painel do lado direito-->
                     <Image x:Name="btnOpenImage" Width="32" Height="32" Source="/Assets/arrow_down.png" />
                 </Grid>
             </Grid>
+            <Grid Background="{Binding LineForeground, ElementName=expanderView}" Height="{Binding LineThickness, ElementName=expanderView}" />
         </StackPanel>
     </Grid>
 </UserControl>

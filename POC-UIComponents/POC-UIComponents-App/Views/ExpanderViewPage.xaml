@@ -20,22 +20,35 @@
                                     Title="Receber por SMS" 
                                     IconSource="/Assets/icon_sms.png"
                                     IsOpenOnStart="False"
-                                    ContentPanel="{Binding ElementName=gridTeste, Mode=TwoWay}" 
-                                    ContentPanelHeight="300" />
+                                    ContentPanel="{Binding ElementName=gridTeste}" 
+                                    ContentPanelHeight="300" 
+                                    AnimateContentPanel="True"
+                                    Background="White"
+                                    LineForeground="LightGray"
+                                    LineThickness ="3" 
+                                    FontWeight="SemiBold"
+                                    Foreground="Gray"/>
 
             <Grid x:Name="gridTeste" Background="White">
                 <ScrollViewer>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Digite a senha recebida abaixo:" Foreground="Black" FontSize="22" Margin="20, 20, 20, 20" />
+                        <TextBlock Text="Digite a senha recebida abaixo:" 
+                                   Foreground="Black" 
+                                   FontSize="22" 
+                                   Margin="20, 20, 20, 20" />
                         <pcs:CustomPasswordBox Margin="0, 20, 0, 20"
-                            Height="100"
-                                    CustomInputScope="AlphanumericFullWidth"
-                                    BorderColor="Red"
-                                    CharacterCount="6"
-                                    ImageSource="/Assets/card.png"/>
+                                               Height="100"
+                                               CustomInputScope="AlphanumericFullWidth"
+                                               BorderColor="Red"
+                                               CharacterCount="6"
+                                               ImageSource="/Assets/card.png" />
                         
-                        <TextBlock Foreground="Gray" FontSize="14" FontFamily="Arial" Margin="10,10,10,10" TextWrapping="WrapWholeWords">
-                            Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. 
+                        <TextBlock Foreground="Gray" 
+                                   FontSize="14" 
+                                   FontFamily="Arial" 
+                                   Margin="10,10,10,10" 
+                                   TextWrapping="WrapWholeWords">
+                            Mu ssum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. 
                             Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. 
                             Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis 
                             quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num 
@@ -49,9 +62,7 @@
                             Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus 
                             velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris 
                             lectus, non scelerisque augue. Aenean justo massa.
-                        </TextBlock>
 
-                        <TextBlock Foreground="Gray" FontSize="14" FontFamily="Arial" Margin="10,10,10,10" TextWrapping="WrapWholeWords">
                             Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. 
                             Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. 
                             Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis 

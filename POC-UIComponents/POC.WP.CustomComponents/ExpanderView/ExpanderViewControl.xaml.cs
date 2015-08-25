@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -20,7 +21,7 @@ namespace POC.WP.CustomComponents.ExpanderView
 {
     public sealed partial class ExpanderViewControl : UserControl
     {
-       
+
         #region Properties
         public static readonly DependencyProperty ContentPanelProperty =
             DependencyProperty.Register("ContentPanel", typeof(Grid), typeof(ExpanderViewControl), new PropertyMetadata(null));
@@ -34,13 +35,40 @@ namespace POC.WP.CustomComponents.ExpanderView
         public static readonly DependencyProperty IsPanelOpenProperty =
             DependencyProperty.Register("IsPanelOpen", typeof(bool), typeof(ExpanderViewControl), new PropertyMetadata(null));
 
-        public static readonly DependencyProperty IsOpenOnStartProperty = 
+        public static readonly DependencyProperty IsOpenOnStartProperty =
             DependencyProperty.Register("IsOpenOnStart", typeof(bool), typeof(ExpanderViewControl), new PropertyMetadata(true));
 
         public static readonly DependencyProperty ContentPanelHeightProperty =
             DependencyProperty.Register("ContentPanelHeight", typeof(double), typeof(ExpanderViewControl), new PropertyMetadata(250));
 
-        
+        public static readonly DependencyProperty AnimateContentPanelProperty =
+            DependencyProperty.Register("AnimateContentPanel", typeof(bool), typeof(ExpanderViewControl), new PropertyMetadata(false));
+
+        public static readonly DependencyProperty LineThicknessProperty =
+            DependencyProperty.Register("LineThickness", typeof(int), typeof(ExpanderViewControl), new PropertyMetadata(0));
+
+        public static readonly DependencyProperty LineForegroundProperty =
+            DependencyProperty.Register("LineForeground", typeof(Brush), typeof(ExpanderViewControl), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(255, 255, 255, 255))));
+
+        public Brush LineForeground
+        {
+            get { return (Brush)GetValue(LineForegroundProperty); }
+            set { SetValue(LineForegroundProperty, value); }
+        }
+
+        public int LineThickness
+        {
+            get { return (int)GetValue(LineThicknessProperty); }
+            set { SetValue(LineThicknessProperty, value); }
+        }
+
+        public bool AnimateContentPanel
+        {
+            get { return (bool)GetValue(AnimateContentPanelProperty); }
+            set { SetValue(AnimateContentPanelProperty, value); }
+        }
+
+
         public double ContentPanelHeight
         {
             get { return (double)GetValue(ContentPanelHeightProperty); }
@@ -94,26 +122,18 @@ namespace POC.WP.CustomComponents.ExpanderView
 
         private bool _hasContentPanelLoaded = false;
 
-        public void Setup()
+        public async void Setup()
         {
             if (!_hasContentPanelLoaded && ContentPanel != null)
             {
                 _hasContentPanelLoaded = true;
-                
+
                 ContentPanel.Visibility = Windows.UI.Xaml.Visibility.Visible;
 
                 if (IsOpenOnStart)
-                {
-                    IsPanelOpen = true;
-                    //ContentPanel.Visibility = Windows.UI.Xaml.Visibility.Visible;
-                    ContentPanel.Height = ContentPanelHeight;
-                }
+                    await OpenPanel(true);
                 else
-                {
-                    IsPanelOpen = false;
-                    //ContentPanel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                    ContentPanel.Height = 0;
-                }
+                    await ClosePanel(true);
             }
         }
 
@@ -127,59 +147,53 @@ namespace POC.WP.CustomComponents.ExpanderView
         {
             if (!IsPanelOpen)
             {
-                // Animate opening the panel
-                while (ContentPanel.Height < ContentPanelHeight)
-                {
-                    ContentPanel.Height += (ContentPanelHeight/10);
-                    await Task.Delay(TimeSpan.FromMilliseconds(1));
-                }
-
-                //ContentPanel.Height = 250;
-
-                //Storyboard s = new Storyboard();
-                //DoubleAnimation ani = new DoubleAnimation();
-                //ani.To = 250;
-                //ani.Duration = new Duration(TimeSpan.FromMilliseconds(200));
-                //Storyboard.SetTarget(ani, ContentPanel);
-                //Storyboard.SetTargetProperty(ani, "Height");
-                //s.Children.Add(ani);
-                //s.Begin();
-                
-                //ContentPanel.Visibility = Windows.UI.Xaml.Visibility.Visible;
-
-                //VisualStateManager.GoToState(this, "OpenPane", true);
-
-                IsPanelOpen = true;
-                btnOpenImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/arrow_up.png", UriKind.Absolute));
+                await OpenPanel();
             }
             else
             {
-                // Animate opening the panel
+                await ClosePanel();
+            }
+
+        }
+
+        private async Task ClosePanel(bool cancelAnimation = false)
+        {
+            if (AnimateContentPanel && !cancelAnimation)
+            {
+                // Animate closing the panel
                 while (ContentPanel.Height > 0)
                 {
                     ContentPanel.Height -= (ContentPanelHeight / 10);
                     await Task.Delay(TimeSpan.FromMilliseconds(1));
                 }
-
-                //ContentPanel.Height = 0;
-
-                //Storyboard s = new Storyboard();
-                //DoubleAnimation ani = new DoubleAnimation();
-                //ani.To = 0;
-                //ani.Duration = new Duration(TimeSpan.FromMilliseconds(2000));
-                //Storyboard.SetTarget(ani, ContentPanel);
-                //Storyboard.SetTargetProperty(ani, "Height");
-                //s.Children.Add(ani);
-                //s.Begin();
-
-                //ContentPanel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-                
-                //VisualStateManager.GoToState(this, "ClosePane", true);
-
-                IsPanelOpen = false;
-                btnOpenImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/arrow_down.png", UriKind.Absolute));
+            }
+            else
+            {
+                ContentPanel.Height = 0;
             }
 
+            IsPanelOpen = false;
+            btnOpenImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/arrow_down.png", UriKind.Absolute));
+        }
+
+        private async Task OpenPanel(bool cancelAnimation = false)
+        {
+            if (AnimateContentPanel && !cancelAnimation)
+            {
+                // Animate opening the panel
+                while (ContentPanel.Height < ContentPanelHeight)
+                {
+                    ContentPanel.Height += (ContentPanelHeight / 10);
+                    await Task.Delay(TimeSpan.FromMilliseconds(1));
+                }
+            }
+            else
+            {
+                ContentPanel.Height = ContentPanelHeight;
+            }
+
+            IsPanelOpen = true;
+            btnOpenImage.Source = new BitmapImage(new Uri("ms-appx:///Assets/arrow_up.png", UriKind.Absolute));
         }
         #endregion
 
