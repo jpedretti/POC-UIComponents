@@ -1,0 +1,37 @@
+﻿<UserControl
+    x:Class="POC.WP.CustomComponents.ExpanderView.ExpanderViewControl"
+    x:Name="expanderView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:POC.WP.CustomComponents.ExpanderView"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="60"
+    d:DesignWidth="400">
+
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Grid Background="White" Height="60" VerticalAlignment="Top" Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,10,10">
+                    <!--Imagem opcional do lado esquerdo-->
+                    <Image x:Name="imgIcon" Width="24" Height="24" Source="{Binding IconSource, ElementName=expanderView}" />
+                </Grid>
+                <Grid Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,10,10,10">
+                    <!--Titulo padrão do componente. nunca opcional-->
+                    <TextBlock x:Name="txtTitle"  Text="{Binding Title, ElementName=expanderView}" Foreground="Gray" FontFamily="Arial" FontWeight="SemiBold" FontSize="20" />
+                </Grid>
+                <Grid Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,10,10,10" >
+                    <!--Botao de abertura do painel do lado direito-->
+                    <Image x:Name="btnOpenImage" Width="32" Height="32" Source="/Assets/arrow_down.png" />
+                </Grid>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>
