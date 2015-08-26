@@ -81,6 +81,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Page Include="AddressBook\AddressBookControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CustomButton\TokpagButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,13 +126,11 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="themes\generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressBook\AddressBookControl.xaml.cs">
+      <DependentUpon>AddressBookControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="CustomButton\TokpagButton.xaml.cs">
       <DependentUpon>TokpagButton.xaml</DependentUpon>

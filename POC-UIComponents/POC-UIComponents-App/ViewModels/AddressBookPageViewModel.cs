@@ -18,6 +18,7 @@ namespace POC_UIComponents_App.ViewModels
     {
         private INavigationService _navigationService;
 
+        public object CurrentSelectedItem { get; set; }
 
         private List<AlphaKeyGroup<AddressBookEntryModel>> _addressGroups = new List<AlphaKeyGroup<AddressBookEntryModel>>();
 
@@ -38,6 +39,7 @@ namespace POC_UIComponents_App.ViewModels
         public AddressBookPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+
         }
 
 

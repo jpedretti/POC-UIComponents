@@ -1,19 +1,22 @@
 ﻿<Page
     x:Class="POC_UIComponents_App.Views.AddressBookPage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:POC_UIComponents_App.Views"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:prism="using:Microsoft.Practices.Prism.Mvvm"
-      Background="White"
-      prism:ViewModelLocator.AutoWireViewModel="True"
-      mc:Ignorable="d">
-    <Page.Resources>
-        <CollectionViewSource x:Key="AddressGroups"
-                              IsSourceGrouped="True" Source="{Binding AddressGroups}"/>
-    </Page.Resources>
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:POC_UIComponents_App.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cs="using:POC.WP.CustomComponents.AddressBook"
+    xmlns:prism="using:Microsoft.Practices.Prism.Mvvm"
+    Background="White"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
     
+    <Page.Resources>
+        <CollectionViewSource x:Key="cvsAddressGroups"
+                              IsSourceGrouped="True" 
+                              Source="{Binding AddressGroups}"/>
+    </Page.Resources>
+
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -30,25 +33,13 @@
         </StackPanel>
 
         <Grid Grid.Row="1" x:Name="ContentRoot">
-            <SemanticZoom>
-                <SemanticZoom.ZoomedInView>
-                    <ListView IsHoldingEnabled="True"
-                          ItemsSource="{Binding Source={StaticResource AddressGroups}}"
-                          ItemTemplate="{StaticResource AddrBookItemTemplate}"
-                          ContinuumNavigationTransitionInfo.ExitElementContainer="True">
-                        <ListView.GroupStyle>
-                            <GroupStyle HidesIfEmpty="True" 
-                                        HeaderTemplate="{StaticResource AddrBookGroupHeaderTemplate}"/>
-                        </ListView.GroupStyle>
-                    </ListView>
-                </SemanticZoom.ZoomedInView>
-                <SemanticZoom.ZoomedOutView>
-                    <GridView Background="White" 
-                          ItemsSource="{Binding Source={StaticResource AddressGroups}, Path=CollectionGroups}"
-                          ItemTemplate="{StaticResource AddrBookJumpTemplate}">
-                    </GridView>
-                </SemanticZoom.ZoomedOutView>
-            </SemanticZoom>
+
+            <cs:AddressBookControl x:Name="csAddressBook" 
+                                   ListSource="{Binding Source={StaticResource cvsAddressGroups}}"
+                                   IndexSource="{Binding Source={StaticResource cvsAddressGroups}, Path=CollectionGroups}"
+                                   SelectedItem="{Binding CurrentSelectedItem, Mode=TwoWay}"/>
+            
+
         </Grid>
     </Grid>
 </Page>
