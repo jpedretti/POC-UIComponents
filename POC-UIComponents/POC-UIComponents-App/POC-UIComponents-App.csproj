@@ -138,6 +138,7 @@
     <Content Include="Assets\background.jpg" />
     <Content Include="Assets\card.png" />
     <Content Include="Assets\contact_photo.jpg" />
+    <Content Include="Assets\contact_photo_2.jpg" />
     <Content Include="Assets\icon_sms.png" />
     <Content Include="Assets\gear.png" />
     <Content Include="Assets\Logo.scale-240.png" />

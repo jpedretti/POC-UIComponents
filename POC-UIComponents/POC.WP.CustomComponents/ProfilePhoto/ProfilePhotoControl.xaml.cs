@@ -13,16 +13,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
-
 namespace POC.WP.CustomComponents.ProfilePhoto
 {
     public sealed partial class ProfilePhotoControl : UserControl
     {
-        public ProfilePhotoControl()
-        {
-            this.InitializeComponent();
-        }
+        #region Properties
+        public static readonly DependencyProperty SourcePhotoProperty =
+            DependencyProperty.Register("SourcePhoto", typeof(ImageSource), typeof(ProfilePhotoControl), new PropertyMetadata(null, PhotoSourceChanged));
+
+        public static readonly DependencyProperty InitialsProperty =
+            DependencyProperty.Register("Initials", typeof(string), typeof(ProfilePhotoControl), new PropertyMetadata(string.Empty));
+
+        public Visibility HasPhoto { get; set; }
 
         public ImageSource SourcePhoto
         {
@@ -30,8 +32,31 @@ namespace POC.WP.CustomComponents.ProfilePhoto
             set { SetValue(SourcePhotoProperty, value); }
         }
 
-        public static readonly DependencyProperty SourcePhotoProperty =
-            DependencyProperty.Register("SourcePhoto", typeof(ImageSource), typeof(ProfilePhotoControl), new PropertyMetadata(null));
+        public string Initials
+        {
+            get { return (string)GetValue(InitialsProperty); }
+            set { SetValue(InitialsProperty, value); }
+        }
+        #endregion
+
+        #region Constructor
+        public ProfilePhotoControl()
+        {
+            this.InitializeComponent();
+        }
+        #endregion
+
+        #region Event Handlers
+        private static void PhotoSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var instance = d as ProfilePhotoControl;
+
+            if (instance.SourcePhoto != null)
+                instance.HasPhoto = Visibility.Visible;
+            else
+                instance.HasPhoto = Visibility.Collapsed;
+        }
+        #endregion
 
     }
 }

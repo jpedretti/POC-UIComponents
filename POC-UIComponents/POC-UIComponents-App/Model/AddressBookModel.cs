@@ -114,6 +114,27 @@ namespace POC_UIComponents_App.Model
             this.Flag = flag ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
         }
 
+        public override string ToString()
+        {
+            return string.Format("{0} {1} {2}", FullName, Account, Phone);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (this.GetType() != obj.GetType())
+                return false;
+
+            var q = (obj as AddressBookEntryModel);
+            
+            if (q.FullName != this.FullName && q.Account != this.Account && q.Phone != this.Phone)
+                return false;
+            
+            return true;
+        }
+
         private string ExtractNameInitials(string fullname)
         {
             Regex initials = new Regex(@"(\b[a-zA-Z])[a-zA-Z]* ?");

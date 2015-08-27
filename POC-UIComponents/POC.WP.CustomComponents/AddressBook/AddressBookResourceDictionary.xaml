@@ -1,0 +1,160 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:POC.WP.CustomComponents.AddressBook"
+    xmlns:cs="using:POC.WP.CustomComponents.ProfilePhoto">
+    
+    
+    <JumpListItemBackgroundConverter x:Key="BackgroundConverter" Enabled="Orange" Disabled="LightGray" />
+    <JumpListItemForegroundConverter x:Key="ForegroundConverter"/>
+    <local:AllCapsConverter  x:Key="StringToUpperConverter"/>
+
+    <DataTemplate x:Key="AddressBookJumpTemplate">
+        <Border Padding="5">
+            <Border Background="{Binding Converter={StaticResource BackgroundConverter}}" 
+                    Width="82" 
+                    Height="82" 
+                    HorizontalAlignment="Left">
+
+                <TextBlock Text="{Binding Group.Key}" 
+                           Foreground="{Binding Converter={StaticResource ForegroundConverter}}" 
+                           FontSize="48" 
+                           Padding="6" 
+                           HorizontalAlignment="Left" 
+                           VerticalAlignment="Center"/>
+            </Border>
+        </Border>
+    </DataTemplate>
+
+
+
+    <!--Moved this part out of the resource dict-->
+    <!--<DataTemplate x:Key="AddressBookItemTemplate">
+        <StackPanel Orientation="Horizontal">
+            <Grid Margin="10,0,0,0" Width="32" VerticalAlignment="Center">
+
+                <CheckBox x:Name="chkSelected" 
+                          Content="X" 
+                          Style="{StaticResource RoundCheckbox}"
+                          IsTapEnabled="True"
+                          Checked="chkSelected_Checked"
+                          IsChecked="{Binding CheckboxLineSelected, Mode=TwoWay}"/>
+
+            </Grid>
+            <Grid Background="Transparent" Margin="10">
+                <cs:ProfilePhotoControl SourcePhoto="{Binding PhotoPath}" 
+                                            Initials="{Binding Initials, Converter={StaticResource StringToUpperConverter}}"
+                                            Width="48" 
+                                            Height="48"/>
+
+                <TextBlock Text="●" 
+                           Foreground="Orange" 
+                           FontSize="32" 
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom"
+                           Visibility="{Binding Flag}"/>
+            </Grid>
+            <StackPanel VerticalAlignment="Center" Margin="0,0,0,0">
+
+                <TextBlock FontSize="17" Foreground="#575757" FontWeight="Bold" FontFamily="Arial" Text="{Binding FullName}" />
+                <TextBlock FontSize="13" Foreground="#969696" FontWeight="Normal" FontFamily="Arial" Text="{Binding Phone}" />
+
+            </StackPanel>
+        </StackPanel>
+    </DataTemplate>-->
+
+    <DataTemplate x:Key="AddressBookGroupHeaderTemplate">
+        <Border Background="Transparent">
+            <Border Background="#F2F2F2" 
+                    Width="{Binding Width, ElementName=addressBook}"
+                    Height="22" 
+                    Margin="0" 
+                    HorizontalAlignment="Left">
+                <TextBlock Text="{Binding Key, Converter={StaticResource StringToUpperConverter}}" 
+                           Foreground="#EC7404" 
+                           FontSize="18" 
+                           FontWeight="Medium"
+                           Margin="10, 2, 10, 2"
+                           FontFamily="Arial" 
+                           HorizontalAlignment="Left" 
+                           VerticalAlignment="Center" />
+            </Border>
+        </Border>
+    </DataTemplate>
+    
+    <Style TargetType="CheckBox" x:Key="RoundCheckbox">
+        <Setter Property="Content" Value="Accept Value" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid Background="Transparent">
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver"/>
+                                <VisualState x:Name="Pressed" />
+                                <VisualState x:Name="Disabled" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckBackground" 
+                                                                       Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame KeyTime="0" 
+                                                                    Value="Orange" />
+                                        </ObjectAnimationUsingKeyFrames>
+
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CheckBackground" 
+                                                                       Storyboard.TargetProperty="Stroke">
+                                            <DiscreteObjectKeyFrame KeyTime="0" 
+                                                                    Value="Transparent" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked" />
+                                <VisualState x:Name="Indeterminate" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid Margin="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse x:Name="CheckBackground" 
+                                     IsHitTestVisible="False" 
+                                     VerticalAlignment="Center" 
+                                     HorizontalAlignment="Left" 
+                                     Fill="White" 
+                                     Stroke="LightGray"
+                                     StrokeThickness="1"
+                                     Height="24" Width="24" />
+                            <Path x:Name="CheckGlyph" 
+                                  Width="12" Height="12" 
+                                  Canvas.Left="19.0001" 
+                                  Canvas.Top="22.1668" 
+                                  Stretch="Fill" 
+                                  Fill="White" 
+                                  VerticalAlignment="Center" HorizontalAlignment="Center"
+                                  Margin="-6,1,0,0"
+                                  Data="F1 M 23.7501,33.25L 34.8334,44.3333L 52.2499,22.1668L 56.9999,26.9168L 
+                                  34.8334,53.8333L 19.0001,38L 23.7501,33.25 Z "/>
+                            <ContentControl x:Name="ContentContainer" 
+                                            Grid.Column="1" 
+                                            Content="{TemplateBinding Content}" 
+                                            ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                            Margin="12,0,0,0" 
+                                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                            Padding="{TemplateBinding Padding}" 
+                                            Foreground="{TemplateBinding Foreground}" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

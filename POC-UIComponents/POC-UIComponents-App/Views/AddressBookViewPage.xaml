@@ -7,10 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:cs="using:POC.WP.CustomComponents.AddressBook"
     xmlns:prism="using:Microsoft.Practices.Prism.Mvvm"
-    Background="White"
+    Background="Black"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <CollectionViewSource x:Key="cvsAddressGroups"
                               IsSourceGrouped="True" 
@@ -21,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <!-- TitlePanel -->
@@ -29,7 +30,7 @@
                        Margin="0,12,0,0" 
                        Style="{ThemeResource HeaderTextBlockStyle}" 
                        FontSize="52" 
-                       Foreground="Orange"/>
+                       Foreground="White"/>
         </StackPanel>
 
         <Grid Grid.Row="1" x:Name="ContentRoot">
@@ -37,9 +38,13 @@
             <cs:AddressBookControl x:Name="csAddressBook" 
                                    ListSource="{Binding Source={StaticResource cvsAddressGroups}}"
                                    IndexSource="{Binding Source={StaticResource cvsAddressGroups}, Path=CollectionGroups}"
-                                   SelectedItem="{Binding CurrentSelectedItem, Mode=TwoWay}"/>
-            
+                                   SelectedItem="{Binding CurrentSelectedItem, Mode=TwoWay}"
+                                   Width="500"/>
 
+
+        </Grid>
+        <Grid Grid.Row="2" x:Name="Counter">
+            <TextBlock Foreground="White" FontSize="22" Text="{Binding SelectedItems.Count, ElementName=csAddressBook, Mode=TwoWay}" />
         </Grid>
     </Grid>
 </Page>

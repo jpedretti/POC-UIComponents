@@ -85,6 +85,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="AddressBook\AddressBookResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="CustomButton\TokpagButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,6 +122,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RoundCheckbox\RoundCheckboxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TextBox\CustomTextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -131,6 +140,7 @@
     <Compile Include="AddressBook\AddressBookControl.xaml.cs">
       <DependentUpon>AddressBookControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddressBook\AllCapsConverter.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="CustomButton\TokpagButton.xaml.cs">
       <DependentUpon>TokpagButton.xaml</DependentUpon>
@@ -157,6 +167,9 @@
       <DependentUpon>ProfilePhotoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoundCheckbox\RoundCheckboxControl.xaml.cs">
+      <DependentUpon>RoundCheckboxControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextBox\CustomTextBox.xaml.cs">
       <DependentUpon>CustomTextBox.xaml</DependentUpon>
     </Compile>
@@ -176,6 +189,10 @@
     <EmbeddedResource Include="Assets\arrows_white.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\selected_no.png" />
+    <Content Include="Assets\selected_yes.png" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

@@ -7,18 +7,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="300">
-    
+    d:DesignHeight="64"
+    d:DesignWidth="64">
+
     <Grid>
-        <Ellipse Width="{Binding Width, ElementName=profilePhoto}"
+        <Grid x:Name="gridPlaceHolder">
+            <Ellipse Width="{Binding Width, ElementName=profilePhoto}"
                  Height="{Binding Height, ElementName=profilePhoto}">
-            <Ellipse.Stroke>
-                <SolidColorBrush Color="LightGray" />
-            </Ellipse.Stroke>
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding SourcePhoto, ElementName=profilePhoto}"/>
-            </Ellipse.Fill>
-        </Ellipse>
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="#969696" />
+                </Ellipse.Fill>
+            </Ellipse>
+            <TextBlock x:Name="txtInitials" 
+                       FontFamily="Arial" 
+                       FontSize="24" 
+                       FontWeight="Light"
+                       Text="{Binding Initials}" 
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Grid>
+        <Grid x:Name="gridPhoto" Visibility="{Binding HasPhoto}">
+            <Ellipse Width="{Binding Width, ElementName=profilePhoto}"
+                 Height="{Binding Height, ElementName=profilePhoto}">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding SourcePhoto, ElementName=profilePhoto}"/>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
     </Grid>
 </UserControl>

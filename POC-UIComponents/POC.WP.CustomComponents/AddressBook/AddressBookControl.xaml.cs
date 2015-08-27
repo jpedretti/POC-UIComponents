@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -35,6 +37,9 @@ namespace POC.WP.CustomComponents.AddressBook
         public static readonly DependencyProperty SelectedValueProperty =
             DependencyProperty.Register("SelectedValue", typeof(object), typeof(AddressBookControl), new PropertyMetadata(null));
 
+        public static readonly DependencyProperty ShowCheckboxesProperty =
+            DependencyProperty.Register("ShowCheckboxes", typeof(bool), typeof(AddressBookControl), new PropertyMetadata(null, ShowCheckboxesChanged));
+
 
         public object ListSource
         {
@@ -47,7 +52,6 @@ namespace POC.WP.CustomComponents.AddressBook
             get { return (object)GetValue(IndexSourceProperty); }
             set { SetValue(IndexSourceProperty, value); }
         }
-
 
         public object SelectedItem
         {
@@ -67,6 +71,38 @@ namespace POC.WP.CustomComponents.AddressBook
             set { SetValue(SelectedValueProperty, value); }
         }
 
+        public bool ShowCheckboxes
+        {
+            get { return (bool)GetValue(ShowCheckboxesProperty); }
+            set { SetValue(ShowCheckboxesProperty, value); }
+        }
+
+
+
+        public ObservableCollection<object> SelectedItems
+        {
+            get { return (ObservableCollection<object>)GetValue(SelectedItemsProperty); }
+            set { SetValue(SelectedItemsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedItems.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedItemsProperty =
+            DependencyProperty.Register("SelectedItems", typeof(ObservableCollection<object>), typeof(AddressBookControl), new PropertyMetadata(null));
+
+        
+
+
+        public Visibility CheckboxesVisibility
+        {
+            get { return (Visibility)GetValue(CheckboxesVisibilityProperty); }
+            set { SetValue(CheckboxesVisibilityProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CheckboxesVisibility.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CheckboxesVisibilityProperty =
+            DependencyProperty.Register("CheckboxesVisibility", typeof(Visibility), typeof(AddressBookControl), new PropertyMetadata(Visibility.Collapsed));
+
+        
 
         #endregion
 
@@ -74,7 +110,18 @@ namespace POC.WP.CustomComponents.AddressBook
         public AddressBookControl()
         {
             this.InitializeComponent();
-            this.listAddressBook.SelectionChanged += SelectionChanged;
+            SelectedItems = new ObservableCollection<object>();
+        }
+
+        void chkSelected_Click(object sender, RoutedEventArgs e)
+        {
+            var chk = (sender as CheckBox);
+
+            if (SelectedItems.Contains(chk.DataContext) && !chk.IsChecked.Value)
+                SelectedItems.Remove(chk.DataContext);
+            else
+                if(chk.IsChecked.Value)
+                    SelectedItems.Add(chk.DataContext);
         }
 
 
@@ -87,13 +134,20 @@ namespace POC.WP.CustomComponents.AddressBook
 
             instance.listAddressBook.ItemsSource = instance.ListSource;
             instance.gridAddressBook.ItemsSource = instance.IndexSource;
+
+
         }
 
-        void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private static void ShowCheckboxesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            //if (this.AddressBookSelectionChanged != null)
-            //    this.AddressBookSelectionChanged(sender, e);
+            var instance = d as AddressBookControl;
+
+            if (instance.ShowCheckboxes)
+                instance.CheckboxesVisibility = Windows.UI.Xaml.Visibility.Visible;
+            else
+                instance.CheckboxesVisibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
+
         #endregion
 
 
